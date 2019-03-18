@@ -4,6 +4,7 @@ Pillow>=4.0.0
 gunicorn
 dj-database-url 
 psycopg2
+django-heroku
 
 # Only needed for running tests.
 tox
