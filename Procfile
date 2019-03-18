@@ -1,1 +1,1 @@
-web: gunicorn django_quiz.wsgi
+web: gunicorn base.wsgi
