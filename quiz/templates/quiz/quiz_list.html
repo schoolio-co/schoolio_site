@@ -4,6 +4,8 @@
 
 {% block content %}
 <h2>{% trans "List of quizzes" %}</h2>
+	<br/>
+	<a class="button" href="{% url 'home' %}">Back to Home</a>
     {% if quiz_list %}
 		<table class="table table-bordered table-striped">
 
@@ -41,4 +43,5 @@
         <p>{% trans "There are no available quizzes" %}.</p>
 		{% endif %}
 </body>
+
 {% endblock %}
