@@ -11,6 +11,7 @@ from .models import Quiz, Category, Progress, Sitting, Question
 from essay.models import Essay_Question
 
 
+ 
 class QuizMarkerMixin(object):
     @method_decorator(login_required)
     @method_decorator(permission_required('quiz.view_sittings'))
@@ -27,6 +28,8 @@ class SittingFilterTitleMixin(object):
 
         return queryset
 
+class Home(TemplateView):
+    template_name = 'home.html'
 
 class QuizListView(ListView):
     model = Quiz

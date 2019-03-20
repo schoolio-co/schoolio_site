@@ -3,13 +3,17 @@ try:
 except ImportError:
     from django.urls import re_path as url
 
-from .views import QuizListView, CategoriesListView, \
+from .views import Home, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 
 urlpatterns = [
 
     url(r'^$',
+        view=Home.as_view(),
+        name='home'),
+
+    url(r'^index/$',
         view=QuizListView.as_view(),
         name='quiz_index'),
 
