@@ -3,6 +3,12 @@
 {% block title %}{% trans "All Quizzes" %}{% endblock %}
 
 {% block content %}
+<br/>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <a class="btn btn-outline-secondary" href="{% url 'home' %}" role="button">Back to Home</a>
+  <a class="btn btn-outline-secondary" href="{% url 'quiz_index' %}" role="button">View All Quizzes</a>
+</div>
+<br/>
 <h2>{% trans "Category list" %}</h2>
 
 <ul>

@@ -1,11 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 {% load static %}
 {% load i18n %}
 
 {% block content %}
+
+<body>
+ 
 <h2>{% trans "List of quizzes" %}</h2>
-	<br/>
-	<a class="button" href="{% url 'home' %}">Back to Home</a>
+<br/>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <a class="btn btn-outline-secondary" href="{% url 'home' %}" role="button">Back to Home</a>
+  <a class="btn btn-outline-secondary" href="{% url 'quiz_category_list_all' %}" role="button">View All Quizzes</a>
+</div>
+<br/>
     {% if quiz_list %}
 		<table class="table table-bordered table-striped">
 
@@ -13,8 +20,6 @@
 			<tr>
 			  <th>{% trans "Title" %}</th>
 			  <th>{% trans "Category" %}</th>
-			  <th>{% trans "Exam" %}</th>
-			  <th>{% trans "Single attempt" %}</th>
 			  <th></th>
 			</tr>
 		  </thead>
@@ -26,11 +31,9 @@
   			<tr>
 			  <td>{{ quiz.title }}</td>
 			  <td>{{ quiz.category }}</td>
-			  <td>{{ quiz.exam_paper }}</td>
-			  <td>{{ quiz.single_attempt }}</td>
 			  <td>
 				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
-				  {% trans "View details" %}
+				  {% trans "View Quiz Details" %}
 				</a>
 			</tr>
 

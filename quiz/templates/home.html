@@ -67,7 +67,7 @@
       </div>
       <nav class="nav-menu">
         <div class="header-menu">
-          <a class="menu-logo" href=""><img src="static/images/schooliologo.png" alt="logo"></a>
+          <a class="menu-logo" href=""><img src="static/images/schoolio_logo.png" alt="logo"></a>
         </div>
         <ul class="menu-text clk">
           <li><a href="#home">Home</a></li>
@@ -309,7 +309,7 @@
                     <img class="responsive-img" src="static/images/portfolio/project-6.jpg" alt="">
                     <figcaption>
                       <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>Praesent convallis, turpis et ultrices tincidunt,orci nisi mollis dolor,<br>non congue erat elit ut purus.</p>
+                      <p>We would love for you to get in touch so we</p>
                     </figcaption> 
                   </figure>
                 </a>
@@ -400,20 +400,16 @@
           <div class="col-md-10 offset-md-2">
             <span class="contact title-page">Contact Us</span>
               <div class="contact-text">
-                <p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth.Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
+                <p>We are dedicated to providing quzlity educational resources for students, teachers, and administrators thourghout the african continent.</p>
               </div><!-- /.contact-text -->
                       
               <div class="personal-info">
                 <h4 class="title-section">Get In Touch</h4>
                  <ul>
-                    <li>
-                      <p> <span> Address</span> - Street, City, Country</p>
+                      <p> <span> Phone</span> - (+264) 081-555-9104</p>
                     </li>
                     <li>
-                      <p> <span> Phone</span> - (123) 456 789</p>
-                    </li>
-                    <li>
-                      <p> <span> E-mail</span> - your-email@mail.com </p>
+                      <p> <span> E-mail</span> - info@schoolio.co </p>
                     </li>
                 </ul>
               </div><!-- /.personal-info -->
@@ -446,13 +442,8 @@
                          <div id="msgSubmit" class="h5 h5 text-danger hidden"></div>
                        </div>
                      </form>
-                      <!-- GOOGLE-MAP-2 (For Mobile Devices)-->
-                     <div class="mobile-panel-cart">
-                      <div id="map_canvas2" class="karta"></div>
-                    </div>
-
                     <div class="copyright-contact">
-                        <span>© Richard Roe 2018 All rights reserved.</span>
+                        <span>© Pop-of-Data 2019 </span>
                      </div>
                    </div>
                  </div>
@@ -484,19 +475,7 @@
                 <p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth.Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life.</p>
               </div><!-- /.contact-text -->
               <br/>
-              {% if quizzes %}
-                <ul>
-                {% for quiz in quizzes %}
-                    <li>
-                <a href="{% url 'quiz_question' quiz_name=quiz.url %}">
-                {{ quiz.title }}
-                </a>
-                </li>
-                  {% endfor %}
-                  </ul>
-                  {% else %}
-                      <p> "There are no quizzes" </p>
-                  {% endif %}
+              
                     
 
                     <div class="copyright-contact">
@@ -520,18 +499,18 @@
 </div> <!-- /.bg-title  -->  
   
 
-  <script src="static/assets/js/googlemap.js"></script>
+  <script src="static/js/googlemap.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDa77CMiGw5QRvFTl8oeV1qBet4XQe6fs&callback=initMap"></script>
-  <script src="static/assets/js/jquery-3.2.1.min.js"></script>
-  <script src="static/assets/js/imagesloaded.pkgd.min.js"></script>
-  <script src='static/assets/js/jquery.shuffle.min.js'></script>
-  <script src='static/assets/js/bootstrap.bundle.min.js'></script>
-  <script src='static/assets/js/owl.carousel.min.js'></script>
-  <script src="static/assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="static/assets/js/validator.min.js"></script>
-  <script src="static/assets/js/form-scripts.js"></script>
-  <script src="static/assets/js/swiper.min.js"></script>
-  <script src="static/assets/js/main.js"></script>
+  <script src="static/js/jquery-3.2.1.min.js"></script>
+  <script src="static/js/imagesloaded.pkgd.min.js"></script>
+  <script src='static/js/jquery.shuffle.min.js'></script>
+  <script src='static/js/bootstrap.bundle.min.js'></script>
+  <script src='static/js/owl.carousel.min.js'></script>
+  <script src="static/js/jquery.magnific-popup.min.js"></script>
+  <script src="static/js/validator.min.js"></script>
+  <script src="static/js/form-scripts.js"></script>
+  <script src="static/js/swiper.min.js"></script>
+  <script src="static/js/main.js"></script>
     
 </body>
 </html>

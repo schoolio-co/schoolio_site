@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'multichoice',
     'true_false',
     'essay',
+    'bootstrap',
+    'fontawesome',
 ]
 
 MIDDLEWARE = [

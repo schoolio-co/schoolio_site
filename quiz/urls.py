@@ -13,7 +13,7 @@ urlpatterns = [
         view=Home.as_view(),
         name='home'),
 
-    url(r'^index/$',
+    url(r'^quizzes/$',
         view=QuizListView.as_view(),
         name='quiz_index'),
 
