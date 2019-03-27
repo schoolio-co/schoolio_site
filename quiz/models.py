@@ -564,7 +564,7 @@ class Question(models.Model):
                                      null=True,
                                      on_delete=models.CASCADE)
 
-    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',
+    figure = models.ImageField(upload_to='static/images/uploads',
                                blank=True,
                                null=True,
                                verbose_name=_("Figure"))
