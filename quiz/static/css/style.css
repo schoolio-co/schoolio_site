@@ -156,6 +156,8 @@ body {
 #portfolio:target ~ #header #navigation #link-portfolio,
 #about:target ~ #header #navigation #link-about, 
 #quiz:target ~ #header #navigation #link-quiz,
+#school:target ~ #header #navigation #link-school,
+#teacher:target ~ #header #navigation #link-teacher,
 #contact:target ~ #header #navigation #link-contact {
   background: #000;
   color: #fff;
@@ -583,7 +585,7 @@ img.mobile-profile-img {
   display: none;
 }
 .about.title-page:before {
-  content: "About";
+  content: "Register";
   top: -52px;
   position: absolute;
   color: rgba(0, 0, 0, 0.04);
@@ -1196,8 +1198,8 @@ textarea.form-control {
 @media (max-width: 360px) {
 }
 
-<---quiz--->
-/*- Contact-Page -*/
+
+/*- Quiz Page  -*/
 #quiz.panel {
   width: 70%;
   height: 100%;
@@ -1224,3 +1226,60 @@ textarea.form-control {
 .quiz-text {
   margin-top: 96px;
 }
+
+/*- School Page  -*/
+#school.panel {
+  width: 70%;
+  height: 100%;
+}
+.school-content {
+  right: 15px;
+  left: 15.6%;
+  top: 0px;
+  margin-top: 96px;
+  position: absolute;
+  padding-bottom: 96px;
+}
+.school.title-page:before {
+  content: "Schools";
+  top: -52px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.04);
+  font-size: 72px;
+  z-index: -1;
+  font-weight: 300;
+  letter-spacing: -4px;
+  text-transform: capitalize;
+}
+.school-text {
+  margin-top: 96px;
+}
+
+/*- Teacher Page  -*/
+#teacher.panel {
+  width: 70%;
+  height: 100%;
+}
+.teacher-content {
+  right: 15px;
+  left: 15.6%;
+  top: 0px;
+  margin-top: 96px;
+  position: absolute;
+  padding-bottom: 96px;
+}
+.teacher.title-page:before {
+  content: "Teachers";
+  top: -52px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.04);
+  font-size: 72px;
+  z-index: -1;
+  font-weight: 300;
+  letter-spacing: -4px;
+  text-transform: capitalize;
+}
+.teacher-text {
+  margin-top: 96px;
+}
+

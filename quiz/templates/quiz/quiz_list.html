@@ -8,10 +8,6 @@
  
 <h2>{% trans "List of quizzes" %}</h2>
 <br/>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <a class="btn btn-outline-secondary" href="{% url 'home' %}" role="button">Back to Home</a>
-  <a class="btn btn-outline-secondary" href="{% url 'quiz_category_list_all' %}" role="button">View All Quizzes</a>
-</div>
 <br/>
     {% if quiz_list %}
 		<table class="table table-bordered table-striped">

@@ -17,6 +17,7 @@ urlpatterns = [
         view=QuizListView.as_view(),
         name='quiz_index'),
 
+
     url(r'^category/$',
         view=CategoriesListView.as_view(),
         name='quiz_category_list_all'),

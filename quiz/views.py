@@ -33,7 +33,7 @@ class Home(TemplateView):
 
 class QuizListView(ListView):
     model = Quiz
-
+    @method_decorator(login_required)
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
@@ -51,6 +51,7 @@ class QuizDetailView(DetailView):
 
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
 
 
 class CategoriesListView(ListView):

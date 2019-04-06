@@ -179,6 +179,8 @@ addEventListener("popstate",function(e){
 	}
 });
 
+
+
 // * menu-nav *
 // button 
 $("a.button").on("click", function(){

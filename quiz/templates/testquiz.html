@@ -1,0 +1,23 @@
+{% block content %}
+
+<body>
+ 
+
+    
+        {% for quiz in quiz_list %}
+        {% if quiz.title == testquiz %}
+  			<tr>
+			  <td>{{ quiz.title }}</td>
+			  <td>{{ quiz.category }}</td>
+			  <td>
+				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
+				  {% trans "View Quiz Details" %}
+				</a>
+			</tr>
+            {% endif %}
+        {% endfor %}
+		  </tbody>
+		</table>
+</body>
+
+{% endblock %}
