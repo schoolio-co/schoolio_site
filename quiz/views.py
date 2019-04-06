@@ -33,7 +33,7 @@ class Home(TemplateView):
 
 class QuizListView(ListView):
     model = Quiz
-    @method_decorator(login_required)
+    
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
