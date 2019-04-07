@@ -328,24 +328,19 @@
               <h4>Education</h4>
             </div>
             <div class="col-lg-8 col-md-10">
-
-              <div class="resume-inner">
-                 <div class="resume-row">
-                  <span class="resume-date">2003-2007</span>
-                  <h4 class="resume-study">College of Computing Technology</h4>
-                  <p class="resume-text">Nunc euismod odio nec turpis aliquet dapibus. Nulla maximus diam leo, a feugiat neque laoreet ut. Aenean bibendum tellus id eros hendrerit, a rhoncus augue eleifend. </p>
+              <div class="container">
+                <div class="row">
+                    <h2>Available Products</h2>
+        
+                    {% for product in all_products %}
+                        <div class="col-lg-4">
+                            <h3><a href="{% url 'product_detail' product.pk product.slug %}">{{ product.name }}</a></h3>
+                            <p>Price ${{ product.price }}</p>
+                        </div>
+                    {% endfor %}
+        
                 </div>
-                <div class="resume-row">
-                  <span class="resume-date">2007-2008</span>
-                  <h4 class="resume-study">Computer Training School</h4>
-                  <p class="resume-text">Curabitur tempus ultricies nulla id consequat. Proin risus eros, pellentesque ut condimentum at, egestas ut augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="resume-row">
-                  <span class="resume-date">2008-2013</span>
-                  <h4 class="resume-study">Institute of Technology</h4>
-                  <p class="resume-text">Praesent ac massa orci. Vestibulum semper, arcu quis pharetra feugiat, urna mauris rutrum metus, at posuere mi sem ut mauris. In sit amet nulla at urna vehicula.</p>
-                </div>
-
+            </div>
               </div><!-- /.resume-inner -->
             </div><!-- /.col-lg-8 .col-md-10 -->
           </div><!-- /.row -->

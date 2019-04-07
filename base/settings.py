@@ -15,7 +15,9 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-
+PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
+ 
+PAYPAL_TEST = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -38,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'quiz',
+    "ecommerce_app",
+    'paypal.standard.ipn',
     'multichoice',
     'true_false',
+    "cal",
     'essay',
 ]
 

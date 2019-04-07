@@ -2,10 +2,15 @@ try:
     from django.conf.urls import url
 except ImportError:
     from django.urls import re_path as url
+    
+from django.urls import path
 
 from .views import Home, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
+
+from ecommerce_app.views import *
+from cal.views import *
 
 urlpatterns = [
 
@@ -17,6 +22,48 @@ urlpatterns = [
         view=QuizListView.as_view(),
         name='quiz_index'),
 
+    url(r'^index/$',
+        view=index,
+        name='index'),
+
+    path('product/<int:product_id>/<slug:product_slug>/',
+        view=show_product, 
+        name='product_detail'),
+
+    url(r'^cart/$', 
+        view=show_cart, 
+        name='show_cart'),
+
+    url(r'^checkout/$', 
+        view=checkout, 
+        name='checkout'),
+
+    path('process-payment/', 
+        view=process_payment, 
+        name='process_payment'),
+
+    path('payment-done/', 
+        view=payment_done, 
+        name='payment_done'),
+
+    path('payment-cancelled/', 
+        view=payment_canceled, 
+        name='payment_cancelled'),
+    
+     path('subscribe/', 
+        view=subscription, 
+        name='subscription'),
+
+    path('process_subscription/', 
+        view=process_subscription, 
+        name='process_subscription'),
+
+    url(r'^cal_index/$', 
+        view=cal_index, name='cal_index'),
+    
+    url(r'^calendar/$', 
+        view=CalendarView.as_view(), 
+        name='calendar'),
 
     url(r'^category/$',
         view=CategoriesListView.as_view(),
@@ -46,4 +93,6 @@ urlpatterns = [
     url(r'^(?P<quiz_name>[\w-]+)/take/$',
         view=QuizTake.as_view(),
         name='quiz_question'),
+
+    
 ]
