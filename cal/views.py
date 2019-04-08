@@ -41,3 +41,25 @@ class EventListView(ListView):
     def get_queryset(self):
         queryset = super(EventListView, self).get_queryset()
         return queryset.filter(draft=False)
+
+def search(request):
+        if 'q' in request.GET:
+          #Get the selected category id 
+          sel_category = request.GET.get('category', None)
+          #If it exists, get the category object
+          if sel_category: 
+                category = get_object_or_404(Category, pk = sel_category)
+          query = request.GET['q']
+          results = Adv.objects.filter(title__icontains=query)
+          #If category objects exists filter the result set based on that
+          if category:
+                    results =results.filter(cate__name__icontains=category.name)
+       #   print results.query 
+        else:
+          query = ""
+          results = None
+          categories = Category.objects.all()
+        template = loader.get_template('search/search1.html')
+        context = Context({ 'query': query, 'results': results, 'city_list': ChoiceCity.objects.all(), 'categories':categories })
+        response = template.render(context)
+        return HttpResponse(response) 
