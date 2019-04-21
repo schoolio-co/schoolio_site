@@ -30,7 +30,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div class="title" data-swiper-parallax="-300">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">Practice</div>
+        <div class="subtitle" data-swiper-parallax="-200">Exam Practice</div>
         <div class="text" data-swiper-parallax="-100">
           <p>Access hundreds of practice questions with solutions for Grade 10 and Grade 12 National Exams</p>
           <a class="button" href="#about">Get Started</a>
@@ -38,17 +38,17 @@
       </div>
       <div class="swiper-slide">
         <div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">Practice</div>
+        <div class="subtitle" data-swiper-parallax="-200">College Prep</div>
         <div class="text" data-swiper-parallax="-100">
-          <p>Track your results and progress in one place</p>
+          <p>Get everything you need to prepare for college from entrance exam prep to info on grants/loans for studying abroad.</p>
               <a class="button" href="#about">Get Started</a>
         </div>
       </div>
       <div class="swiper-slide">
         <div class="title" data-swiper-parallax="-300">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">Practice</div>
+        <div class="subtitle" data-swiper-parallax="-200">Career Planning</div>
         <div class="text" data-swiper-parallax="-100">
-          <p>Prepare for National Exams from your phone, laptop, or tablet</p>
+          <p>Get guidance on career paths, skills assessments, or University majors.</p>
           <a class="button" href="#about">Get Started</a>
         </div>
       </div>
@@ -321,57 +321,39 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <span class="resume title-page">Resume</span>
+            <span class="resume title-page">About</span>
           </div>
         </div>  
-                      
-        <div class="education">
-          <div class="row">
-            <div class="col-lg-4 col-md-2">
-              <h4>Education</h4>
-            </div>
-            <div class="col-lg-8 col-md-10">
-              <div class="container">
-                <div class="row">
-                    <h2>Available Products</h2>
-        
-                    {% for product in all_products %}
-                        <div class="col-lg-4">
-                            <h3><a href="{% url 'product_detail' product.pk product.slug %}">{{ product.name }}</a></h3>
-                            <p>Price ${{ product.price }}</p>
-                        </div>
-                    {% endfor %}
-        
-                </div>
-            </div>
-              </div><!-- /.resume-inner -->
-            </div><!-- /.col-lg-8 .col-md-10 -->
-          </div><!-- /.row -->
-      </div><!-- /.education -->
 
  <!-- experience -->
       <div class="education">
         <div class="row">
           <div class="col-lg-4 col-md-2">
-            <h4>Experience</h4>
+            <h4>REACH HIGHER</h4>
           </div>
           <div class="col-lg-8 col-md-10">
 
             <div class="resume-inner">
               <div class="resume-row">
-                <span class="resume-date">2013-2014</span>
-                <h4 class="resume-study">Junior Web Designer</h4>
-                <p class="resume-text">Nunc euismod odio nec turpis aliquet dapibus. Nulla maximus diam leo, a feugiat neque laoreet ut. Aenean bibendum tellus id eros hendrerit, a rhoncus augue eleifend. </p>
+                <span class="resume-date">Exam Practice </span>
+                <h4 class="resume-study">Online Practice Exams</h4>
+                <p class="resume-text">Schoolio has an online platform to help secondary students prepare for all 
+                  major subjects. Gain access to hundreds of practice questions with solutions. Our library of exams is 
+                  always growing and expanding which means you will always have new material. </p>
               </div>
               <div class="resume-row">
-                <span class="resume-date">2014-2015</span>
-                <h4 class="resume-study">User Experience (UX) Designer</h4>
-                <p class="resume-text">Curabitur tempus ultricies nulla id consequat. Proin risus eros, pellentesque ut condimentum at, egestas ut augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <span class="resume-date">University Prep</span>
+                <h4 class="resume-study">Entrance Exams, Grant/Loans, Study Abroad</h4>
+                <p class="resume-text">Get info on University requirements and enrollment procedures. 
+                  Apply for grants and scholarships from all around the world. Students can also take supplemental 
+                  courses to help with international exams like SAT, ACT, or TOEFL.</p>
               </div>
               <div class="resume-row">
-                <span class="resume-date">2015-2017</span>
-                <h4 class="resume-study">Web Developer</h4>
-                <p class="resume-text">Praesent ac massa orci. Vestibulum semper, arcu quis pharetra feugiat, urna mauris rutrum metus, at posuere mi sem ut mauris. In sit amet nulla at urna vehicula.</p>
+                <span class="resume-date">Career Planning</span>
+                <h4 class="resume-study">Plan for Your Future</h4>
+                <p class="resume-text">Gain access to career guidance and exposure to hundreds of career paths based on your unique skills and passions. 
+                  Meet with recent graduates who have just started down that career path. Become prepared for your career after University with online internships or mentoring. 
+                </p>
               </div>
             </div><!-- /.resume-inner -->
 

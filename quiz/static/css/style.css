@@ -907,7 +907,7 @@ figure.effect-sadie:hover i {
   font-size: 14px;
 }
 .resume.title-page:before {
-  content: "Resume";
+  content: "About";
   top: -52px;
   position: absolute;
   color: rgba(0, 0, 0, 0.04);
