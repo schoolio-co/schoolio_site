@@ -5,7 +5,7 @@ except ImportError:
     
 from django.urls import path
 
-from .views import Home, QuizListView, CategoriesListView, \
+from .views import Home, user_profile, login_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 
@@ -18,6 +18,10 @@ urlpatterns = [
         view=Home.as_view(),
         name='home'),
 
+     url(r'^profile/$',
+        view=user_profile.as_view(),
+        name='profile'),
+
     url(r'^quizzes/$',
         view=QuizListView.as_view(),
         name='quiz_index'),
@@ -25,6 +29,14 @@ urlpatterns = [
     url(r'^index/$',
         view=index,
         name='index'),
+
+    path('login/',
+        view=login_user,
+        name='login'),
+
+    path('logout/',
+        view=logout_user,
+        name='logout'),
 
     path('product/<int:product_id>/<slug:product_slug>/',
         view=show_product, 

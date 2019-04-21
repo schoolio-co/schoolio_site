@@ -1,9 +1,11 @@
 import random
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, TemplateView, FormView
 
 from .forms import QuestionForm, EssayForm
@@ -31,12 +33,34 @@ class SittingFilterTitleMixin(object):
 class Home(TemplateView):
     template_name = 'home.html'
 
-class QuizListView(ListView):
+class user_profile(TemplateView):
+    template_name = 'profile.html'
+
+class QuizListView(LoginRequiredMixin, ListView):
     model = Quiz
     
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ('You are logged In!'))
+            return redirect('quiz_index')
+        else:
+            messages.success(request, ('Error Logging In - Please Try Again...'))
+            return redirect('login')
+    else:
+        return render(request, 'login.html', {})
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
 
 
 class QuizDetailView(DetailView):
@@ -54,7 +78,7 @@ class QuizDetailView(DetailView):
 
 
 
-class CategoriesListView(ListView):
+class CategoriesListView(LoginRequiredMixin, ListView):
     model = Category
 
 

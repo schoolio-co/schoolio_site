@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now
 from django.utils.encoding import python_2_unicode_compatible
 from django.conf import settings
-
+from stream_django.activity import Activity
 from model_utils.managers import InheritanceManager
 
 
@@ -591,3 +591,23 @@ class Question(models.Model):
 
     def __str__(self):
         return self.content
+
+class Tweet(models.Model, Activity):
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    @property
+    def activity_actor_attr(self):
+        return self.author
+
+    @property
+    def activity_notify(self):
+        if self.is_retweet and self.parent_tweet.author != self.author:
+            target_feed = feed_manager.get_notification_feed(self.parent_tweet.author_id)
+            return [target_feed]
+
+class Follow(models.Model, Activity):
+
+    @property
+    def activity_notify(self):
+        return [feed_manager.get_notification_feed(self.target_user.id)]

@@ -46,7 +46,11 @@ INSTALLED_APPS = [
     'true_false',
     "cal",
     'essay',
+    "stream_django",
 ]
+
+STREAM_API_KEY = '4emhs9sqfdtv'
+STREAM_API_SECRET = 'axa749jt5ybghj747dbqaceqf998a4wf27cewcgp4wzgtn5ctdxvr4bqd6kp6pzm'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -3,18 +3,40 @@
 {% block title %}{% trans "All Quizzes" %}{% endblock %}
 
 {% block content %}
-<br/>
-<br/>
+
+<body>
 <h2>{% trans "Category list" %}</h2>
+<br/>
+<br/>
+    {% if category_list %}
+    <table class="table table-bordered table-striped">
 
-<ul>
-  {% for cat in category_list %}
-  <li>
-	<a href="{% url 'quiz_category_list_matching' category_name=cat.category %}">
-	  {{ cat.category }}
-	</a>
-  </li>
-  {% endfor %}
-</ul>
+        <thead>
+            <tr>
+              <th>{% trans "Category" %}</th>
+            </tr>
+            </thead> 
 
+            <tbody>
+
+                {% for cat in category_list %}
+        
+                <tr>
+                <td>
+                  <a href="{% url 'quiz_category_list_matching' category_name=cat.category %}">
+                      {{ cat.category }}
+                    </a>
+                  </td>
+              </tr>
+        
+                {% endfor %}
+              </tbody> 
+
+</table>
+    {% else %}
+        <p>{% trans "There are no available quizzes" %}.</p>
+		{% endif %}
+
+
+</body>
 {% endblock %}
