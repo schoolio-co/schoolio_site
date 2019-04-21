@@ -136,15 +136,11 @@ def process_subscription(request):
     host = request.get_host()
  
     if subscription_plan == '1-month':
-        price = "10"
+        price = "15"
         billing_cycle = 1
         billing_cycle_unit = "M"
-    elif subscription_plan == '6-month':
-        price = "50"
-        billing_cycle = 6
-        billing_cycle_unit = "M"
     else:
-        price = "90"
+        price = "35"
         billing_cycle = 1
         billing_cycle_unit = "Y"
  

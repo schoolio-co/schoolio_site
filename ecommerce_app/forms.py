@@ -21,9 +21,8 @@ class CheckoutForm(forms.ModelForm):
         }
 
 subscription_options = [
-    ('1-month', '1-Month subscription ($10 USD/Mon)'),
-    ('6-month', '6-Month subscription Save $10 ($50 USD/Mon)'),
-    ('1-year', '1-Year subscription Save $30 ($90 USD/Mon)'),
+    ('1-month', '1-Month subscription ($15 USD/Mon)'),
+    ('1-year', '1-Year subscription ($35 USD/Mon)'),
 ]
  
  
