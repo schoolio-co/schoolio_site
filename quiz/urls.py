@@ -72,6 +72,9 @@ urlpatterns = [
 
     url(r'^cal_index/$', 
         view=cal_index, name='cal_index'),
+
+    url(r'^cal_search/$', 
+        view=EventSearchListView.as_view(), name='event_search_list_view'),
     
     url(r'^calendar/$', 
         view=CalendarView.as_view(), 

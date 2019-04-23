@@ -6,8 +6,19 @@
 <br/>
 <br/>
 <h3>Event Schedule 2019</h3>
-<a class="button" href="{% url 'home' %}" role="button">Back to Homepage</a>
 <br/>
+<div>
+		<ul class="list-group list-group-horizontal">
+		<li><a type="button" class="btn btn-light" href="{% url 'home' %}" role="button">Back to Homepage</a></li>
+		<br/>
+		<li><a type="button" class="btn btn-light" href="{% url 'calendar' %}" role="button">All Exam Dates</a></li>
+		<br/>
+		<li><form class="form-inline my-2 my-lg-0" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
+			<input class="form-control mr-sm-2" id="searchbox" name="q" type="text" placeholder="Search">
+			<button type="button" class="btn btn-light" type="submit">Search Exams</button>
+		</form></li>
+	</ul>
+</div>
 <br/>
 {% if event_list %}
 		<table class="table table-bordered table-striped">

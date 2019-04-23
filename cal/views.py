@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
 from django.views.generic import DetailView, ListView, TemplateView, FormView
-
+import operator
+from django.db.models import Q
+from functools import reduce
 from .models import *
 from .utils import Calendar
 
@@ -40,26 +42,25 @@ class EventListView(ListView):
     
     def get_queryset(self):
         queryset = super(EventListView, self).get_queryset()
-        return queryset.filter(draft=False)
+        return queryset.filter()
 
-def search(request):
-        if 'q' in request.GET:
-          #Get the selected category id 
-          sel_category = request.GET.get('category', None)
-          #If it exists, get the category object
-          if sel_category: 
-                category = get_object_or_404(Category, pk = sel_category)
-          query = request.GET['q']
-          results = Adv.objects.filter(title__icontains=query)
-          #If category objects exists filter the result set based on that
-          if category:
-                    results =results.filter(cate__name__icontains=category.name)
-       #   print results.query 
-        else:
-          query = ""
-          results = None
-          categories = Category.objects.all()
-        template = loader.get_template('search/search1.html')
-        context = Context({ 'query': query, 'results': results, 'city_list': ChoiceCity.objects.all(), 'categories':categories })
-        response = template.render(context)
-        return HttpResponse(response) 
+class EventSearchListView(CalendarView):
+    """
+    Display a Event List page filtered by the search query.
+    """
+    paginate_by = 10
+
+    def get_queryset(self):
+        result = super(EventSearchListView, self).get_queryset()
+
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.and_,
+                       (Q(title__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(category__icontains=q) for q in query_list))
+            )
+
+        return result
