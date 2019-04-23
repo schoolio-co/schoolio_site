@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "cal",
     'essay',
     "stream_django",
+    'preventconcurrentlogins',
 ]
 
 STREAM_API_KEY = '4emhs9sqfdtv'
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
