@@ -43,6 +43,10 @@ class Essay_Question(Question):
         else:
             return False
 
+    def order_answers(self, queryset):
+        return queryset.order_by()
+
+
     def get_answers(self):
         return self.order_answers(Answer.objects.filter(question=self))
 
