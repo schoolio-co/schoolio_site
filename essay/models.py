@@ -38,10 +38,10 @@ class Essay_Question(Question):
 
             score = (base + results)/2
 
-        if score >= .50:
-            return True
-        else:
+        if score <= .50:
             return False
+        else:
+            return True
 
     def order_answers(self, queryset):
         return queryset.order_by()
