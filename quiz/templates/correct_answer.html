@@ -10,7 +10,7 @@
   <table class="table table-striped table-bordered">
     <tbody>
   	  {% for answer in previous.answers %}
-        {% if answer.correct %}
+        {% if answer.is_correct == True  %}
   	    <tr class="success">
   		  <td>{{ answer.content }}</td>
   		  <td><strong>{% trans "This is the correct answer" %}</strong></td>
