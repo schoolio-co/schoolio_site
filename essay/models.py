@@ -39,9 +39,9 @@ class Essay_Question(Question):
             score = (base + results)/2
 
         if score >= .50:
-            return True
+            return 1
         else:
-            return False
+            return 0
 
     def get_answers(self):
         return self.order_answers(Answer.objects.filter(question=self))
