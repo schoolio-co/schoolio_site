@@ -47,7 +47,7 @@ class Essay_Question(Question):
         return self.order_answers(Answer.objects.filter(question=self))
 
     def get_answers_list(self):
-        return Answer.objects.get(id=guess).content
+        return Answer.content.get(id=guess)
 
     def answer_choice_to_string(self, guess):
         return str(guess)
