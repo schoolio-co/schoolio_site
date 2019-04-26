@@ -13,8 +13,8 @@ nltk.download('punkt')
 class Essay_Question(Question):
 
     def check_if_correct(self, guess):
-        guess = Answer.objects.get(id=guess)
-        answer = Answer.content
+        guess = guess
+        answer = Answer.objects.filter(question=self).content
 
     def assess(answer,guess):
         stemmer = nltk.stem.porter.PorterStemmer()
@@ -39,9 +39,9 @@ class Essay_Question(Question):
             score = (base + results)/2
 
         if score >= .50:
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def get_answers(self):
         return self.order_answers(Answer.objects.filter(question=self))
