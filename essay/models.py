@@ -14,7 +14,7 @@ class Essay_Question(Question):
 
     def check_if_correct(self, guess):
         guess = guess
-        answer = Answer.objects.filter(question=self).content
+        answer = Answer.content.filter(question=self)
 
     def assess(answer,guess):
         stemmer = nltk.stem.porter.PorterStemmer()
