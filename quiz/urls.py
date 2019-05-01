@@ -80,6 +80,7 @@ urlpatterns = [
         view=CalendarView.as_view(), 
         name='calendar'),
 
+
     url(r'^category/$',
         view=CategoriesListView.as_view(),
         name='quiz_category_list_all'),

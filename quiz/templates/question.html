@@ -7,7 +7,7 @@
 {% block description %} {{ quiz.title }} - {{ quiz.description }} {% endblock %}
 
 {% block content %}
-
+<div class="container">
 {% if previous.answers %}
 
   <p class="muted"><small>{% trans "The previous question" %}:</small></p>
@@ -76,7 +76,6 @@
 
 {% endif %}
 
-<hr>
 
 
 {% endblock %}

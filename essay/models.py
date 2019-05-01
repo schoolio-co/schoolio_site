@@ -16,33 +16,6 @@ class Essay_Question(Question):
         guess = guess
         answer = Answer.content
 
-    def assess(answer,guess):
-        stemmer = nltk.stem.porter.PorterStemmer()
-        remove_punctuation_map = dict((ord(char), None) for char in string.punctuation)
-
-        def stem_tokens(tokens):
-            return [stemmer.stem(item) for item in tokens]
-
-
-        def normalize(text):
-            return stem_tokens(nltk.word_tokenize(text.lower().translate(remove_punctuation_map)))
-
-            vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
-
-        def cosine_sim(text1, text2):
-            tfidf = vectorizer.fit_transform([text1, text2])
-            return ((tfidf * tfidf.T).A)[0,1]
-
-            base = cosine_sim(answer, answer)
-            results = (cosine_sim(answer, guess))
-
-            score = (base + results)/2
-
-        if score <= .50:
-            return False
-        else:
-            return True
-
     def order_answers(self, queryset):
         return queryset.order_by()
 
