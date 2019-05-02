@@ -53,3 +53,5 @@ wrapt==1.11.1
 stream_django
 sklearn
 nltk
+python-decouple
+unipath

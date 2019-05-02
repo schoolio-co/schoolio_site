@@ -42,6 +42,7 @@ urlpatterns = [
         view=show_product, 
         name='product_detail'),
 
+
     url(r'^cart/$', 
         view=show_cart, 
         name='show_cart'),

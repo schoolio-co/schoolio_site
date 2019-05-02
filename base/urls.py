@@ -17,13 +17,17 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include 
 from django.conf.urls.static import static
-
+from quiz import views as quiz_views
+from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
 ]
+
+handler404 = quiz_views.error_404
+handler500 = quiz_views.error_500
 
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
