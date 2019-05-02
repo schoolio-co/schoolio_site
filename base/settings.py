@@ -16,19 +16,19 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 SECRET_KEY = config('SECRET_KEY')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
-PAYPAL_TEST = True
+PAYPAL_TEST = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 
 # Application definition
@@ -233,9 +233,10 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'quiz/static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())
