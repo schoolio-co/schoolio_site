@@ -72,7 +72,7 @@ body {
   font-size: 14px;
   letter-spacing: 0.1;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
 }
 .responsive-img {
   width: 100%;
