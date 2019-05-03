@@ -38,9 +38,6 @@ urlpatterns = [
         view=logout_user,
         name='logout'),
 
-    path('accounts/login/', 
-        auth_views.LoginView.as_view()),
-    
 
     path('product/<int:product_id>/<slug:product_slug>/',
         view=show_product, 
