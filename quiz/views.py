@@ -62,6 +62,10 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+class LoginRedirectView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
 
 class QuizDetailView(DetailView):
     model = Quiz
