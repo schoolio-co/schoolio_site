@@ -39,8 +39,8 @@ class user_profile(TemplateView):
 class QuizListView(LoginRequiredMixin, ListView):
     model = Quiz
     login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-    
+
+
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
