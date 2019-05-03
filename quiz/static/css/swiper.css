@@ -176,12 +176,12 @@
 }
 .swiper-button-prev,
 .swiper-container-rtl .swiper-button-next {
-  background-image: url("quiz/static/assets/images/home-img/matric.jpg");
+  background-image: url("#");
   right: auto;
 }
 .swiper-button-next,
 .swiper-container-rtl .swiper-button-prev {
-  background-image: url("quiz/static/assets/images/home-img/matric.jpg");
+  background-image: url("#");
   right: 10px;
   left: auto;
 }
