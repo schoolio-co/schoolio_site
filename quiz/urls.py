@@ -7,7 +7,7 @@ from django.urls import path
 
 from .views import Home, user_profile, login_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
-    QuizMarkingDetail, QuizDetailView, QuizTake, LoginRedirectView
+    QuizMarkingDetail, QuizDetailView, QuizTake
 from django.contrib.auth import views as auth_views
 from ecommerce_app.views import *
 from cal.views import *
