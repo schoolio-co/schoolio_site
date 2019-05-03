@@ -16,7 +16,7 @@ from whitenoise import WhiteNoise
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 
-PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
+PAYPAL_RECEIVER_EMAIL = 'audrey-facilitator@schoolio.co'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 PAYPAL_TEST = True
 # Quick-start development settings - unsuitable for production
