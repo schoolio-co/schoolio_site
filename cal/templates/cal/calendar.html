@@ -13,10 +13,14 @@
 		<br/>
 		<li><a type="button" class="btn btn-light" href="{% url 'calendar' %}" role="button">All Exam Dates</a></li>
 		<br/>
-		<li><form class="form-inline my-2 my-lg-0" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
-			<input class="form-control mr-sm-2" id="searchbox" name="q" type="text" placeholder="Search">
-			<button type="button" class="btn btn-light" type="submit">Search Exams</button>
-		</form></li>
+		<li>
+		<form id="searchform" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
+      <button class="searchbutton" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+		</form>
+		</li>
 	</ul>
 </div>
 <br/>
