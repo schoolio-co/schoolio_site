@@ -17,7 +17,7 @@ from whitenoise import WhiteNoise
 
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
- 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 PAYPAL_TEST = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
