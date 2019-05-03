@@ -40,7 +40,7 @@ def ipn_receiver(sender, **kwargs):
  
         email = EmailMessage(subject,
                              message,
-                             'audrey@schoolio.co,
+                             'audrey@schoolio.co',
                              [user.email])
  
         email.send()
