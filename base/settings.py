@@ -14,8 +14,8 @@ import os
 import django_heroku
 from whitenoise import WhiteNoise
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
 PAYPAL_TEST = True
@@ -28,7 +28,7 @@ SECRET_KEY = 'jh@&sube49vg(=9llvw*dpms&6oxr-r0o9q=j*9i7^gk_rzud-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['schoolioco.herokuapp.com']
 
 
 # Application definition
@@ -134,9 +134,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 django_heroku.settings(locals())
