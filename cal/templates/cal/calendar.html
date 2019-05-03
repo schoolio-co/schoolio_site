@@ -15,10 +15,10 @@
 		<br/>
 		<li>
 		<form id="searchform" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
-      <button class="searchbutton" type="submit">
-        <i class="fa fa-search"></i>
-      </button>
       <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+			<button class="searchbutton" type="submit">
+        <i class="fa fa-search" aria-hidden="true"></i>
+			</button>
 		</form>
 		</li>
 	</ul>
