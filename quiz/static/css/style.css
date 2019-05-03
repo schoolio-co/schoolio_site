@@ -657,7 +657,7 @@ img.mobile-profile-img {
   position: absolute;
 }
 .profile-img {
-  background: url(..static/images/about/profile.jpg) center;
+  background: url('#') center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
