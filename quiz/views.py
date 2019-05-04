@@ -7,7 +7,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, TemplateView, FormView
-
+from django.forms import generic
+from django.urls import reverse
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import QuestionForm, EssayForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from essay.models import Essay_Question
@@ -43,20 +45,18 @@ class QuizListView(LoginRequiredMixin, ListView):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
 
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, ('You are logged In!'))
-            return redirect('quiz_index')
-        else:
-            messages.success(request, ('Error Logging In - Please Try Again...'))
-            return redirect('login')
-    else:
-        return render(request, 'login.html', {})
+class LoginView(generic.FormView):
+    from_class = AuthenticationForm #specify the form you're using
+    success_url = reverse("login")
+    template_name = "login.html"
+    
+    def get_form(self, form_class=None): #check the form
+        if form_class=None:
+            form_class = self.get_form_class()
+        return form_class(self.request, **self.get_form_kwargs())
+    def form_valid(self, form): #check if form is valid
+        login(self.request, form.get_user())
+        return super().form_valid(form)
 
 def logout_user(request):
     logout(request)
