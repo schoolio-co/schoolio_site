@@ -1,6 +1,7 @@
 import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render, redirect
@@ -64,6 +65,23 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+def register_user(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ('Your have Registered'))
+            return redirect("home")
+    else:
+        form = UserCreationForm()
+
+    context = {'form': form}
+    return render(request, "registration/register.html", context)
+
 
 class QuizDetailView(DetailView):
     model = Quiz
@@ -82,7 +100,7 @@ class QuizDetailView(DetailView):
 
 class CategoriesListView(LoginRequiredMixin, ListView):
     model = Category
-
+    login_url = "/login/"
 
 class ViewQuizListByCategory(ListView):
     model = Quiz
@@ -111,6 +129,7 @@ class ViewQuizListByCategory(ListView):
 
 class QuizUserProgressView(TemplateView):
     template_name = 'progress.html'
+    login_url = "/login/"
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
