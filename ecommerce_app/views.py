@@ -105,7 +105,7 @@ def process_payment(request):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
-                                           reverse('register')),
+                                           reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
