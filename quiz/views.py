@@ -48,7 +48,7 @@ class QuizListView(LoginRequiredMixin, ListView):
 class LoginView(generic.FormView):
     from_class = AuthenticationForm #specify the form you're using
     success_url = reverse("login")
-    template_name = "login.html"
+    template_name = "registration/login.html"
     
     def get_form(self, form_class=None): #check the form
         if form_class=None:
