@@ -37,33 +37,16 @@
           <a class="nav-link dropdown-toggle" href="{% url 'quiz_category_list_all' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categories
           </a>
-          <div class="dropdown">
-              <button class="dropbtn">Categories
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <div class="header">
-                  <h2>Quiz Categories</h2>
-                </div> 
-                <div class="row">
-                  <div class="column">
-                    <h3>English</h3>
-                    <a href="{% url 'quiz_category_list_matching' 'English' %}">English</a>
-                  </div>
-                  <div class="column">
-                    <h3>Math</h3>
-                    <a href="{% url 'quiz_category_list_matching' 'Math' %}">Math</a>
-                  </div>
-                  <div class="column">
-                    <h3>Science</h3>
-                    <a href="{% url 'quiz_category_list_matching' 'Biology' %}">Biolohy</a>
-                    <a href="{% url 'quiz_category_list_matching' 'PhysicalScience' %}">Phyiscal Science</a>
-                  </div>
-                </div>
-              </div>
-            </div> 
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'English' %}">English</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Math' %}">Math</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'PhysicalScience' %}">Phyiscal Science</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Biology' %}">Biology</a>
+          </div>
         </li>
-      
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
