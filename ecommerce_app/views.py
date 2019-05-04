@@ -105,7 +105,7 @@ def process_payment(request):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
-                                           reverse('payment_done')),
+                                           reverse('register')),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
@@ -115,10 +115,7 @@ def process_payment(request):
 
 @csrf_exempt
 def payment_done(request):
-    if ipn_obj.txn_type == "subscr_signup":
-       return render(request, 'ecommerce_app/payment_done.html') 
-    else:
-        return redirect('subscribe')
+    return render(request, 'ecommerce_app/payment_done.html')
  
 @csrf_exempt
 def payment_canceled(request):
