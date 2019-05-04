@@ -30,7 +30,7 @@ urlpatterns = [
         view=index,
         name='index'),
 
-    path('accounts/login/',
+    path('login/',
         view=login_user,
         name='login'),
 
