@@ -1,4 +1,5 @@
 import random
+import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -13,7 +14,7 @@ from .forms import QuestionForm, EssayForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from essay.models import Essay_Question
 
-
+dt = datetime.datetime.now()
  
 class QuizMarkerMixin(object):
     @method_decorator(login_required)
