@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
+    path(r'^djga/', include('google_analytics.urls')),
 ]
 
 if settings.DEBUG: # new
