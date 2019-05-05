@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import url
 from django.urls import path, include 
 from django.conf.urls.static import static
 
@@ -23,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path(r'^djga/', include('google_analytics.urls')),
+    url(r'^djga/', include('google_analytics.urls')),
 ]
 
 if settings.DEBUG: # new
