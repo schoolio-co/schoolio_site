@@ -135,6 +135,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+GOOGLE_ANALYTICS_MODEL = True
+
 GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-130587635-2',
 }
