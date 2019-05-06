@@ -26,7 +26,7 @@ class CheckoutForm(forms.ModelForm):
 
 subscription_options = [
     ('1-month', '1-Month subscription ($15 USD/Mon)'),
-    ('1-year', '1-Year subscription ($35 USD/Mon)'),
+    ('1-year', '1-Year subscription ($35 USD)'),
 ]
  
  
