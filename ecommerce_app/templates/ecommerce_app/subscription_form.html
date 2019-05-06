@@ -4,16 +4,17 @@
 
 <h3>Register for Schoolio</h3>
 <p>Register for a monthly subscription for N$200 (15.00 usd) per month</p>
-<p>Register for an annual subscription for N$500 (35.00 usd) per month</p>
-
+<p>Register for an annual subscription for N$500 (35.00 usd) per year</p>
+<br/>
     <form action="" method="post">
         {% csrf_token %}
         {{ f }}
         <input type="submit" value="Subscribe">
     </form>
-
+<br/>
 <p>Please note payments are processed in USD. 
     If you are more comfortable processing your subscription via EFT. 
-    Please contact us to process an offline payment.</p>
+    Please contact us to process an offline payment. 
+    Only annual subscriptions can be purchased via eft. </p>
     <a href="mailto:lettisia@schoolio.co">Email Us</a>
 {% endblock %}
