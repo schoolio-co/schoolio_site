@@ -53,7 +53,7 @@
   <strong>{{ question.category }}</strong>
 </p>
 
-<p class="lead">{{ question.content }}</p>
+<p class="lead">{{ question.content | safe | linebreaks}}</p>
 
 {% if question.figure %}
     <img src="{{ question.figure.url }}" alt="{{ question.content }}" />
