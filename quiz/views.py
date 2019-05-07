@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, TemplateView, FormView
 
-from .forms import QuestionForm, EssayForm
+from .forms import QuestionForm, EssayForm, SignUpForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from essay.models import Essay_Question
 
@@ -78,7 +78,7 @@ def register_user(request):
             messages.success(request, ('Your have Registered'))
             return redirect("home")
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
 
     context = {'form': form}
     return render(request, "registration/register.html", context)
