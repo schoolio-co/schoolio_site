@@ -412,7 +412,7 @@ def anon_session_score(session, to_add=0, possible=0):
 
     return session["session_score"], session["session_score_possible"]
 
-def error_404(request):
+def error_404(request, exception):
         data = {}
         return render(request,'error_404.html', data)
 

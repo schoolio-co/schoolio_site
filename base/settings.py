@@ -214,6 +214,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+TIME_INPUT_FORMATS = ['%H:%M:%S',
+                        '%H:%M',]
+
 USE_I18N = True
 
 USE_L10N = True
@@ -234,7 +237,7 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())
