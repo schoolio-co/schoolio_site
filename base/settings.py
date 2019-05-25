@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'essay',
     "stream_django",
     'preventconcurrentlogins',
-    'django-storages',
+    'storages',
 ]
 
 STREAM_API_KEY = '4emhs9sqfdtv'
