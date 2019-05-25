@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import django_heroku
 from whitenoise import WhiteNoise
+from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 
@@ -29,6 +30,15 @@ SECRET_KEY = 'jh@&sube49vg(=9llvw*dpms&6oxr-r0o9q=j*9i7^gk_rzud-'
 DEBUG = False
 
 ALLOWED_HOSTS = ['schoolioco.herokuapp.com']
+
+DEFAULT_FILE_STORAGE = “storages.backends.s3boto3.S3Boto3Storage”
+STATICFILES_STORAGE = “storages.backends.s3boto3.S3Boto3Storage”
+
+AWS_ACCESS_KEY_ID = config(“AWS_ACCESS_KEY_ID”)
+AWS_SECRET_ACCESS_KEY = config(“AWS_SECRET_ACCESS_KEY”)
+AWS_STORAGE_BUCKET_NAME = config(“AWS_STORAGE_BUCKET_NAME”)
+AWS_QUERYSTRING_AUTH = False 
+AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME + ‘.s3.amazonaws.com’
 
 
 # Application definition
@@ -49,6 +59,7 @@ INSTALLED_APPS = [
     'essay',
     "stream_django",
     'preventconcurrentlogins',
+    'storages',
 ]
 
 STREAM_API_KEY = '4emhs9sqfdtv'
@@ -137,13 +148,16 @@ USE_TZ = True
 SECURE_SSL_REDIRECT = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+STATIC_URL = ‘https://' + AWS_STORAGE_BUCKET_NAME + ‘.s3.amazonaws.com/’
+MEDIA_URL = STATIC_URL + ‘media/’
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, “static”), )
+STATIC_ROOT = ‘staticfiles’
+ADMIN_MEDIA_PREFIX = STATIC_URL + ‘admin/’
+STATICFILES_FINDERS = (
+‘django.contrib.staticfiles.finders.FileSystemFinder’,
+‘django.contrib.staticfiles.finders.AppDirectoriesFinder’,
+)
 
 LOGIN_URL='/login/'
 LOGIN_REDIRECT_URL='/login/'

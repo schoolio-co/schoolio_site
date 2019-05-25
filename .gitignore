@@ -16,3 +16,4 @@ build*
 /uploads/
 .tox
 *.egg
+.env
