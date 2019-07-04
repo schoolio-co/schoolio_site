@@ -3,9 +3,9 @@
 {% block title %}{% trans "Exam Schedule 2019" %}{% endblock %}
 
 {% block content %}
-<br/>
-<br/>
-<h3>Event Schedule 2019</h3>
+
+	<br/>
+<h3>Exam Schedule 2019</h3>
 <br/>
 <div>
 		<ul class="list-group list-group-horizontal">
@@ -13,11 +13,17 @@
 		<br/>
 		<li><a type="button" class="btn btn-light" href="{% url 'calendar' %}" role="button">All Exam Dates</a></li>
 		<br/>
-		<li><form class="form-inline my-2 my-lg-0" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
-			<input class="form-control mr-sm-2" id="searchbox" name="q" type="text" placeholder="Search">
-			<button type="button" class="btn btn-light" type="submit">Search Exams</button>
-		</form></li>
+		<li>
+		<form id="searchform" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+			<button class="searchbutton" type="submit">Search</button>
+		</form>
+		</li>
 	</ul>
+	<br/>
+	<h5>Search by subject or keywords to find test dates.</h5>
+	<p>please note information provided by Ministry of Education and may change without notice. 
+		Please use this schedule as reference and make sure to confirm with your test centre.</p>
 </div>
 <br/>
 {% if event_list %}
@@ -50,7 +56,6 @@
 	{% else %}
         <p>{% trans "There are no available exams" %}.</p>
 		{% endif %}
-
 
 {% endblock %}
 

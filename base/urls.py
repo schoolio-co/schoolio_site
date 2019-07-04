@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quiz.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
-]
+    
+] 
 
 handler404 = quiz_views.error_404
 handler500 = quiz_views.error_500

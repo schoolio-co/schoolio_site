@@ -5,9 +5,11 @@ from django.conf import settings
 from decimal import Decimal
 from paypal.standard.forms import PayPalPaymentsForm
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import login, authenticate
 from .models import Product, Order, LineItem
-from .forms import CartForm, CheckoutForm, SubscriptionForm
+from .forms import CartForm, CheckoutForm, SubscriptionForm, SignUpForm
 from . import cart
+from .signals import *
 
 # Create your views here.
 
@@ -115,7 +117,6 @@ def process_payment(request):
 def payment_done(request):
     return render(request, 'ecommerce_app/payment_done.html')
  
- 
 @csrf_exempt
 def payment_canceled(request):
     return render(request, 'ecommerce_app/payment_cancelled.html')
@@ -157,6 +158,7 @@ def process_subscription(request):
         'item_name': 'Content subscription',
         'custom': 1,     # custom data, pass something meaningful here
         'currency_code': 'USD',
+        'user.id': 'a custom value',
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,

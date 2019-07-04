@@ -13,12 +13,21 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from decouple import config, Csv
 import django_heroku
+from whitenoise import WhiteNoise
+from base.aws.conf import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+<<<<<<< HEAD
 SECRET_KEY = config('SECRET_KEY')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
+=======
+
+
+PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+>>>>>>> 64a4ad74553026c5ac03dca7e52f2fd3ac90bdb3
 PAYPAL_TEST = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -28,7 +37,7 @@ PAYPAL_TEST = False
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['schoolioco.herokuapp.com']
 
 
 # Application definition
@@ -75,7 +84,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -227,6 +236,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+<<<<<<< HEAD
 
 
 # Static files (CSS, JavaScript, Images)
@@ -238,6 +248,19 @@ STATIC_URL = '/static/'
 
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+=======
+SECURE_SSL_REDIRECT = True
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+>>>>>>> 64a4ad74553026c5ac03dca7e52f2fd3ac90bdb3
+MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL='/login/'
+LOGIN_REDIRECT_URL='/login/'
 django_heroku.settings(locals())

@@ -2,26 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}Simple ecommerce </title>
-    <style>
-        table{
-            border-collapse: collapse;
-            border: none;
-        }
-        td{
-            padding: 10px;
-        }
-        form{
-            margin-bottom: 0;
-        }
-    </style>
+    <title>{% block title %}{% endblock %} </title>
+
 </head>
 <body>
-
-<p>
-    <a href="{% url 'index' %}">All Products</a> |
-    <a href="{% url 'show_cart' %}">Cart: {{ cart_item_count }} item</a>
-</p>
 
 {% block content %}
 

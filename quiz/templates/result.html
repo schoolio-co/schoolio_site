@@ -97,3 +97,11 @@
 
 
 {% endblock %}
+
+<ul class="list-group">
+    <li class="list-group-item">{% trans "The previous question" %}:</li>
+    <li class="list-group-item">{{ previous.previous_question }}</li>
+    <li class="list-group-item">Your answer was</li>
+    <li class="list-group-item">{{ previous.previous_outcome|yesno:"correct,incorrect" }}</li>
+    <li class="list-group-item">{% include 'correct_answer.html' %}</li>
+  </ul>

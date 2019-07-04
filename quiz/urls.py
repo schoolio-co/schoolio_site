@@ -5,10 +5,10 @@ except ImportError:
     
 from django.urls import path
 
-from .views import Home, user_profile, login_user, logout_user, QuizListView, CategoriesListView, \
+from .views import Home, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
-
+from django.contrib.auth import views as auth_views
 from ecommerce_app.views import *
 from cal.views import *
 
@@ -34,9 +34,14 @@ urlpatterns = [
         view=login_user,
         name='login'),
 
+    path('register/',
+        view=register_user,
+        name='register'),
+
     path('logout/',
         view=logout_user,
         name='logout'),
+
 
     path('product/<int:product_id>/<slug:product_slug>/',
         view=show_product, 
@@ -75,7 +80,8 @@ urlpatterns = [
         view=cal_index, name='cal_index'),
 
     url(r'^cal_search/$', 
-        view=EventSearchListView.as_view(), name='event_search_list_view'),
+        view=EventSearchListView.as_view(), 
+        name='event_search_list_view'),
     
     url(r'^calendar/$', 
         view=CalendarView.as_view(), 

@@ -1,6 +1,8 @@
 import random
+import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
@@ -8,11 +10,11 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, TemplateView, FormView
 
-from .forms import QuestionForm, EssayForm
+from .forms import QuestionForm, EssayForm, SignUpForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from essay.models import Essay_Question
 
-
+dt = datetime.datetime.now()
  
 class QuizMarkerMixin(object):
     @method_decorator(login_required)
@@ -38,7 +40,9 @@ class user_profile(TemplateView):
 
 class QuizListView(LoginRequiredMixin, ListView):
     model = Quiz
-    
+
+    login_url = "/login/"
+
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
@@ -56,11 +60,28 @@ def login_user(request):
             messages.success(request, ('Error Logging In - Please Try Again...'))
             return redirect('login')
     else:
-        return render(request, 'login.html', {})
+        return render(request, 'registration/login.html', {})
 
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+def register_user(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ('Your have Registered'))
+            return redirect("home")
+    else:
+        form = SignUpForm()
+
+    context = {'form': form}
+    return render(request, "registration/register.html", context)
 
 
 class QuizDetailView(DetailView):
@@ -80,7 +101,7 @@ class QuizDetailView(DetailView):
 
 class CategoriesListView(LoginRequiredMixin, ListView):
     model = Category
-
+    login_url = "/login/"
 
 class ViewQuizListByCategory(ListView):
     model = Quiz
@@ -109,6 +130,7 @@ class ViewQuizListByCategory(ListView):
 
 class QuizUserProgressView(TemplateView):
     template_name = 'progress.html'
+    login_url = "/login/"
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
