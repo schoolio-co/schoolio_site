@@ -16,18 +16,15 @@ import django_heroku
 from whitenoise import WhiteNoise
 from base.aws.conf import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-<<<<<<< HEAD
 SECRET_KEY = config('SECRET_KEY')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
-=======
 
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
->>>>>>> 64a4ad74553026c5ac03dca7e52f2fd3ac90bdb3
 PAYPAL_TEST = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
