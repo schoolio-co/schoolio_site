@@ -19,14 +19,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
-PAYPAL_TEST = True
+PAYPAL_TEST = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
@@ -237,7 +237,7 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())
