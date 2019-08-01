@@ -5,7 +5,7 @@ except ImportError:
     
 from django.urls import path
 
-from .views import user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
+from .views import elearning, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 from schooliolanding.views import landing
@@ -19,7 +19,7 @@ urlpatterns = [
         name='landing'),
 
     url(r'^elearning/$',
-        view=elearnng.as_view(),
+        view=elearning.as_view(),
         name='elearning'),
 
      url(r'^profile/$',
