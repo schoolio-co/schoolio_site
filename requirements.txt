@@ -81,11 +81,4 @@ urllib3==1.24.1
 virtualenv==16.4.3
 whitenoise==4.1.2
 wrapt==1.11.1
-<<<<<<< HEAD
-stream_django
-sklearn
-nltk
-python-decouple
-unipath
-=======
->>>>>>> 64a4ad74553026c5ac03dca7e52f2fd3ac90bdb3
+
