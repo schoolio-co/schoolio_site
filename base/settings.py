@@ -233,19 +233,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-<<<<<<< HEAD
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-
-
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-=======
 SECURE_SSL_REDIRECT = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -254,7 +242,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
->>>>>>> 64a4ad74553026c5ac03dca7e52f2fd3ac90bdb3
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 
