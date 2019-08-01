@@ -14,7 +14,7 @@ from ecommerce_app.views import *
 from cal.views import *
 
 urlpatterns = [
-    url(r'^$',
+    url(r'^/$',
         view=landing.as_view(),
         name='landing'),
 
