@@ -5,10 +5,9 @@ except ImportError:
     
 from django.urls import path
 
-from .views import elearning, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
+from .views import landing, elearning, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
-from schooliolanding.views import landing
 from django.contrib.auth import views as auth_views
 from ecommerce_app.views import *
 from cal.views import *
