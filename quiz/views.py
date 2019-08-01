@@ -32,7 +32,7 @@ class SittingFilterTitleMixin(object):
 
         return queryset
 
-class Home(TemplateView):
+class elearning(TemplateView):
     template_name = 'home.html'
 
 class user_profile(TemplateView):

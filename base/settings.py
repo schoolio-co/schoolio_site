@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'essay',
     "stream_django",
     'preventconcurrentlogins',
+    'schooliolanding',
 ]
 
 STREAM_API_KEY = '4emhs9sqfdtv'
