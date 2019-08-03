@@ -5,7 +5,7 @@ except ImportError:
     
 from django.urls import path
 
-from .views import landing, elearning, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
+from .views import Home, user_profile, login_user, register_user, logout_user, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 from django.contrib.auth import views as auth_views
@@ -13,13 +13,10 @@ from ecommerce_app.views import *
 from cal.views import *
 
 urlpatterns = [
-    url(r'^/$',
-        view=landing.as_view(),
-        name='landing'),
 
-    url(r'^elearning/$',
-        view=elearning.as_view(),
-        name='elearning'),
+    url(r'^/$',
+        view=Home.as_view(),
+        name='home'),
 
      url(r'^profile/$',
         view=user_profile.as_view(),
