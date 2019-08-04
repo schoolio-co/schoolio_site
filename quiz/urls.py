@@ -14,7 +14,7 @@ from cal.views import *
 
 urlpatterns = [
 
-    url(r'^/$',
+    url(r'^$',
         view=Home.as_view(),
         name='home'),
 
