@@ -36,6 +36,9 @@ class SittingFilterTitleMixin(object):
 class Home(TemplateView):
     template_name = 'home.html'
 
+class landing(TemplateView):
+    template_name = 'index.html'
+
 class user_profile(TemplateView):
     template_name = 'profile.html'
 
