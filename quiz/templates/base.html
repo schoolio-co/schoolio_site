@@ -84,13 +84,22 @@
                   <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                <li><a href="#about">Register</a></li>
-                <li><a href="{% url 'calendar' %}">Exam Schedule</a></li>
+                <a href="#about">Register</a>
+                </li>
+                <li class="nav-item">
+                <a href="{% url 'calendar' %}">Exam Schedule</a>
+              </li>
                 {% if user.is_authenticated %}
-                <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-                <li><a class="nav-link" href="{% url 'quiz_index' %}">View Exams</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'quiz_index' %}">View Exams</a>
+                </li>
                 {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li class="nav-item">
+                <a href="{% url 'login' %}">Login</a>
+              </li>
                 {% endif %}
                   <a href="#" class="nav-link search" id="search">
                     <i class="ti-search"></i>
