@@ -21,106 +21,108 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   </head>
 
-  <header class="header_area">
-    <div class="main_menu">
-      <div class="search_input" id="search_input_box">
-        <div class="container">
-          <form class="d-flex justify-content-between" method="" action="">
-            <input
-              type="text"
-              class="form-control"
-              id="search_input"
-              placeholder="Search Here"
-            />
-            <button type="submit" class="btn"></button>
-            <span
-              class="ti-close"
-              id="close_search"
-              title="Close Search"
-            ></span>
-          </form>
-        </div>
-      </div>
-
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <a class="navbar-brand logo_h" href="#"
-            ><img src="static/img/schooliologo.png" alt=""
-          /></a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="icon-bar"></span> <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div
-            class="collapse navbar-collapse offset"
-            id="navbarSupportedContent"
-          >
-            <ul class="nav navbar-nav menu_nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'quiz_index' %}">All Exams</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'quiz_progress' %}">My Results </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{% url 'quiz_category_list_all' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Categories
+  <body>
+      <!--================ Start Header Menu Area =================-->
+      <header class="header_area white-header">
+          <div class="main_menu">
+            <div class="search_input" id="search_input_box">
+              <div class="container">
+                <form class="d-flex justify-content-between" method="" action="">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="search_input"
+                    placeholder="Search Here"
+                  />
+                  <button type="submit" class="btn"></button>
+                  <span
+                    class="ti-close"
+                    id="close_search"
+                    title="Close Search"
+                  ></span>
+                </form>
+              </div>
+            </div>
+    
+            <nav class="navbar navbar-expand-lg navbar-light">
+              <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand" href="index.html">
+                  <img class="logo-2" src="img/logo2.png" alt="" />
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'English' %}">English</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Math' %}">Math</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'PhysicalScience' %}">Phyiscal Science</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Biology' %}">Biology</a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="icon-bar"></span> <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div
+                  class="collapse navbar-collapse offset"
+                  id="navbarSupportedContent"
+                >
+                <ul class="nav navbar-nav menu_nav ml-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'quiz_index' %}">All Exams</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'quiz_progress' %}">My Results </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="{% url 'quiz_category_list_all' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'English' %}">English</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Math' %}">Math</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'PhysicalScience' %}">Phyiscal Science</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'quiz_category_list_matching' 'Biology' %}">Biology</a>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                      </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                      </li>
+                    {% endif %}
+                    <li class="nav-item">
+                      <a href="#" class="nav-link search" id="search">
+                        <i class="ti-search"></i>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-              {% else %}
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-              {% endif %}
-              <li class="nav-item">
-                <a href="#" class="nav-link search" id="search">
-                  <i class="ti-search"></i>
-                </a>
-              </li>
-            </ul>
+              </div>
+            </nav>
           </div>
-        </div>
-      </nav>
-    </div>
-  </header>
+        </header>
 
 <div class="container">
   {% if messages %}
@@ -196,4 +198,5 @@ Copyright 2019;</script> All rights reserved | Schoolio<!-- Link back to Colorli
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
     <script src="static/js/gmaps.min.js"></script>
     <script src="static/js/theme.js"></script>
+  </body>
 </html>
