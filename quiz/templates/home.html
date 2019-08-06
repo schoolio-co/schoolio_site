@@ -3,41 +3,6 @@
 {% block content %}
 
   <!-- HOME-CAROUSEL PAGE -->
-  <!-- Swiper -->
-  <div class="swiper-container">
-    <div class="parallax-bg" style="background-image:url(static/img/banner/home.png)" data-swiper-parallax="-23%"></div>
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="title" data-swiper-parallax="-300">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">Exam Practice</div>
-        <div class="text" data-swiper-parallax="-100">
-          <p>Access hundreds of practice questions with solutions for Grade 10 and Grade 12 National Exams</p>
-          <a class="button" href="#about">Get Started</a>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">College Prep</div>
-        <div class="text" data-swiper-parallax="-100">
-          <p>Get everything you need to prepare for college from entrance exam prep to info on grants/loans for studying abroad.</p>
-              <a class="button" href="#about">Get Started</a>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="title" data-swiper-parallax="-300">Schoolio</div>
-        <div class="subtitle" data-swiper-parallax="-200">Career Planning</div>
-        <div class="text" data-swiper-parallax="-100">
-          <p>Get guidance on career paths, skills assessments, or University majors.</p>
-          <a class="button" href="#about">Get Started</a>
-        </div>
-      </div>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
-    <!-- Add Arrows -->
-    <div class="swiper-button-next"><i class="ion-ios-arrow-thin-right"></i></div>
-    <div class="swiper-button-prev"><i class="ion-ios-arrow-thin-left"></i></div>
-  </div>
     <!-- Navigation -->
     <div class="col-lg-2 pd-left">
       <div class="mobile-nav">
@@ -46,7 +11,7 @@
       </div>
       <nav class="nav-menu">
         <div class="header-menu">
-          <a class="menu-logo" href=""><img src="static/images/schoolio_logo.png" alt="logo"></a>
+          <a class="menu-logo" href=""><img src="static/img/schooliologo.png" alt="logo"></a>
         </div>
         <ul class="menu-text clk">
           <li><a href="#home">Home</a></li>
@@ -61,19 +26,9 @@
           <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>
-        <ul class="social-links">
-          <li><a href="https://twitter.com/schoolioco"><i class="fa ion-social-twitter" aria-hidden="true"></i></a></li>
-          <li><a href="https://wa.me/2648155559104"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-          <li><a href="https://www.facebook.com/schoolioco"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-          <li><a href="https://www.instagram.com/schoolioco/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-        </ul>
       </nav>
     </div><!-- /.col-lg-2 -->
 
-<!-- Copyright -->
-  <div class="copyright">
-    <span>© Schoolio 2019 All rights reserved.</span>
-  </div>
  <!-- ABOUT-PAGE -->
   <div id="about" class="panel">
     <div class="about-content">
@@ -111,58 +66,7 @@
               </div>
             </div><!--  /.personal-info -->
             <!-- Skill-bar-section -->
-            <div class='skill'>
-              <h4 class="title-section">Current Subjects</h4>
-              <p>Below is the breakdown of the current subjects offered through Schoolio Practice. We add new subjects and practice exams every week!</p>
-              <!-- progress bar -->
-              <div id="skills">
-                <div class="skillbar-title"><span>Grade 10 English</span></div>
-                <div class="skillbar clearfix " data-percent="90%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">200</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 10 Math Ordinary Level</span></div>
-                <div class="skillbar clearfix " data-percent="50%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">100</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 12 English as Second Language</span></div>
-                <div class="skillbar clearfix" data-percent="90%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">200</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 12 Math Ordinary Level</span></div>
-                <div class="skillbar clearfix" data-percent="80%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">180</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 12 Math Upper Level</span></div>
-                <div class="skillbar clearfix" data-percent="70%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">160</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 12 Biology</span></div>
-                <div class="skillbar clearfix" data-percent="55%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">100</div>
-                </div>
-
-                <div class="skillbar-title"><span>Grade 12 Chemistry</span></div>
-                <div class="skillbar clearfix" data-percent="55%">
-                  <div class="skillbar-bar"></div>
-                  <div class="skill-bar-percent">100</div>
-                </div>
-
-
-            </div>   <!-- /#skill -->
-          </div> <!-- /.skill  -->  
-
-          
+        
           <!-- services-section -->
           <div class="services">
               <!-- card-1 -->
@@ -198,107 +102,6 @@
     <div class="profile-img"></div>
   </div>    
 
-<!-- PORTFOLIO-PAGE -->
-  <div id="portfolio" class="panel">
-    <div class="portfolio-content">    
-      <div class="container-fluid">
-        <span class="portfolio title-page">Portfolio</span>
-        <p>Quisque volutpat eleifend ex, id tincidunt sapien molestie ac. Duis sed enim eget augue semper efficitur. Suspendisse vulputate pellentesque semper.</p>
-        <!-- menu-portfolio -->
-        <ul id="filter">
-          <li>
-            <a class="active-filter" href="#" data-group="all">All</a>
-          </li>
-          <li>
-            <a href="#" data-group="ui">UI / UX Design</a>
-          </li>
-          <li>
-            <a href="#" data-group="photography">Photography</a>
-          </li>
-          <li>
-            <a href="#" data-group="graphic-design">Graphic Design</a>
-          </li>
-          <li>
-            <a href="#" data-group="web-design">Web Design</a>
-          </li>
-        </ul><!-- /.filter -->
-          <!-- Grid portfolio -->
-          <div id="grid" class="row no-gutters">
-              <div class="item col-lg-4"  data-groups='["ui"]'>
-                <a href="static/images/portfolio/big-img/project-big-1.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                    <img class="responsive-img" src="static/images/portfolio/big-img/project-big-1.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i> 
-                      <p>Praesent convallis, turpis et ultrices tincidunt, orci nisi mollis dolor,<br>non congue erat elit ut purus.</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-
-              <div class="item col-lg-4" data-groups='["photography"]'>
-                <a href="static/images/portfolio/big-img/project-big-2.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                    <img class="responsive-img" src="static/images/portfolio/project-2.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>Praesent convallis, turpis et ultrices tincidunt, orci nisi mollis dolor,<br> non congue erat elit ut purus.</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-
-              <div class="item col-lg-4"  data-groups='["photography"]'>
-                <a href="static/images/portfolio/big-img/project-big-3.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                   <img class="responsive-img" src="static/images/portfolio/project-3.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>Praesent convallis, turpis et ultrices tincidunt, orci nisi mollis dolor,<br>non congue erat elit ut purus.</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-
-              <div class="item col-lg-4"   data-groups='["graphic-design"]'>
-                <a href="static/images/portfolio/big-img/project-big-4.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                    <img class="responsive-img" src="static/images/portfolio/project-4.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>Praesent convallis, turpis et ultrices tincidunt, orci nisi mollis dolor,<br>non congue erat elit ut purus.</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-
-              <div class="item col-lg-4"   data-groups='["graphic-design"]'>
-                <a href="static/images/portfolio/big-img/project-big-5.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                    <img class="responsive-img" src="static/images/portfolio/project-5.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>Praesent convallis, turpis et ultrices tincidunt, orci nisi mollis dolor,<br>non congue erat elit ut purus.</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-
-              <div class="item col-lg-4"   data-groups='["web-design"]'>
-                <a href="static/images/portfolio/big-img/project-big-6.jpg" class="with-caption image-link" title="Project Title">
-                  <figure class="effect-sadie">
-                    <img class="responsive-img" src="static/images/portfolio/project-6.jpg" alt="">
-                    <figcaption>
-                      <i class="fa ion-ios-plus-outline" aria-hidden="true"></i>
-                      <p>We would love for you to get in touch so we</p>
-                    </figcaption> 
-                  </figure>
-                </a>
-              </div>
-        </div><!-- /#grid -->
-      </div> <!-- / .container-fluid --> 
-    </div><!-- /.portfolio-content -->
-  </div><!-- /#portfolio -->
 
         <!-- RESUME-PAGE -->
   <div id="resume" class="panel">
@@ -370,15 +173,6 @@
                       <p> <span> E-mail</span> - lettisia@schoolio.co </p>
                     </li>
                 </ul>
-                <ul class="social-links">
-                    <li><a href="https://twitter.com/schoolioco"><i class="fa ion-social-twitter fa-2x" aria-hidden="true"></i></a></li>
-                    <li></li>
-                    <li><a href="https://wa.me/2648155559104"><i class="fa fa-whatsapp fa-2x " aria-hidden="true"></i></a></li>
-                  <li></li>
-                    <li><a href="https://www.facebook.com/schoolioco"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a></li>
-                   <li></li>
-                    <li><a href="https://www.instagram.com/schoolioco/"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
-                  </ul>
               </div><!-- /.personal-info -->
 
               <div class="row"><!-- block form -->
