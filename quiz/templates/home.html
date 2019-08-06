@@ -1,33 +1,25 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130587635-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-130587635-2');
-</script>
-
-  <meta charset="UTF-8">
-    <title>Schoolio Practice</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <link rel='shortcut icon' type='image/png' href='static/images/favicon.png' />
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/ionicons.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/owl.carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="static/css/swiper.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-</head>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="quiz/static/img/favicon.png" type="image/png" />
+    <title>Schoolio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/nice-select/css/nice-select.css' %}">
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  </head>
 
 <body>
 <!-- PRELOADER -->
@@ -430,25 +422,65 @@
 
 <!-- GOOGLE_MAP-1 -->
   
-</div> <!-- /.bg-title  -->  
-<script>
-      window.intercomSettings = {
-        app_id: "rxyrhcmi"
-      };
-    </script>
-    <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/rxyrhcmi';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
 
+    <!--================ Start footer Area  =================-->
+    <footer class="footer-area section_gap">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Top Products</h4>
+            <ul>
+              <li><a href="#">National Exams Online Prep</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Jobs</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Features</h4>
+            <ul>
+              <li><a href="#">Investor Relations</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Guides</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row footer-bottom d-flex justify-content-between">
+          <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright 2019;</script> All rights reserved | Schoolio<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+          <div class="col-lg-4 col-sm-12 footer-social">
+            <a href="#"><i class="ti-facebook"></i></a>
+            <a href="#"><i class="ti-twitter"></i></a>
+            <a href="#"><i class="ti-dribbble"></i></a>
+            <a href="#"><i class="ti-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--================ End footer Area  =================-->
 
-  <script src="static/js/jquery-3.2.1.min.js"></script>
-  <script src="static/js/imagesloaded.pkgd.min.js"></script>
-  <script src='static/js/jquery.shuffle.min.js'></script>
-  <script src='static/js/bootstrap.bundle.min.js'></script>
-  <script src='static/js/owl.carousel.min.js'></script>
-  <script src="static/js/jquery.magnific-popup.min.js"></script>
-  <script src="static/js/validator.min.js"></script>
-  <script src="static/js/form-scripts.js"></script>
-  <script src="static/js/swiper.min.js"></script>
-  <script src="static/js/main.js"></script>
-    
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/popper.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="static/js/owl-carousel-thumb.min.js"></script>
+    <script src="static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="static/js/mail-script.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="static/js/gmaps.min.js"></script>
+    <script src="static/js/theme.js"></script>
+  </body>
 </html>
