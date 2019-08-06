@@ -2,33 +2,6 @@
 
 {% block content %}
 
-  <!-- HOME-CAROUSEL PAGE -->
-    <!-- Navigation -->
-    <div class="col-lg-2 pd-left">
-      <div class="mobile-nav">
-        <i class="fa ion-navicon" aria-hidden="true"></i>
-        <span>Schoolio</span>
-      </div>
-      <nav class="nav-menu">
-        <div class="header-menu">
-          <a class="menu-logo" href=""><img src="static/img/schooliologo.png" alt="logo"></a>
-        </div>
-        <ul class="menu-text clk">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#resume">About Us</a></li>
-          <li><a href="#about">Register</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="{% url 'calendar' %}">Exam Schedule</a></li>
-          {% if user.is_authenticated %}
-          <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-          <li><a class="nav-link" href="{% url 'quiz_index' %}">View Exams</a></li>
-          {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-          {% endif %}
-        </ul>
-      </nav>
-    </div><!-- /.col-lg-2 -->
-
  <!-- ABOUT-PAGE -->
   <div id="about" class="panel">
     <div class="about-content">
