@@ -3,11 +3,10 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from quiz.models import Question
 from django.db import models
-import nltk, string
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-nltk.download('punkt')
+
 
 @python_2_unicode_compatible
 class Essay_Question(Question):
