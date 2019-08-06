@@ -234,7 +234,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
@@ -247,4 +247,4 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL='/login/'
 LOGIN_REDIRECT_URL='/login/'
-django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
