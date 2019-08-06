@@ -1,0 +1,19 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 20/01/2019 08:29
+  	*/
+
+
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 48px;
+font-style: normal;
+margin-left: 0px;
+color: #002347;
+}
+
+.flaticon-student:before { content: "\f100"; }
+.flaticon-book:before { content: "\f101"; }
+.flaticon-earth:before { content: "\f102"; }
