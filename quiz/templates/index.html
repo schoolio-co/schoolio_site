@@ -173,10 +173,6 @@
     </section>
     <!--================ End Feature Area =================-->
 
-    <!--================ Start Popular Courses Area =================-->
- 
-    <!--================ End Popular Courses Area =================-->
-
     <!--================ Start Registration Area =================-->
     <a name="blog"></a> 
     <div class="popular_courses">
@@ -197,17 +193,15 @@
             <div class="owl-carousel active_course">
               <div class="single_course">
                 <div class="course_head">
-                  <img class="img-fluid" src="static/img/courses/c2.jpg" alt="" />
+                  <img class="img-fluid" src="static/img/blog/blog1.png" alt="" />
                 </div>
                 <div class="course_content">
-                  <span class="price">$25</span>
-                  <span class="tag mb-4 d-inline-block">design</span>
+                  <span class="tag mb-4 d-inline-block">edtech</span>
                   <h4 class="mb-3">
-                    <a href="#">Social Media Network</a>
+                    <a href="{% url 'blog' %}">Better School Communication</a>
                   </h4>
                   <p>
-                    One make creepeth man bearing their one firmament won't fowl
-                    meat over sea
+                      When school communities are connected, students SUCCEED!
                   </p>
                   <div
                     class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4"
@@ -267,88 +261,6 @@
     </div>
     <!--================ End Registration Area =================-->
 
-    <!--================ Start Trainers Area =================-->
-    <a name="team"></a>
-    <section class="trainer_area section_gap_top">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5">
-            <div class="main_title">
-              <h2 class="mb-3">Our Team</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row justify-content-center d-flex align-items-center">
-          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-            <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/audrey.png" alt="" />
-            </div>
-            <div class="meta-text text-sm-center">
-              <h4>Audrey Akwenye</h4>
-              <p class="designation">CEO</p>
-              <div class="mb-4">
-                <p>
-                  If you are looking at blank cassettes on the web, you may be
-                  very confused at the.
-                </p>
-              </div>
-              <div class="align-items-center justify-content-center d-flex">
-                <a href="#"><i class="ti-facebook"></i></a>
-                <a href="#"><i class="ti-twitter"></i></a>
-                <a href="#"><i class="ti-linkedin"></i></a>
-                <a href="#"><i class="ti-pinterest"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-            <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/dustan.png" alt="" />
-            </div>
-            <div class="meta-text text-sm-center">
-              <h4>Dustan Levenstein</h4>
-              <p class="designation">CTO</p>
-              <div class="mb-4">
-                <p>
-                  If you are looking at blank cassettes on the web, you may be
-                  very confused at the.
-                </p>
-              </div>
-              <div class="align-items-center justify-content-center d-flex">
-                <a href="#"><i class="ti-facebook"></i></a>
-                <a href="#"><i class="ti-twitter"></i></a>
-                <a href="#"><i class="ti-linkedin"></i></a>
-                <a href="#"><i class="ti-pinterest"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-            <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/lettisia.png" alt="" />
-            </div>
-            <div class="meta-text text-sm-center">
-              <h4>Lettisia Tjambari</h4>
-              <p class="designation">SADC Regional Sales</p>
-              <div class="mb-4">
-                <p>
-                  If you are looking at blank cassettes on the web, you may be
-                  very confused at the.
-                </p>
-              </div>
-              <div class="align-items-center justify-content-center d-flex">
-                <a href="#"><i class="ti-facebook"></i></a>
-                <a href="#"><i class="ti-twitter"></i></a>
-                <a href="#"><i class="ti-linkedin"></i></a>
-                <a href="#"><i class="ti-pinterest"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--================ End Trainers Area =================-->
-
     <!--================ Start Events Area =================-->
     <a name="events"></a> 
     <div class="events_area">
@@ -391,11 +303,78 @@
     </div>
     <br/>
     <!--================ End Events Area =================-->
+    <!--================ Start Trainers Area =================-->
+    <a name="team"></a>
+    <section class="trainer_area section_gap_top">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="main_title">
+              <h2 class="mb-3">Our Team</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center d-flex align-items-center">
+          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
+            <div class="thumb d-flex justify-content-sm-center">
+              <img class="img-fluid" src="static/img/trainer/audrey.png" alt="" />
+            </div>
+            <div class="meta-text text-sm-center">
+              <h4>Audrey Akwenye</h4>
+              <p class="designation">CEO</p>
+              <div class="mb-4">
+                <p>
+                  Audrey is an Educator and Data Scientists. She is passionated about using Machine Learning to help Global Education.
+                </p>
+              </div>
+              <div class="align-items-center justify-content-center d-flex">
+                <a href="https://twitter.com/audreyakwenye"><i class="ti-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/audrey-taylor-akwenye/"><i class="ti-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
 
-    <!--================ Start Testimonial Area =================-->
+          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
+            <div class="thumb d-flex justify-content-sm-center">
+              <img class="img-fluid" src="static/img/trainer/dustan.png" alt="" />
+            </div>
+            <div class="meta-text text-sm-center">
+              <h4>Dustan Levenstein</h4>
+              <p class="designation">CTO</p>
+              <div class="mb-4">
+                <p>
+                  Dustan is a Data Science passionate about using AI to solve tough problems. 
+                </p>
+              </div>
+              <div class="align-items-center justify-content-center d-flex">
+                <a href="https://twitter.com/dustanlevenstei"><i class="ti-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/dustanl/"><i class="ti-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
 
-    <!--================ End Testimonial Area =================-->
-
+          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
+            <div class="thumb d-flex justify-content-sm-center">
+              <img class="img-fluid" src="static/img/trainer/lettisia.png" alt="" />
+            </div>
+            <div class="meta-text text-sm-center">
+              <h4>Lettisia Tjambari</h4>
+              <p class="designation">SADC Regional Sales</p>
+              <div class="mb-4">
+                <p>
+                  Lettisia has worked in Edtech sales for almost a decade. She works with schools to find solutions that work. 
+                </p>
+              </div>
+              <div class="align-items-center justify-content-center d-flex">
+                <a href="https://www.linkedin.com/in/lettisia-tjambari-b7317ab7/"><i class="ti-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br/>
+    <!--================ End Trainers Area =================-->
     <!--================ Start footer Area  =================-->
     <footer class="footer-area section_gap">
       <div class="container">
@@ -431,10 +410,9 @@
 Copyright 2019;</script> All rights reserved | Schoolio<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           </p>
           <div class="col-lg-4 col-sm-12 footer-social">
-            <a href="#"><i class="ti-facebook"></i></a>
-            <a href="#"><i class="ti-twitter"></i></a>
-            <a href="#"><i class="ti-dribbble"></i></a>
-            <a href="#"><i class="ti-linkedin"></i></a>
+            <a href="https://www.facebook.com/schoolioco/"><i class="ti-facebook"></i></a>
+            <a href="https://twitter.com/schoolioco"><i class="ti-twitter"></i></a>
+            <a href="https://www.linkedin.com/company/schoolio-co"><i class="ti-linkedin"></i></a>
           </div>
         </div>
       </div>

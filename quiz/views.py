@@ -39,6 +39,9 @@ class Home(TemplateView):
 class landing(TemplateView):
     template_name = 'index.html'
 
+class blog(TemplateView):
+    template_name = 'blog.html'
+
 class user_profile(TemplateView):
     template_name = 'profile.html'
 
