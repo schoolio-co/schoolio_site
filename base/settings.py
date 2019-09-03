@@ -148,71 +148,52 @@ DEFAULT_FROM_EMAIL = 'webadmin@schoolio.co'
 
 
 LOGGING = {
-
-'version': 1,
-
-'disable_existing_loggers': True,
-
-'formatters': {
-
-'verbose': {
-
-'format': '%(levelname)s [%(asctime)s] %(module)s %(message)s'
-
-},
-
-},
-
-'handlers': {
-
-'console': {
-
-'level': 'DEBUG',
-
-'class': 'logging.StreamHandler',
-
-
-},
-
-'file': {
-
-'class': 'logging.handlers.RotatingFileHandler',
-
-'formatter': 'verbose',
-
-'filename': '/var/www/logs/ibiddjango.log',
-
-'maxBytes': 1024000,
-
-'backupCount': 3,
-
-},
-
-'mail_admins': {
-
-'level': 'ERROR',
-
-'class': 'django.utils.log.AdminEmailHandler'
-
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'py.warnings': {
+            'handlers': ['console'],
+        },
+    }
 }
 
-},
 
-'loggers': {
-
-'django': {
-
-'handlers': ['file', 'console','mail_admins'],
-
-'propagate': True,
-
-'level': 'DEBUG',
-
-},
-
-}
-
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
