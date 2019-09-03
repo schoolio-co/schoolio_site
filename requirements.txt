@@ -79,4 +79,5 @@ urllib3==1.24.1
 virtualenv==16.4.3
 whitenoise==4.1.2
 wrapt==1.11.1
+google-compute-engine==2.8.13
 
