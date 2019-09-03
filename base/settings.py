@@ -50,12 +50,10 @@ INSTALLED_APPS = [
     'quiz',
     'storages',
     "ecommerce_app",
-    'paypal.standard.ipn',
     'multichoice',
     'true_false',
     "cal",
     'essay',
-    "stream_django",
     'preventconcurrentlogins',
 ]
 

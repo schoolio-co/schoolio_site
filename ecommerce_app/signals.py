@@ -1,14 +1,12 @@
 from django.shortcuts import get_object_or_404
 from .models import Order
-from paypal.standard.ipn.signals import valid_ipn_received
 from django.dispatch import receiver
-from paypal.standard.models import ST_PP_COMPLETED
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from datetime import datetime
  
  
-@receiver(valid_ipn_received)
+
 def ipn_receiver(sender, **kwargs):
     ipn_obj = sender
  
