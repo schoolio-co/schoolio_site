@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="quiz/static/img/favicon.png" type="image/png" />
+    <title>Schoolio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/nice-select/css/nice-select.css' %}">
+    <!-- main css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  </head>
+
+  <body>
+    <!--================ Start Header Menu Area =================-->
+    <header class="header_area">
+      <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="#"
+              ><img src="static/img/schooliologo.png" alt=""
+            /></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div
+              class="collapse navbar-collapse offset"
+              id="navbarSupportedContent"
+            >
+              <ul class="nav navbar-nav menu_nav ml-auto">
+                <li class="nav-item active">
+                {% if user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'school_profile' school_url=user.school  %}">Home</a>
+                {% else %}
+                <a class="nav-link" href="{% url 'school_profile' school_url=school_url %}">Home</a>
+                {% endif %}
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' school_url=user.school  username=user.username %}">My Profile</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' school_url=user.school  %}">Logout</a>
+                </li>
+                {% else %}
+                {% if school_url %}
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' school_url=school_url  %}">Login</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'role_registration' school_url=school_url  %}">Register</a>
+                </li>
+                {% endif %}
+              {% endif %}
+              </ul>
+              {% if user.is_authenticated %}
+                <a class="btn btn-outline-secondary" href="#" >Inbox</a>
+                {% endif %}
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!--================ End Header Menu Area =================-->
+      <!--================ Start Home Banner Area =================-->
+
+        <!--================ End Home Banner Area =================-->
+
+
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning alert-dismissable" role="alert">
+      <button class="close" data-dismiss="alert">
+          <small><sup>x</sup></small>
+      </button>
+      {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+
+<div class="container">
+{% block content %}
+{% endblock %}
+</div>
+    <!--================ Start footer Area  =================-->
+    <footer class="footer-area section_gap">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Top Products</h4>
+            <ul>
+              <li><a href="#">National Exams Online Prep</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Jobs</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Features</h4>
+            <ul>
+              <li><a href="#">Investor Relations</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 single-footer-widget">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Guides</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row footer-bottom d-flex justify-content-between">
+          <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright 2019;</script> All rights reserved | Schoolio<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+          <div class="col-lg-4 col-sm-12 footer-social">
+              <a href="https://www.facebook.com/schoolioco/"><i class="ti-facebook"></i></a>
+              <a href="https://twitter.com/schoolioco"><i class="ti-twitter"></i></a>
+              <a href="https://www.linkedin.com/company/schoolio-co"><i class="ti-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/popper.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="static/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="static/js/owl-carousel-thumb.min.js"></script>
+    <script src="static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="static/js/mail-script.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="static/js/gmaps.min.js"></script>
+    <script src="static/js/theme.js"></script>
+  </body>
+</html>

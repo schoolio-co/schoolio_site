@@ -15,7 +15,7 @@ class school(models.Model):
 		return reverse("school_profile", kwargs={"slug": self.url})
 
 	def __str__(self):
-		return self.name
+		return self.url
 
 class User(AbstractUser):
 	is_parent = models.BooleanField(default=False)

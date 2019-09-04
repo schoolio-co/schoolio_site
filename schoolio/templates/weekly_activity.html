@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'basetwo.html' %}
 {% block content %}
 <p>hello {{ username }}!</p>
 
@@ -22,4 +22,4 @@
 {% else %}
     <li><a href="{% url 'school_lesson' school_url=school_url username=username week_of=next_week %}">Add Activities for Next Week</a></li>
 {% endif %}
-{% endblock }
+{% endblock %}
