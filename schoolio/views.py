@@ -1,0 +1,353 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponse
+from django.template import loader
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
+from django.utils.safestring import mark_safe
+from django.template.defaultfilters import stringfilter
+from django.utils.text import normalize_newlines
+from django.views.generic import View, FormView, TemplateView, DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.db import transaction
+from django.contrib import messages 
+from datetime import date
+from django.db.models import Q
+from django.shortcuts import get_list_or_404, get_object_or_404, render
+from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm
+from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary
+from .standard_matching import match_standard
+from .evaluate import get_MI_BL
+from .import_csv import import_csv 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class SchoolRegistration(TemplateView):
+    template_name = 'home.html'
+
+    def get(self,request, *args, **kwargs):
+        return render(request, 'home.html')
+
+class RoleRegistrations(TemplateView):
+    template_name = 'roles_registration.html'
+
+    def get(self,request,school_url):
+        return render(request, 'roles_registration.html', {'school_url': school_url})
+
+
+
+def Import_Data(request, *args, **kwargs):
+    path = 'schoolio/standards/Grade One.csv'
+    with open(path) as f:
+        for line in f:
+            line = line.split(',') 
+            obj, created = standards.objects.get_or_create(subject=line[0], standard=line[1], skill_topic=line[2], objective=line[3], competency=line[4])
+            obj.save()
+    return render(request, 'import.html')
+
+def login_user(request, school_url=None):
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ('You are logged In!'))
+            return redirect('school_profile', school_url=school_url)
+        else:
+            messages.success(request, ('Error Logging In - Please Try Again...'))
+            return render(request, 'registration/login.html', {'school_url': school_url})
+    else:
+        return render(request, 'registration/login.html', {'school_url': school_url})
+
+def logout_user(request, school_url=None):
+    logout(request)
+    return redirect('school_profile', school_url=school_url)
+
+def School_Register(request, slug=None):
+    if request.method == "POST":
+        form = SchoolForm(request.POST)
+        if form.is_valid():
+            prev = form.save(commit=False)
+            school.url = prev.url
+            prev.save()
+        return render(request, 'school_register.html', {'slug': school.url})
+    else:
+        form = SchoolForm()
+    return render(request, 'school_register.html', {'form': form})
+
+class School_Profile(TemplateView):
+    model=school
+    slug_field = 'school_url'
+    template_name = "school_profile.html"
+    
+    def get(self,request,school_url):
+        object = school.objects.get(url=school_url)
+        school_url = object.url
+        return render(request, 'school_profile.html', {'object': object, 'school_url': school_url })
+
+
+def Parent_Register(request, school_url=None, slug=None):
+    model = User
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+
+    if request.method == "POST":
+        form = ParentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'register.html', {'slug': username})
+
+    else:
+        data = {'is_parent': 'True', 
+                'school': school_pk }
+        form = ParentForm(initial=data)
+    return render(request, 'register.html', {'form': form, 'school_url': school_url})
+
+def Student_Register(request, school_url=None, slug=None):
+    model = User
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+
+    if request.method == "POST":
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'register.html', {'slug': username, 'school_url': school_url})
+
+    else:
+        data = {'school': school_pk }
+        form = StudentForm(initial=data)
+    return render(request, 'register.html', {'form': form, 'school_url': school_url})
+
+@receiver(post_save, sender=User)
+def create_modelb(sender, instance, created, **kwargs):
+    if created and User.is_student:
+        if not hasattr(instance, 'student_profiles'):
+            student_profiles.objects.create(user=instance)
+
+def Admin_Register(request, school_url=None, slug=None):
+    model = User
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+
+    if request.method == "POST":
+        form = AdministratorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'register.html', {'slug': username})
+
+    else:
+        data = {'is_admin': 'True', 
+                'school': school_pk }
+        form = AdministratorForm(initial=data)
+    return render(request, 'register.html', {'form': form, 'school_url': school_url})
+
+def Teacher_Register(request, school_url=None, slug=None):
+    model = User
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+
+    if request.method == "POST":
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'register.html', {'slug': username, 'school_url': school_url})
+
+    else:
+        data = {'is_teacher': 'True', 
+                'school': school_pk }
+        form = TeacherForm(initial=data)
+    return render(request, 'register.html', {'form': form, 'school_url': school_url})
+
+class Student_Profiles(TemplateView):
+    model=student_profiles
+    school_url = 'school_url'
+    template_name = "student_profiles.html"
+    
+    def get(self,request,school_url):
+        obj = school.objects.get(url=school_url)
+        school_pk = obj.id
+        school_url = obj.url
+        object = student_profiles.objects.all()
+        return render(request, 'student_profiles.html', {'object': object, 'school_url': school_url})
+
+def UserList(request,school_url=None):
+    obj = school.objects.get(url=school_url)
+    school_pk = obj.id
+    school_url = obj.url
+    object = User.objects.all()
+    return render(request, 'all_users.html', {'object_list': object, 'school_url': school_url})
+
+class Profile(TemplateView):
+    model=User
+    school_url = 'school_url'
+    slug_field = 'username'
+    template_name = "profile.html"
+    
+    def get(self,request,school_url,username):
+        obj = school.objects.get(url=school_url)
+        school_url = obj.url
+        object = User.objects.get(username=username)
+        return render(request, 'profile.html', {'object': object, 'school_url': school_url})
+
+def create_grade(request, school_url=None, slug=None):
+    model = grade_level
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+
+    if request.method == "POST":
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('school_profile', school_url=school_url)
+
+    else:
+        data = {'school': school_pk }
+        form = GradeForm(initial=data)
+    return render(request, 'create_classroom.html', {'form': form, 'school_url': school_url })
+
+def create_classroom(request, school_url=None, username=None, slug=None):
+    model = classroom
+    object = school.objects.get(url=school_url)
+    school_url = object.url
+    school_pk = object.id
+    user = User.objects.get(username=username)
+    user_pk = user.id
+
+    if request.method == "POST":
+        form = ClassroomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('school_profile', school_url=school_url)
+
+    else:
+        data = {'school': school_pk, 
+                'teacher': user_pk }
+        form = ClassroomForm(initial=data)
+    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url })
+
+
+def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
+    school_url=school_url
+    if username:
+        user = User.objects.get(username=username)
+        user_pk = user.id
+    schooly = school.objects.get(url=school_url)
+    school_pk = schooly.id
+    current_week = date.today().isocalendar()[1] 
+
+    if request.method == "POST":
+        form = SchoolLessonForm(request.POST)
+        if form.is_valid():
+            planning_id = form.save(commit=False)
+            teacher = planning_id.teacher
+            week_of = planning_id.week_of
+            planning_id.save()
+        return redirect('weeklyactivitycreate', school_url=school_url, planning_id=planning_id, username=teacher, week_of=week_of)
+    else:
+        form = SchoolLessonForm()
+        form.fields['school'].initial = school_pk
+        if username:
+            form.fields['teacher'].initial = username
+        if week_of is None:
+            form.fields['week_of'].initial = current_week
+        else:
+            form.fields['week_of'].initial = week_of
+    return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
+
+
+def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
+    model = activities
+    object = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    classroom = object.classroom
+    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom)
+    results = match_standard(object.objective, object.subject )
+
+    if request.method == "POST":
+        form = ActivityForm(request.POST or None)
+        if form.is_valid():
+            prev = form.save(commit=False)
+            prev.save()
+            messages.success(request, 'Form submission successful')
+            return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
+    else:
+        form = ActivityForm()
+
+    return render(request, 'weekly_create.html', {'form': form, 'school_url': school_url, 'username': username, 'object': object, 'results': results})
+
+
+def WeeklyActivity(request, school_url=None, week_of=None, username=None):
+ 
+    object2 = activities.objects.select_related().filter(week_of=week_of)
+    previous = int(week_of) - 1 
+    object1 = activities.objects.select_related().filter(week_of=previous)
+    next_week = int(week_of) + 1 
+    object3 = activities.objects.select_related().filter(week_of=next_week)
+    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'username': username, 'school_url': school_url, 'previous': previous, 'next_week': next_week})
+
+
+def SingleActivity(request, school_url=None, first_id=None, activity_id=None):
+    object = weekly_activities.objects.filter(id=activity_id)
+    return render(request, 'single_activity.html', {'object': object, 'school_url': school_url})
+
+def CreateActivity(request, school_url=None, first_id=None, username=None):
+    model = teacher_objectives
+    model= standards
+    object = teacher_objectives.objects.get(stepone_id=first_id)
+    teacher_objective = object.objective
+    teacher_subject = object.subject
+    teacher_pk = object.stepone_id
+    week_of = object.week_of
+
+
+    if request.method == "POST":
+        form = ActivityForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
+    else:
+        results = match_standard(teacher_objective, teacher_subject)
+        form = ActivityForm()
+        form.fields['standard'].initial = results
+        form.fields['subject'].initial = teacher_subject
+        form.fields['week_of'].initial = week_of
+        form.fields['teacher'].initial = username
+    return render(request, 'activity.html', {'form': form, 'results': results, 'object': object, 'teacher_objective': teacher_objective })
+
+
+def CreateAssessment(request, school_url=None):
+    if request.method == "POST":
+        form = AssessmentForm(request.POST)
+        if form.is_valid():
+            prev = form.save(commit=False)
+            school.url = prev.url
+            prev.save()
+        return render(request, 'assessment.html', {'slug': school.url})
+    else:
+        form = AssessmentForm()
+    return render(request, 'assessment.html', {'form': form, 'school_url': school_url})

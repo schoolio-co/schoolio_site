@@ -1,0 +1,13 @@
+'classroom': classroom
+'subject': subject_summary.subject
+'lu_level': subject_summary.lu_level
+'mu_level': subject_summary.mu_level
+'hu_level': subject_summary.hu_level
+'logical_level': subject_summary.logical_level
+'linguistic_level': subject_summary.linguistic_level
+'kinesthetic_level': subject_summary.kinesthetic_level
+'musical_level': subject_summary.musical_level
+'visual_level': subject_summary.visual_level
+'naturalist_level': subject_summary.naturalist_level
+'group_level': subject_summary.group_level
+'independent_level': subject_summary.independent_level

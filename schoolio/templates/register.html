@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Registration {{ school_name }}</h2>
+{% if slug  %}
+<h3>{{ slug }} have been registered! Click the link below to view your profile</h3>
+<a href="{% url 'profile' school_url=school_url slug=slug %}">View Profile</a>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+  {% endif %}
+  {% endblock %} 

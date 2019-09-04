@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Profile</h3> 
+<h3>User Profile</h3> 
+<p>{{ object.username }}</p>
+<p>{{ object.first_name }} {{ object.last_name }} </p>
+<p>{{ object.school }}</p>
+
+<li><a href="{% url 'Student_Profiles' school_url=school_url %}">Students</a></li>
+
+{% if object.is_teacher %}
+<li><a href="{% url 'create_classroom' username=object.username school_url=school_url %}">Add Classroom</a></li>
+<li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
+<li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
+{% endif %}
+
+{% if object.is_admin %}
+<li><a href="{% url 'create_classroom' username=object.username school_url=school_url %}">Add Classroom</a></li>
+<li><a href="{% url 'create_grade' school_url=school_url %}">Add Grade</a></li>
+<li><a href="{% url 'user_list' school_url=school_url %}">All Users</a></li>
+<li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
+<li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
+{% endif %}
+{% endblock %}
+
+

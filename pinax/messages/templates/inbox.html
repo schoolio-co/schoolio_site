@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pinax-messages-inbox-container">
+    <h2 class="with-actions">
+        Inbox</h2>
+        <a class="button" href="{% url 'message_create' %}">
+            <i class="fas fa-envelope"></i>
+            New Message
+        </a>
+    
+
+    <section class="mailbox">
+        {% for thread in threads %}
+            <div class="thread">
+                <a href="{{thread.get_absolute_url}}">
+                    <div class="participants">{{ thread.users.all|join:", " }}</div>
+                    <div class="latest-message">
+                        <p class="subject">{{ thread.subject }}</p>
+                        <p class="content">{{ thread.latest_message.content }}</p>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            <div class="no-messages">You have no messages.</div>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

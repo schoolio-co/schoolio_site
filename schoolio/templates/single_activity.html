@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Single Activity</h1>
+{% for j in object %}
+{{ j.activity_title }}
+{{ j.teacher }}
+{% endfor %}
+{% endblock %}

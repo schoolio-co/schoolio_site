@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
  
-
+AUTH_USER_MODEL = 'schoolio.User'
 
 PAYPAL_RECEIVER_EMAIL = 'audrey@schoolio.co'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quiz',
     'storages',
+    'pinax',
+    'schoolio',
     "ecommerce_app",
     'multichoice',
     'true_false',

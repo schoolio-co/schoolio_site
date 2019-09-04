@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>hello {{ username }}!</p>
+
+<h2>Planned This Week</h2> 
+
+{% for x in object2 %}
+<li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
+{% endfor %}
+
+<h3>Last Week </h3>
+{% if object1 %}
+<li><a href="{% url 'weekly_activity' school_url=school_url username=username week_of=previous %}">Last Week's Lesson Plans</a></li>
+{% else %}
+    <li><a href="{% url 'school_lesson' school_url=school_url username=username week_of=previous %}">Add Activities for previous week</a></li>
+{% endif %}
+
+
+<h3>Next Week </h3>
+{% if object3 %}
+    <li><a href="{% url 'weekly_activity' school_url=school_url username=username week_of=next_week %}">Next Week's Lesson Plan</a></li>
+{% else %}
+    <li><a href="{% url 'school_lesson' school_url=school_url username=username week_of=next_week %}">Add Activities for Next Week</a></li>
+{% endif %}
+{% endblock }

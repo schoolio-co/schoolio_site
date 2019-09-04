@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>stepone</h1>
+{{ object.subject }}
+{{ subject_summary }}
+{% if form %}
+<form method="POST">
+    {% csrf_token %}
+    {{form.errors}}
+    {{form2.errors}}
+    {{ form.as_p }}
+    {{ form2.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+
+{% endif %}
+{% endblock %}

@@ -22,7 +22,7 @@ from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('quiz.urls')),
+    path('', include('schoolio.urls')),
     
 ] 
 

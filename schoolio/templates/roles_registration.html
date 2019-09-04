@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>School Profile</h3> 
+
+<li><a href="{% url 'admin_register' school_url=school_url %}">Register Administrator</a></li>
+<li><a href="{% url 'teacher_register' school_url=school_url %}">Register Teacher</a></li>
+<li><a href="{% url 'parent_register' school_url=school_url %}">Register Parent</a></li>
+<li><a href="{% url 'student_register' school_url=school_url %}">Register Student</a></li>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="pinax-messages-create-container">
+    <h2>New Message</h2>
+
+    <form class="comment-form" action="{% url 'message_create' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div class="form-actions">
+            <a href="{% url 'inbox' %}" class="cancel">Cancel</a>
+            <button>Send</button>
+
+{% endblock %}
