@@ -115,13 +115,13 @@ urlpatterns = [
         view=Profile.as_view(),
         name='profile'),
     
-    url(r'^(?P<school_url>[\w-]+)/school_lesson/',
+    url(r'^(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/school_lesson/',
         view=Create_School_Lesson,
         name='school_lesson'),
-
+    
     url(r'^(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<week_of>[\w-]+)/school_lesson/',
         view=Create_School_Lesson,
-        name='school_lesson'),
+        name='school_lesson_week'),
     
     url(r'^(?P<school_url>[\w-]+)/assessment/',
         view=CreateAssessment,
@@ -131,11 +131,11 @@ urlpatterns = [
         view=CreateWeeklyActivity,
         name='weeklyactivitycreate'),
     
-    url(r'^l/(?P<school_url>[\w-]+)/(?P<first_id>[\w-]+)/(?P<username>[\w-]+)/activity/',
+    url(r'^create/(?P<school_url>[\w-]+)/(?P<planning_id>[\w-]+)/(?P<username>[\w-]+)/activity/',
         view=CreateActivity,
         name='activity'),
 
-    url(r'^l/(?P<school_url>[\w-]+)/(?P<week_of>[\w-]+)/(?P<username>[\w-]+)/weekly-activity/',
+    url(r'^weekly/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<week_of>[\w-]+)/activity/',
         view=WeeklyActivity,
         name='weekly_activity'),
 

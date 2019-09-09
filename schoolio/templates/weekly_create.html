@@ -2,366 +2,127 @@
 {% block content %}
 <h3>Step One: Review Weekly Activity Information </h3>
 
-{% if 'Monday' in object.days %}
-<h4>Monday</h4>
+{% if messages %}
+    {% for message in messages %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+{% endif %}
+
 <form method="POST">
-{% csrf_token %}
-    {{ form.non_field_errors }}
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+                {{ form.school_lesson_id.errors }}
+                <label >Lesson Id: </label>
+                <input type="text" class="form-control" value='{{ object.school_lesson_id }}'name='school_lesson_id'>
+            </div>
     <div class="form-group">
-        {{ form.activity_title.errors }}
-        <label >Weekly Objective: </label>
-        <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
-    </div>
-<div class="form-row">
+            {{ form.activity_title.errors }}
+            <label >Weekly Objective: </label>
+            <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
+        </div>
+    <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.teacher.errors }}
+            <label >Teacher: </label>
+            <input type="text" class="form-control" value='{{ username }}' name='teacher'>
+        </div>
         <div class="form-group col-md-4">
-        {{ form.teacher.errors }}
-        <label >Teacher: </label>
-        <input type="text" class="form-control" value='{{ username }}' name='teacher'>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.subject.errors }}
-        <label >Subject: </label>
-        <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.week_of.errors }}
-        <label >Week Of: </label>
-        <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
-    </div>
-</div>
-    <div class="form-group">
-        <input type="hidden" class="form-control" value='{{ object.days }}' name='days'>
+            {{ form.subject.errors }}
+            <label >Subject: </label>
+            <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.week_of.errors }}
+            <label >Week Of: </label>
+            <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
+        </div>
     </div>
     <div class="form-group">
         {{ form.standard.errors }}
         <label for="exampleFormControlTextarea1">Standards</label>
         <input type="text" class="form-control" value='{{ results }}' name='standard'>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-        {{ form.intro.errors }}
-        <label >Introduction: </label>
-        <textarea class="form-control" name='intro' rows="2"></textarea>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.activity.errors }}
-        <label >Activity: </label>
-        <textarea class="form-control" name='activity' rows="2"></textarea>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.wrap_up.errors }}
-        <label >Wrap Up: </label>
-        <textarea class="form-control" name='wrap_up' rows="2"></textarea>
-    </div>
-</div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-        {{ form.resources.errors }}
-        <label >Resources: </label>
-        <input type="text" class="form-control" name='resources'>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.blooms.errors }}
-        <label >Blooms: </label>
-        <input type="text" class="form-control" name='blooms'>
-    </div>
-    <div class="form-group col-md-4">
-        {{ form.vocabulary.errors }}
-        <label >Vocabulary: </label>
-        <input type="text" class="form-control" name='vocabulary'>
-    </div>
-    </div>
-    {% endif %}
-    {% if 'Tuesday' in object.days %}
-    <h4>Tuesday</h4>
-    <form method="POST">
-    {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="form-group">
-            {{ form.activity_title.errors }}
-            <label >Weekly Objective: </label>
-            <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
-        </div>
-    <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.teacher.errors }}
-            <label >Teacher: </label>
-            <input type="text" class="form-control" value='{{ username }}' name='teacher'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.subject.errors }}
-            <label >Subject: </label>
-            <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.week_of.errors }}
-            <label >Week Of: </label>
-            <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
-        </div>
-    </div>
-        <div class="form-group">
-            <input type="hidden" class="form-control" value='{{ object.days }}' name='days'>
-        </div>
-        <div class="form-group">
-            {{ form.standard.errors }}
-            <label for="exampleFormControlTextarea1">Standards</label>
-            <input type="text" class="form-control" value='{{ results }}' name='standard'>
-        </div>
+        {% if 'Monday' in object.days %}
+        <h4>Monday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
-            {{ form.intro.errors }}
+            {{ form.mondayintro.errors }}
             <label >Introduction: </label>
-            <textarea class="form-control" name='intro' rows="2"></textarea>
+            <textarea class="form-control" name='mondayintro' rows="2"></textarea>
         </div>
         <div class="form-group col-md-4">
-            {{ form.activity.errors }}
+            {{ form.mondayactivity.errors }}
             <label >Activity: </label>
-            <textarea class="form-control" name='activity' rows="2"></textarea>
+            <textarea class="form-control" name='mondayactivity' rows="2"></textarea>
         </div>
         <div class="form-group col-md-4">
-            {{ form.wrap_up.errors }}
+            {{ form.mondaywrap_up.errors }}
             <label >Wrap Up: </label>
-            <textarea class="form-control" name='wrap_up' rows="2"></textarea>
+            <textarea class="form-control" name='mondaywrap_up' rows="2"></textarea>
         </div>
     </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-            {{ form.resources.errors }}
+            {{ form.mondayresources.errors }}
             <label >Resources: </label>
-            <input type="text" class="form-control" name='resources'>
+            <input type="text" class="form-control" name='mondayresources'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.blooms.errors }}
+            {{ form.mondayblooms.errors }}
             <label >Blooms: </label>
-            <input type="text" class="form-control" name='blooms'>
+            <input type="text" class="form-control" name='mondayblooms'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.vocabulary.errors }}
+            {{ form.mondayvocabulary.errors }}
             <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='vocabulary'>
+            <input type="text" class="form-control" name='mondayvocabulary'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.day.errors }}
+            <label >Vocabulary: </label>
+            <input type="text" class="form-control" name='day'>
         </div>
         </div>
         {% endif %}
-    {% if 'Wednesday' in object.days %}
-    <h4>Wednesday</h4>
-    <form method="POST">
-    {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="form-group">
-            {{ form.activity_title.errors }}
-            <label >Weekly Objective: </label>
-            <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
-        </div>
-    <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.teacher.errors }}
-            <label >Teacher: </label>
-            <input type="text" class="form-control" value='{{ username }}' name='teacher'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.subject.errors }}
-            <label >Subject: </label>
-            <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.week_of.errors }}
-            <label >Week Of: </label>
-            <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
-        </div>
-    </div>
-        <div class="form-group">
-            <input type="hidden" class="form-control" value='{{ object.days }}' name='days'>
-        </div>
-        <div class="form-group">
-            {{ form.standard.errors }}
-            <label for="exampleFormControlTextarea1">Standards</label>
-            <input type="text" class="form-control" value='{{ results }}' name='standard'>
-        </div>
+        {% if 'Tuesday' in object.days %}
+        <h4>Tuesday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
-            {{ form.intro.errors }}
+            {{ form.tuesdayintro.errors }}
             <label >Introduction: </label>
-            <textarea class="form-control" name='intro' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdayintro' rows="2"></textarea>
         </div>
         <div class="form-group col-md-4">
-            {{ form.activity.errors }}
+            {{ form.tuesdayactivity.errors }}
             <label >Activity: </label>
-            <textarea class="form-control" name='activity' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdayactivity' rows="2"></textarea>
         </div>
         <div class="form-group col-md-4">
-            {{ form.wrap_up.errors }}
+            {{ form.tuesdaywrap_up.errors }}
             <label >Wrap Up: </label>
-            <textarea class="form-control" name='wrap_up' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdaywrap_up' rows="2"></textarea>
         </div>
     </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-            {{ form.resources.errors }}
+            {{ form.tuesdayresources.errors }}
             <label >Resources: </label>
-            <input type="text" class="form-control" name='resources'>
+            <input type="text" class="form-control" name='tuesdayresources'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.blooms.errors }}
+            {{ form.tuesdayblooms.errors }}
             <label >Blooms: </label>
-            <input type="text" class="form-control" name='blooms'>
+            <input type="text" class="form-control" name='tuesdayblooms'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.vocabulary.errors }}
+            {{ form.tuesdayvocabulary.errors }}
             <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='vocabulary'>
+            <input type="text" class="form-control" name='tuesdayvocabulary'>
         </div>
         </div>
         {% endif %}
-    {% if 'Thursday' in object.days %}
-    <h4>Thursday</h4>
-    <form method="POST">
-    {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="form-group">
-            {{ form.activity_title.errors }}
-            <label >Weekly Objective: </label>
-            <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
-        </div>
-    <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.teacher.errors }}
-            <label >Teacher: </label>
-            <input type="text" class="form-control" value='{{ username }}' name='teacher'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.subject.errors }}
-            <label >Subject: </label>
-            <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.week_of.errors }}
-            <label >Week Of: </label>
-            <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
-        </div>
-    </div>
-        <div class="form-group">
-            <input type="hidden" class="form-control" value='{{ object.days }}' name='days'>
-        </div>
-        <div class="form-group">
-            {{ form.standard.errors }}
-            <label for="exampleFormControlTextarea1">Standards</label>
-            <input type="text" class="form-control" value='{{ results }}' name='standard'>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.intro.errors }}
-            <label >Introduction: </label>
-            <textarea class="form-control" name='intro' rows="2"></textarea>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.activity.errors }}
-            <label >Activity: </label>
-            <textarea class="form-control" name='activity' rows="2"></textarea>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.wrap_up.errors }}
-            <label >Wrap Up: </label>
-            <textarea class="form-control" name='wrap_up' rows="2"></textarea>
-        </div>
-    </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.resources.errors }}
-            <label >Resources: </label>
-            <input type="text" class="form-control" name='resources'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.blooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='blooms'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.vocabulary.errors }}
-            <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='vocabulary'>
-        </div>
-        </div>
-        {% endif %}
-    {% if 'Friday' in object.days %}
-    <h4>Friday</h4>
-    <form method="POST">
-    {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="form-group">
-            {{ form.activity_title.errors }}
-            <label >Weekly Objective: </label>
-            <input type="text" class="form-control" value='{{ object.objective }}'name='activity_title'>
-        </div>
-    <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.teacher.errors }}
-            <label >Teacher: </label>
-            <input type="text" class="form-control" value='{{ username }}' name='teacher'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.subject.errors }}
-            <label >Subject: </label>
-            <input type="text" class="form-control" value='{{ object.subject }}' name='subject'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.week_of.errors }}
-            <label >Week Of: </label>
-            <input type="text" class="form-control" value='{{ object.week_of }}' name='week_of'>
-        </div>
-    </div>
-        <div class="form-group">
-            <input type="hidden" class="form-control" value='{{ object.days }}' name='days'>
-        </div>
-        <div class="form-group">
-            {{ form.standard.errors }}
-            <label for="exampleFormControlTextarea1">Standards</label>
-            <input type="text" class="form-control" value='{{ results }}' name='standard'>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.intro.errors }}
-            <label >Introduction: </label>
-            <textarea class="form-control" name='intro' rows="2"></textarea>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.activity.errors }}
-            <label >Activity: </label>
-            <textarea class="form-control" name='activity' rows="2"></textarea>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.wrap_up.errors }}
-            <label >Wrap Up: </label>
-            <textarea class="form-control" name='wrap_up' rows="2"></textarea>
-        </div>
-    </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-            {{ form.resources.errors }}
-            <label >Resources: </label>
-            <input type="text" class="form-control" name='resources'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.blooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='blooms'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.vocabulary.errors }}
-            <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='vocabulary'>
-        </div>
-        </div>
-        {% endif %}
-{% if messages %}
-{% for message in messages %}
-<h4>{{ message }}</h4>
-{% endfor %}
-{% else %}
-<h3>Step Three: Submit Activities for this Objective  </h3>
-<input type="submit" value="Submit">
+    <input type="submit" value="Save Activity" class="btn btn-secondary">
 </form>
 
-{% endif %}
-</div>
 {% endblock %}
-

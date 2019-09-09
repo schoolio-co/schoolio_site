@@ -14,9 +14,10 @@ from django.urls import reverse_lazy
 from django.db import transaction
 from django.contrib import messages 
 from datetime import date
+from django import views
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm
+from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm
 from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary
 from .standard_matching import match_standard
 from .evaluate import get_MI_BL
@@ -67,21 +68,21 @@ def logout_user(request, school_url=None):
     logout(request)
     return redirect('school_profile', school_url=school_url)
 
-def School_Register(request, slug=None):
+def School_Register(request):
     if request.method == "POST":
         form = SchoolForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
             school.url = prev.url
             prev.save()
-        return render(request, 'school_register.html', {'slug': school.url})
+        return render(request, 'school_register.html', {'school_url': school.url})
     else:
         form = SchoolForm()
     return render(request, 'school_register.html', {'form': form})
 
 class School_Profile(TemplateView):
     model=school
-    slug_field = 'school_url'
+    school_url = 'school_url'
     template_name = "school_profile.html"
     
     def get(self,request,school_url):
@@ -90,7 +91,7 @@ class School_Profile(TemplateView):
         return render(request, 'school_profile.html', {'object': object, 'school_url': school_url })
 
 
-def Parent_Register(request, school_url=None, slug=None):
+def Parent_Register(request, school_url=None, username=None):
     model = User
     object = school.objects.get(url=school_url)
     school_url = object.url
@@ -104,7 +105,7 @@ def Parent_Register(request, school_url=None, slug=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return render(request, 'register.html', {'slug': username})
+            return render(request, 'register.html', {'username': username, 'school_url': school_url})
 
     else:
         data = {'is_parent': 'True', 
@@ -112,7 +113,7 @@ def Parent_Register(request, school_url=None, slug=None):
         form = ParentForm(initial=data)
     return render(request, 'register.html', {'form': form, 'school_url': school_url})
 
-def Student_Register(request, school_url=None, slug=None):
+def Student_Register(request, school_url=None, username=None):
     model = User
     object = school.objects.get(url=school_url)
     school_url = object.url
@@ -126,7 +127,7 @@ def Student_Register(request, school_url=None, slug=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return render(request, 'register.html', {'slug': username, 'school_url': school_url})
+            return render(request, 'register.html', {'username': username, 'school_url': school_url})
 
     else:
         data = {'school': school_pk }
@@ -139,7 +140,7 @@ def create_modelb(sender, instance, created, **kwargs):
         if not hasattr(instance, 'student_profiles'):
             student_profiles.objects.create(user=instance)
 
-def Admin_Register(request, school_url=None, slug=None):
+def Admin_Register(request, school_url=None, username=None):
     model = User
     object = school.objects.get(url=school_url)
     school_url = object.url
@@ -153,7 +154,7 @@ def Admin_Register(request, school_url=None, slug=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return render(request, 'register.html', {'slug': username})
+            return render(request, 'register.html', {'username': username, 'school_url': school_url})
 
     else:
         data = {'is_admin': 'True', 
@@ -161,7 +162,7 @@ def Admin_Register(request, school_url=None, slug=None):
         form = AdministratorForm(initial=data)
     return render(request, 'register.html', {'form': form, 'school_url': school_url})
 
-def Teacher_Register(request, school_url=None, slug=None):
+def Teacher_Register(request, school_url=None, username=None):
     model = User
     object = school.objects.get(url=school_url)
     school_url = object.url
@@ -175,7 +176,7 @@ def Teacher_Register(request, school_url=None, slug=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return render(request, 'register.html', {'slug': username, 'school_url': school_url})
+            return render(request, 'register.html', {'username': username, 'school_url': school_url })
 
     else:
         data = {'is_teacher': 'True', 
@@ -188,10 +189,7 @@ class Student_Profiles(TemplateView):
     school_url = 'school_url'
     template_name = "student_profiles.html"
     
-    def get(self,request,school_url):
-        obj = school.objects.get(url=school_url)
-        school_pk = obj.id
-        school_url = obj.url
+    def get(self,request,school_url,username):
         object = student_profiles.objects.all()
         return render(request, 'student_profiles.html', {'object': object, 'school_url': school_url})
 
@@ -209,8 +207,6 @@ class Profile(TemplateView):
     template_name = "profile.html"
     
     def get(self,request,school_url,username):
-        obj = school.objects.get(url=school_url)
-        school_url = obj.url
         object = User.objects.get(username=username)
         return render(request, 'profile.html', {'object': object, 'school_url': school_url})
 
@@ -253,51 +249,100 @@ def create_classroom(request, school_url=None, username=None, slug=None):
 
 
 def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
-    school_url=school_url
-    if username:
-        user = User.objects.get(username=username)
-        user_pk = user.id
-    schooly = school.objects.get(url=school_url)
-    school_pk = schooly.id
+    teacher = User.objects.get(username=username)
+    teacher_pk = teacher.username
     current_week = date.today().isocalendar()[1] 
 
     if request.method == "POST":
         form = SchoolLessonForm(request.POST)
         if form.is_valid():
-            planning_id = form.save(commit=False)
-            teacher = planning_id.teacher
-            week_of = planning_id.week_of
-            planning_id.save()
-        return redirect('weeklyactivitycreate', school_url=school_url, planning_id=planning_id, username=teacher, week_of=week_of)
+            prev = form.save(commit=False)
+            teacher = prev.teacher
+            week_of = prev.week_of
+            instance = form.save()
+            planning_id = instance.pk
+        return redirect('weeklyactivitycreate', planning_id=planning_id, school_url=school_url, username=teacher, week_of=week_of)
     else:
         form = SchoolLessonForm()
-        form.fields['school'].initial = school_pk
-        if username:
-            form.fields['teacher'].initial = username
-        if week_of is None:
-            form.fields['week_of'].initial = current_week
-        else:
+        if week_of:
             form.fields['week_of'].initial = week_of
+        else:
+            form.fields['week_of'].initial = current_week
+        form.fields['teacher'].initial = teacher_pk
     return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
 
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
-    model = activities
+    
     object = lesson_school_info.objects.get(school_lesson_id=planning_id)
     classroom = object.classroom
+    teacher_subject = object.subject
     subject_summary = classroom_subject_summary.objects.filter(classroom=classroom)
     results = match_standard(object.objective, object.subject )
 
     if request.method == "POST":
-        form = ActivityForm(request.POST or None)
+        form = WeeklyCreateForm(request.POST)
         if form.is_valid():
-            prev = form.save(commit=False)
-            prev.save()
-            messages.success(request, 'Form submission successful')
+            school_lesson_id = form.cleaned_data['school_lesson_id']
+            activity_title = form.cleaned_data['activity_title']
+            subject =  form.cleaned_data['subject']
+            week_of =  form.cleaned_data['week_of']
+            standard =  form.cleaned_data['standard']
+            day = form.cleaned_data['day']
+            mondayintro = form.cleaned_data['mondayintro']
+            mondayactivity = form.cleaned_data['mondayactivity']
+            mondaywrap_up = form.cleaned_data['mondaywrap_up']
+            mondayresources = form.cleaned_data['mondayresources']
+            mondayblooms = form.cleaned_data['mondayblooms']
+            mondayvocabulary = form.cleaned_data['mondayvocabulary']
+            tuesdayintro = form.cleaned_data['tuesdayintro']
+            tuesdayactivity = form.cleaned_data['tuesdayactivity']
+            tuesdaywrap_up = form.cleaned_data['tuesdaywrap_up']
+            tuesdayresources = form.cleaned_data['tuesdayresources']
+            tuesdayblooms = form.cleaned_data['tuesdayblooms']
+            tuesdayvocabulary = form.cleaned_data['tuesdayvocabulary']
+            wednesdayintro = form.cleaned_data['wednesdayintro']
+            wednesdayactivity = form.cleaned_data['wednesdayactivity']
+            wednesdaywrap_up = form.cleaned_data['wednesdaywrap_up']
+            wednesdayresources = form.cleaned_data['wednesdayresources']
+            wednesdayblooms = form.cleaned_data['wednesdayblooms']
+            wednesdayvocabulary = form.cleaned_data['wednesdayvocabulary']
+            thursdayintro = form.cleaned_data['thursdayintro']
+            thursdayactivity = form.cleaned_data['thursdayactivity']
+            thursdaywrap_up = form.cleaned_data['thursdaywrap_up']
+            thursdayresources = form.cleaned_data['thursdayresources']
+            thursdayblooms = form.cleaned_data['thursdayblooms']
+            thursdayvocabulary = form.cleaned_data['thursdayvocabulary']
+            fridayintro = form.cleaned_data['fridayintro']
+            fridayactivity = form.cleaned_data['fridayactivity']
+            fridaywrap_up = form.cleaned_data['fridaywrap_up']
+            fridayresources = form.cleaned_data['fridayresources']
+            fridayblooms = form.cleaned_data['fridayblooms']
+            fridayvocabulary = form.cleaned_data['fridayvocabulary']
+            if 'Monday' in object.days:
+                monday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , blooms=mondayblooms , vocabulary=mondayvocabulary)
+                monday.save()
+            if 'Tuesday' in object.days:
+                tuesday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Tuesday', intro=tuesdayintro, activity=tuesdayactivity , wrap_up=tuesdaywrap_up , resources=tuesdayresources , blooms=tuesdayblooms , vocabulary=tuesdayvocabulary)
+                tuesday.save()
+            if 'Wednesday' in object.days:
+                wednesday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Wednesday', intro=wednesdayintro, activity=wednesdayactivity , wrap_up=wednesdaywrap_up , resources=wednesdayresources , blooms=wednesdayblooms , vocabulary=wednesdayvocabulary)
+                wednesday.save()
+            if 'Thursday' in object.days:
+                thursday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Thursday', intro=thursdayintro, activity=thursdayactivity , wrap_up=thursdaywrap_up , resources=thursdayresources , blooms=thursdayblooms , vocabulary=thursdayvocabulary)
+                thursday.save()
+            if 'Friday' in object.days:
+                friday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Friday', intro=fridayintro, activity=fridayactivity , wrap_up=fridaywrap_up , resources=fridayresources , blooms=fridayblooms , vocabulary=fridayvocabulary)
+                friday.save()
             return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
     else:
-        form = ActivityForm()
-
+        
+        form = WeeklyCreateForm()
+        form.fields['standard'].initial = results
+        form.fields['subject'].initial = teacher_subject
+        form.fields['school_lesson_id'].initial = planning_id
+        form.fields['week_of'].initial = week_of
+        
     return render(request, 'weekly_create.html', {'form': form, 'school_url': school_url, 'username': username, 'object': object, 'results': results})
 
 
@@ -312,18 +357,18 @@ def WeeklyActivity(request, school_url=None, week_of=None, username=None):
 
 
 def SingleActivity(request, school_url=None, first_id=None, activity_id=None):
-    object = weekly_activities.objects.filter(id=activity_id)
+    object = activities.objects.filter(id=activity_id)
     return render(request, 'single_activity.html', {'object': object, 'school_url': school_url})
 
-def CreateActivity(request, school_url=None, first_id=None, username=None):
-    model = teacher_objectives
+
+def CreateActivity(request, school_url=None, planning_id=None, username=None):
+    model = lesson_school_info
     model= standards
-    object = teacher_objectives.objects.get(stepone_id=first_id)
+    object = lesson_school_info.objects.get(school_lesson_id=planning_id)
     teacher_objective = object.objective
     teacher_subject = object.subject
-    teacher_pk = object.stepone_id
     week_of = object.week_of
-
+    days = object.days 
 
     if request.method == "POST":
         form = ActivityForm(request.POST)
@@ -333,10 +378,6 @@ def CreateActivity(request, school_url=None, first_id=None, username=None):
     else:
         results = match_standard(teacher_objective, teacher_subject)
         form = ActivityForm()
-        form.fields['standard'].initial = results
-        form.fields['subject'].initial = teacher_subject
-        form.fields['week_of'].initial = week_of
-        form.fields['teacher'].initial = username
     return render(request, 'activity.html', {'form': form, 'results': results, 'object': object, 'teacher_objective': teacher_objective })
 
 

@@ -20,7 +20,7 @@
 <li><a href="{% url 'create_grade' school_url=school_url %}">Add Grade</a></li>
 <li><a href="{% url 'user_list' school_url=school_url %}">All Users</a></li>
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
-<li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
+<li><a href="{% url 'school_lesson' school_url=school_url username=object.username %}">School Lesson</a></li>
 {% endif %}
 {% endblock %}
 

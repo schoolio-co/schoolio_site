@@ -188,11 +188,7 @@ class lesson_school_info(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	teacher = models.ForeignKey(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='author_teacher')
+	teacher = models.CharField(max_length=30)
 	week_of = models.CharField(max_length=30)	
 	date = models.DateTimeField(default=now)
 	subject = models.CharField(max_length=100)
@@ -219,6 +215,7 @@ class activities(models.Model):
 	resources = models.CharField(max_length=100)
 	blooms = models.CharField(max_length=100)
 	vocabulary = models.CharField(max_length=100)
+	day = models.CharField(max_length=100)
 	
 
 	def __str__(self):
