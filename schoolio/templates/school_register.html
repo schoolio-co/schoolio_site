@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>School Registration</h2>
-{% if slug  %}
+{% if school_url  %}
 <h3>Thanks for Registering, Click the link below to view your School Page</h3>
-<a href="{% url 'school_profile' school_url=slug %}">View Profile</a>
+<a href="{% url 'school_profile' school_url=school_url %}">View Profile</a>
 {% else %}
 <form method="POST">
     {% csrf_token %}
