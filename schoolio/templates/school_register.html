@@ -1,4 +1,5 @@
-
+{% extends 'base.html' %}
+{% block content %}
 <h2>School Registration</h2>
 {% if slug  %}
 <h3>Thanks for Registering, Click the link below to view your School Page</h3>
@@ -9,3 +10,5 @@
     {{ form.as_p }}
     <input type="submit" value="Add School" class="btn btn-secondary">
 </form>
+{% endif %}
+{% endblock %}
