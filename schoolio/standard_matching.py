@@ -34,7 +34,7 @@ def match_standard(teacher_input, subject):
 def match_activity(classroom_id, teacher_objective, standard, subject):
         obj = activities.objects.all().filter(subject=subject, standard=standard)
         df = pd.DataFrame(list(obj))
-        cr_ss = classroom_subject_summary.objects.all().filter(classroom = classroom_id)
+        cr_ss = classroom_subject_summary.objects.get(classroom = classroom_id)
         prediction = []
         classroom_bl = {
 "Low"    : cr_ss.lu_level,
