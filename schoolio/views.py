@@ -258,9 +258,8 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
         if form.is_valid():
             prev = form.save(commit=False)
             week_of = prev.week_of
-            instance = prev.save()
-            planning_id = instance.id
-        return redirect('weeklyactivitycreate', planning_id=planning_id, school_url=school_url, username=teacher_pk, week_of=week_of)
+            prev.save()
+        return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
     else:
         form = SchoolLessonForm()
         if week_of:
