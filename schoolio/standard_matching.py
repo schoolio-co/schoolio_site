@@ -31,24 +31,25 @@ def match_standard(teacher_input, subject):
         return(results)
 
 # classroom_subject_summary
-def match_activity(classroom_subject, teacher_objective, standard, subject):
+def match_activity(classroom_id, teacher_objective, standard, subject):
         obj = activities.objects.all().filter(subject=subject, standard=standard)
         df = pd.DataFrame(list(obj))
+        cr_ss = classroom_subject_summary.objects.all().filter(classroom = classroom_id)
         prediction = []
         classroom_bl = {
-"Low"    : classroom_subject.lu_level,
-"Medium" : classroom_subject.mu_level,
-"High"   : classroom_subject.hu_level
+"Low"    : cr_ss.lu_level,
+"Medium" : cr_ss.mu_level,
+"High"   : cr_ss.hu_level
 }
         classroom_mi = {
-"Logical - Mathematical"  : classroom_subject.logical_level,
-"Verbal - Linguistic"     : classroom_subject.linguistic_level,
-"Bodily Kinesthetic"      : classroom_subject.kinesthetic_level,
-"Musical"                 : classroom_subject.musical_level,
-"Visual Spatial"          : classroom_subject.visual_level,
-"Naturalist"              : classroom_subject.naturalist_level,
-"Interpersonal"           : classroom_subject.group_level,
-"Intrapersonal"           : classroom_subject.independent_level
+"Logical - Mathematical"  : cr_ss.logical_level,
+"Verbal - Linguistic"     : cr_ss.linguistic_level,
+"Bodily Kinesthetic"      : cr_ss.kinesthetic_level,
+"Musical"                 : cr_ss.musical_level,
+"Visual Spatial"          : cr_ss.visual_level,
+"Naturalist"              : cr_ss.naturalist_level,
+"Interpersonal"           : cr_ss.group_level,
+"Intrapersonal"           : cr_ss.independent_level
 }
         for activity in df.iterrows():
                 activity = ''.join(str(i) for i in activity)

@@ -79,18 +79,18 @@ class classroom_subject_summary(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	subject = models.TextField(max_length=50)
-	lu_level = models.IntegerField(max_length=10)
-	mu_level = models.IntegerField(max_length=10)
-	hu_level = models.IntegerField(max_length=10)
-	logical_level = models.IntegerField(max_length=10)
-	linguistic_level = models.IntegerField(max_length=10)
-	kinesthetic_level = models.IntegerField(max_length=10)
-	musical_level = models.IntegerField(max_length=10)
-	visual_level = models.IntegerField(max_length=10)
-	naturalist_level = models.IntegerField(max_length=10)
-	group_level = models.IntegerField(max_length=10)
-	independent_level = models.IntegerField(max_length=10)
+	subject = models.TextField()
+	lu_level = models.IntegerField()
+	mu_level = models.IntegerField()
+	hu_level = models.IntegerField()
+	logical_level = models.IntegerField()
+	linguistic_level = models.IntegerField()
+	kinesthetic_level = models.IntegerField()
+	musical_level = models.IntegerField()
+	visual_level = models.IntegerField()
+	naturalist_level = models.IntegerField()
+	group_level = models.IntegerField()
+	independent_level = models.IntegerField()
 	
 
 	
