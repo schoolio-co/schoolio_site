@@ -78,11 +78,6 @@
             <label >Vocabulary: </label>
             <input type="text" class="form-control" name='mondayvocabulary'>
         </div>
-        <div class="form-group col-md-4">
-            {{ form.day.errors }}
-            <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='day'>
-        </div>
         </div>
         {% endif %}
         {% if 'Tuesday' in object.days %}
@@ -119,6 +114,117 @@
             {{ form.tuesdayvocabulary.errors }}
             <label >Vocabulary: </label>
             <input type="text" class="form-control" name='tuesdayvocabulary'>
+        </div>
+        </div>
+        {% endif %}
+        {% if 'Wednesday' in object.days %}
+        <h4>Wednesday</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.wednesdayintro.errors }}
+            <label >Introduction: </label>
+            <textarea class="form-control" name='wednesdayintro' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.wednesdayactivity.errors }}
+            <label >Activity: </label>
+            <textarea class="form-control" name='wednesdayactivity' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.wednesdaywrap_up.errors }}
+            <label >Wrap Up: </label>
+            <textarea class="form-control" name='wednesdaywrap_up' rows="2"></textarea>
+        </div>
+    </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.wednesdayresources.errors }}
+            <label >Resources: </label>
+            <input type="text" class="form-control" name='wednesdayresources'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.wednesdayblooms.errors }}
+            <label >Blooms: </label>
+            <input type="text" class="form-control" name='wednesdayblooms'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.wednesdayvocabulary.errors }}
+            <label >Vocabulary: </label>
+            <input type="text" class="form-control" name='wednesdayvocabulary'>
+        </div>
+        </div>
+        {% endif %}
+        {% if 'Thursday' in object.days %}
+        <h4>Thursday</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.thursdayintro.errors }}
+            <label >Introduction: </label>
+            <textarea class="form-control" name='thursdayintro' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.thursdayactivity.errors }}
+            <label >Activity: </label>
+            <textarea class="form-control" name='thursdayactivity' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.thursdaywrap_up.errors }}
+            <label >Wrap Up: </label>
+            <textarea class="form-control" name='thursdaywrap_up' rows="2"></textarea>
+        </div>
+    </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.thursdayresources.errors }}
+            <label >Resources: </label>
+            <input type="text" class="form-control" name='thursdayresources'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.thursdayblooms.errors }}
+            <label >Blooms: </label>
+            <input type="text" class="form-control" name='thursdayblooms'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.thursdayvocabulary.errors }}
+            <label >Vocabulary: </label>
+            <input type="text" class="form-control" name='thursdayvocabulary'>
+        </div>
+        </div>
+        {% endif %}
+        {% if 'Friday' in object.days %}
+        <h4>Friday</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.fridayintro.errors }}
+            <label >Introduction: </label>
+            <textarea class="form-control" name='fridayintro' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.fridayactivity.errors }}
+            <label >Activity: </label>
+            <textarea class="form-control" name='fridayactivity' rows="2"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.fridaywrap_up.errors }}
+            <label >Wrap Up: </label>
+            <textarea class="form-control" name='fridaywrap_up' rows="2"></textarea>
+        </div>
+    </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            {{ form.fridayresources.errors }}
+            <label >Resources: </label>
+            <input type="text" class="form-control" name='fridayresources'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.fridayblooms.errors }}
+            <label >Blooms: </label>
+            <input type="text" class="form-control" name='fridayblooms'>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.fridayvocabulary.errors }}
+            <label >Vocabulary: </label>
+            <input type="text" class="form-control" name='fridayvocabulary'>
         </div>
         </div>
         {% endif %}
