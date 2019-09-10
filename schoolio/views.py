@@ -268,7 +268,7 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
             form.fields['week_of'].initial = week_of
         else:
             form.fields['week_of'].initial = current_week
-        form.fields['teacher'].initial = teacher_pk
+        form.fields['planning_teacher'].initial = teacher_pk
     return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
 
 
