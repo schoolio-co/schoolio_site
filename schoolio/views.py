@@ -257,7 +257,7 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
         form = SchoolLessonForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
-            teacher = prev.teacher
+            teacher = prev.planning_teacher
             week_of = prev.week_of
             instance = prev.save()
             planning_id = instance.pk

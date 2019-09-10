@@ -188,12 +188,12 @@ class lesson_school_info(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	teacher = models.CharField(max_length=30)
 	week_of = models.CharField(max_length=30)	
 	date = models.DateTimeField(default=now)
 	subject = models.CharField(max_length=100)
 	days = models.CharField(max_length=100)	
 	objective = models.TextField(max_length=500)
+	planning_teacher = models.CharField(max_length=30)
 
 	def get_absolute_url(self):
 		return ("school_lesson")
