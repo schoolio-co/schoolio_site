@@ -1,12 +1,6 @@
 from django.test import TestCase
 from schoolio.models import *
-
-class HomePageTests(SimpleTestCase):
-
-    def test_home_page_status_code(self):
-        response = self.client.get('/')
-        self.assertEquals(response.status_code, 200)
-
+from schoolio.standard_matching import match_standard, match_activity
 
 class SchoolTest(TestCase):
     def setUp(self):
@@ -15,4 +9,10 @@ class SchoolTest(TestCase):
     def test_thing(self):
         """"""
         anderson = school.objects.get(name="anderson")
-        self.assertEqual(str(anderson), 'anderson')
+
+        self.assertEqual(anderson.name, 'anderson')
+
+class MatchTest(TestCase):
+    def setUp(self):
+        pass
+
