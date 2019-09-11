@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from django.db.models import Q
 import pandas as pd 
-from .models import standards, activities 
+from .models import standards, activities, classroom_subject_summary
 from .evaluate import get_MI_BL
 
 pd.set_option('display.max_colwidth', -1)
@@ -33,8 +33,8 @@ def match_standard(teacher_input, subject):
 # classroom_subject_summary
 def match_activity(classroom_id, teacher_objective, standard, subject):
         obj = activities.objects.all().filter(subject=subject, standard=standard)
-        df = pd.DataFrame(list(obj))
-        cr_ss = classroom_subject_summary.objects.get(classroom = classroom_id)
+        # df = pd.DataFrame(list(obj))
+        cr_ss = classroom_subject_summary.objects.filter(classroom=classroom_id).filter(subject=subject)
         prediction = []
         classroom_bl = {
 "Low"    : cr_ss.lu_level,
@@ -51,10 +51,10 @@ def match_activity(classroom_id, teacher_objective, standard, subject):
 "Interpersonal"           : cr_ss.group_level,
 "Intrapersonal"           : cr_ss.independent_level
 }
-        for activity in df.iterrows():
-                activity = ''.join(str(i) for i in activity)
+        for activity in obj:
+                # activity = ''.join(str(i) for i in activity)
                 bl, mi1, mi2, mi3 = get_MI_BL(activity)
-                result = classroom_bl[bl] + classroom_mi[mi1] + \
+                result = -classroom_bl[bl] + classroom_mi[mi1] + \
                          classroom_mi[mi2] + classroom_mi[mi3]
                 total = activity, result
                 prediction.append(total)

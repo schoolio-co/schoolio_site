@@ -1,25 +1,30 @@
 {% extends 'basetwo.html' %}
 {% block content %}
+<br/>
 <p>hello {{ username }}!</p>
 
     <div class="row seven-cols">
       <div class="col-md-1">
-        <p>Last Week </p>
         {% if object1 %}
-        <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=previous %}">Last Week's Lesson Plans</a></li>
+        <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a></li>
         {% else %}
-            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=previous %}">Add Activities for previous week</a></li>
+            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a></li>
         {% endif %}
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
           <p>Monday</p>
           {% for x in object2 %}
           {% if 'Monday' in x.day %}
+          {% for subject in x.subject.split %}
+          {{ subject }}
             <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
-        {% endif %}
+          {% endfor %}
+          {% endif %}
         {% endfor %}
+        
+        
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
           <p>Tuesday</p>
           {% for x in object2 %}
           {% if 'Tuesday' in x.day %}
@@ -27,7 +32,7 @@
         {% endif %}
       {% endfor %}
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
           <p>Wednesday</p>
           {% for x in object2 %}
           {% if 'Wednesday' in x.day %}
@@ -35,7 +40,7 @@
       ``{% endif %}
       {% endfor %}
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
           <p>Thursday</p>
           {% for x in object2 %}
           {% if 'Thursday' in x.day %}
@@ -43,7 +48,7 @@
       ``{% endif %}
       {% endfor %}
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
           <p>Friday </p>
           {% for x in object2 %}
           {% if 'Friday' in x.day %}
@@ -53,13 +58,12 @@
       </div>
 
       <div class="col-md-1">
-        <p>Next Week </p>
         {% if object3 %}
-            <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=next_week %}">Next Week's Lesson Plan</a></li>
+            <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a></li>
         {% else %}
-            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=next_week %}">Add Activities for Next Week</a></li>
+            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a></li>
         {% endif %} 
       </div>
     </div>
-
+<br/>
 {% endblock %}

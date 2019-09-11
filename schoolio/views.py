@@ -208,7 +208,8 @@ class Profile(TemplateView):
     
     def get(self,request,school_url,username):
         object = User.objects.get(username=username)
-        return render(request, 'profile.html', {'object': object, 'school_url': school_url})
+        current_week = date.today().isocalendar()[1] 
+        return render(request, 'profile.html', {'object': object, 'school_url': school_url, 'current_week': current_week})
 
 def create_grade(request, school_url=None, slug=None):
     model = grade_level
@@ -274,6 +275,7 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
     
     object = lesson_school_info.objects.get(school_lesson_id=planning_id)
     classroom = object.classroom
+    teacher_objective = object.objective
     teacher_subject = object.subject
     subject_summary = classroom_subject_summary.objects.filter(classroom=classroom)
     results = match_standard(object.objective, object.subject )
@@ -291,32 +293,33 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
             mondayactivity = form.cleaned_data['mondayactivity']
             mondaywrap_up = form.cleaned_data['mondaywrap_up']
             mondayresources = form.cleaned_data['mondayresources']
-            mondayblooms = form.cleaned_data['mondayblooms']
+            mondayblooms = get_MI_BL(mondayactivity)
             mondayvocabulary = form.cleaned_data['mondayvocabulary']
             tuesdayintro = form.cleaned_data['tuesdayintro']
             tuesdayactivity = form.cleaned_data['tuesdayactivity']
             tuesdaywrap_up = form.cleaned_data['tuesdaywrap_up']
             tuesdayresources = form.cleaned_data['tuesdayresources']
-            tuesdayblooms = form.cleaned_data['tuesdayblooms']
+            tuesdayblooms = get_MI_BL(tuesdayactivity)
             tuesdayvocabulary = form.cleaned_data['tuesdayvocabulary']
             wednesdayintro = form.cleaned_data['wednesdayintro']
             wednesdayactivity = form.cleaned_data['wednesdayactivity']
             wednesdaywrap_up = form.cleaned_data['wednesdaywrap_up']
             wednesdayresources = form.cleaned_data['wednesdayresources']
-            wednesdayblooms = form.cleaned_data['wednesdayblooms']
+            wednesdayblooms = get_MI_BL(wednesdayactivity)
             wednesdayvocabulary = form.cleaned_data['wednesdayvocabulary']
             thursdayintro = form.cleaned_data['thursdayintro']
             thursdayactivity = form.cleaned_data['thursdayactivity']
             thursdaywrap_up = form.cleaned_data['thursdaywrap_up']
             thursdayresources = form.cleaned_data['thursdayresources']
-            thursdayblooms = form.cleaned_data['thursdayblooms']
+            thursdayblooms = get_MI_BL(thursdayactivity)
             thursdayvocabulary = form.cleaned_data['thursdayvocabulary']
             fridayintro = form.cleaned_data['fridayintro']
             fridayactivity = form.cleaned_data['fridayactivity']
             fridaywrap_up = form.cleaned_data['fridaywrap_up']
             fridayresources = form.cleaned_data['fridayresources']
-            fridayblooms = form.cleaned_data['fridayblooms']
+            fridayblooms = get_MI_BL(fridayactivity)
             fridayvocabulary = form.cleaned_data['fridayvocabulary']
+
             if 'Monday' in object.days:
                 monday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , blooms=mondayblooms , vocabulary=mondayvocabulary)
                 monday.save()
@@ -334,9 +337,9 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
                 friday.save()
             return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
     else:
-        
+        choices = results
         form = WeeklyCreateForm()
-        form.fields['standard'].initial = results
+        form.fields['standard'].initial = choices
         form.fields['subject'].initial = teacher_subject
         form.fields['school_lesson_id'].initial = planning_id
         form.fields['week_of'].initial = week_of

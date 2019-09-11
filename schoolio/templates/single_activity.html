@@ -2,7 +2,20 @@
 {% block content %}
 <h1>Single Activity</h1>
 {% for j in object %}
-{{ j.activity_title }}
-{{ j.teacher }}
+    <li>{{j.school_lesson_id}}</li>
+	<li>{{j.activity_title}}</li>
+	<li>{{j.subject}}</li>
+    <li>{{j.week_of}}</li>
+    <li>{{j.standard}}</li>
+	<li>{{j.intro}}</li>
+	<li>{{j.activity}}</li>
+	<li>{{j.wrap_up}}</li>
+    <li>{{j.resources}}</li>
+    {% for item in j.blooms.split %}
+    {{ item }}
+    {% endfor %}
+	<li>{{j.vocabulary}}</li>
+	<li>{{j.day}}</li>
+
 {% endfor %}
 {% endblock %}

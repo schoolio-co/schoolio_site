@@ -10,9 +10,9 @@
 <li><a href="{% url 'Student_Profiles' school_url=school_url %}">Students</a></li>
 
 {% if object.is_teacher %}
-<li><a href="{% url 'create_classroom' username=object.username school_url=school_url %}">Add Classroom</a></li>
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
 <li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
+<li><a href="{% url 'weekly_activity' school_url=school_url username=object.username week_of=current_week %}">Weekly Activities</a></li>
 {% endif %}
 
 {% if object.is_admin %}
@@ -21,6 +21,7 @@
 <li><a href="{% url 'user_list' school_url=school_url %}">All Users</a></li>
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
 <li><a href="{% url 'school_lesson' school_url=school_url username=object.username %}">School Lesson</a></li>
+<li><a href="{% url 'weekly_activity' school_url=school_url username=object.username week_of=current_week %}">Weekly Activities</a></li>
 {% endif %}
 {% endblock %}
 
