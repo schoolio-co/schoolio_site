@@ -205,7 +205,7 @@ class lesson_school_info(models.Model):
 		
 class activities(models.Model):
 	school_lesson_id = models.IntegerField()
-	activity_title = models.CharField(max_length=500)
+	weekly_goal = models.CharField(max_length=500)
 	subject =  models.CharField(max_length=500)
 	week_of =  models.CharField(max_length=5)
 	standard =  models.CharField(max_length=500)
@@ -213,13 +213,16 @@ class activities(models.Model):
 	activity = models.TextField(max_length=1000)
 	wrap_up = models.CharField(max_length=500)
 	resources = models.CharField(max_length=100)
-	blooms = models.CharField(max_length=100)
+	bl = models.CharField(max_length=50)
+	mi1 = models.CharField(max_length=50)
+	mi2 = models.CharField(max_length=50)
+	mi3 = models.CharField(max_length=50)
 	vocabulary = models.CharField(max_length=100)
 	day = models.CharField(max_length=100)
 	
 
 	def __str__(self):
-		return "%s" % (self.activity_title)
+		return "%s" % (self.intro)
 
 class classroom_averages(models.Model):
 	classroom = models.ForeignKey(classroom, 

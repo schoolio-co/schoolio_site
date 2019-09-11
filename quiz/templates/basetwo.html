@@ -110,10 +110,14 @@
             <div class="row justify-content-center">
               <div class="col-lg-6">
                 <div class="banner_content text-center">
-                  <h2>Contact Us</h2>
+                  <h2>{% block title %}Welcome{% endblock %}</h2>
                   <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="contact.html">Contact</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'school_profile' school_url=user.school  %}">Home</a>
+                    <a href="{% url 'profile' school_url=user.school  username=user.username %}">My Profile</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'school_profile' school_url=school_url %}">Home</a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -124,7 +128,7 @@
 
       
         <!--================ End Home Banner Area =================-->
-
+<br/>
 <div class="container">
   {% if messages %}
   {% for message in messages %}
@@ -136,9 +140,12 @@
     </div>
     {% endfor %}
   {% endif %}
+
 {% block content %}
 
 {% endblock %}
+</div>
+<br/>
 
     <!--================ Start footer Area  =================-->
     <footer class="footer-area section_gap">

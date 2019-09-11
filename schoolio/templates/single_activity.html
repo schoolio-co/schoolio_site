@@ -1,7 +1,7 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 <h1>Single Activity</h1>
-{% for j in object %}
+{% for j in obj %}
     <li>{{j.school_lesson_id}}</li>
 	<li>{{j.activity_title}}</li>
 	<li>{{j.subject}}</li>
@@ -11,9 +11,10 @@
 	<li>{{j.activity}}</li>
 	<li>{{j.wrap_up}}</li>
     <li>{{j.resources}}</li>
-    {% for item in j.blooms.split %}
-    {{ item }}
-    {% endfor %}
+    <li>{{j.bl}}</li>
+    <li>{{j.mi1}}</li>
+    <li>{{j.mi2}}</li>
+    <li>{{j.mi3}}</li>
 	<li>{{j.vocabulary}}</li>
 	<li>{{j.day}}</li>
 

@@ -15,8 +15,9 @@ class SchoolTest(TestCase):
 
 class MatchTest(TestCase):
     def setUp(self):
-        school.objects.create(name="anderson", address = "anderson")
-        User.objects.create(first_name = "Carolyn", last_name = "Luc", email = "as@fid.ohv", school="anderson"
+        school.objects.create(name="anderson", address = "anderson", url = "anderson")
+        school_pk = school.objects.get(name='anderson')
+        User.objects.create(first_name = "Carolyn", last_name = "Luc", email = "as@fid.ohv", school=school_pk,
             username="cluc")
         grade_level.objects.create(grade = "1st", school = "anderson")
         classroom.objects.create(classroom="unique", grade = "1st", school="anderson", teacher = "cluc")

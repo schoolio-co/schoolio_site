@@ -6,9 +6,9 @@
     <div class="row seven-cols">
       <div class="col-md-1">
         {% if object1 %}
-        <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a></li>
+        <a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a>
         {% else %}
-            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a></li>
+        <a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=previous %}">Last Week</a>
         {% endif %}
       </div>
       <div class="col-md-2">
@@ -17,7 +17,7 @@
           {% if 'Monday' in x.day %}
           {% for subject in x.subject.split %}
           {{ subject }}
-            <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
+            <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
           {% endfor %}
           {% endif %}
         {% endfor %}
@@ -28,40 +28,52 @@
           <p>Tuesday</p>
           {% for x in object2 %}
           {% if 'Tuesday' in x.day %}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
-        {% endif %}
+          {% for subject in x.subject.split %}
+          {{ subject }}
+          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+        {% endfor %}
+          {% endif %}
       {% endfor %}
       </div>
       <div class="col-md-2">
           <p>Wednesday</p>
           {% for x in object2 %}
           {% if 'Wednesday' in x.day %}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
-      ``{% endif %}
+          {% for subject in x.subject.split %}
+          {{ subject }}
+          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          {% endfor %}
+          {% endif %}
       {% endfor %}
       </div>
       <div class="col-md-2">
           <p>Thursday</p>
           {% for x in object2 %}
           {% if 'Thursday' in x.day %}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
-      ``{% endif %}
+          {% for subject in x.subject.split %}
+          {{ subject }}
+          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          {% endfor %}
+          {% endif %}
       {% endfor %}
       </div>
       <div class="col-md-2">
           <p>Friday </p>
           {% for x in object2 %}
           {% if 'Friday' in x.day %}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.activity_title }}: {{ x.id }}</a></li>
-      ``{% endif %}
+          {% for subject in x.subject.split %}
+          {{ subject }}
+          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+      {% endfor %}
+          {% endif %}
       {% endfor %}
       </div>
 
       <div class="col-md-1">
         {% if object3 %}
-            <li><a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a></li>
+        <a href="{% url 'weekly_activity' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a>
         {% else %}
-            <li><a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a></li>
+        <a href="{% url 'school_lesson_week' school_url=school_url username=user.get_username week_of=next_week %}">Next Week</a>
         {% endif %} 
       </div>
     </div>

@@ -19,7 +19,7 @@ from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm
 from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary
-from .standard_matching import match_standard
+from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .import_csv import import_csv 
 from django.db.models.signals import post_save
@@ -86,16 +86,16 @@ class School_Profile(TemplateView):
     template_name = "school_profile.html"
     
     def get(self,request,school_url):
-        object = school.objects.get(url=school_url)
-        school_url = object.url
-        return render(request, 'school_profile.html', {'object': object, 'school_url': school_url })
+        obj = school.objects.get(url=school_url)
+        school_url = obj.url
+        return render(request, 'school_profile.html', {'obj': obj, 'school_url': school_url })
 
 
 def Parent_Register(request, school_url=None, username=None):
     model = User
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
 
     if request.method == "POST":
         form = ParentForm(request.POST)
@@ -115,9 +115,9 @@ def Parent_Register(request, school_url=None, username=None):
 
 def Student_Register(request, school_url=None, username=None):
     model = User
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
 
     if request.method == "POST":
         form = StudentForm(request.POST)
@@ -142,9 +142,9 @@ def create_modelb(sender, instance, created, **kwargs):
 
 def Admin_Register(request, school_url=None, username=None):
     model = User
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
 
     if request.method == "POST":
         form = AdministratorForm(request.POST)
@@ -164,9 +164,9 @@ def Admin_Register(request, school_url=None, username=None):
 
 def Teacher_Register(request, school_url=None, username=None):
     model = User
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
 
     if request.method == "POST":
         form = TeacherForm(request.POST)
@@ -190,15 +190,15 @@ class Student_Profiles(TemplateView):
     template_name = "student_profiles.html"
     
     def get(self,request,school_url,username):
-        object = student_profiles.objects.all()
-        return render(request, 'student_profiles.html', {'object': object, 'school_url': school_url})
+        obj = student_profiles.objects.all()
+        return render(request, 'student_profiles.html', {'obj': obj, 'school_url': school_url})
 
 def UserList(request,school_url=None):
     obj = school.objects.get(url=school_url)
     school_pk = obj.id
     school_url = obj.url
-    object = User.objects.all()
-    return render(request, 'all_users.html', {'object_list': object, 'school_url': school_url})
+    obj = User.objects.all()
+    return render(request, 'all_users.html', {'object_list': obj, 'school_url': school_url})
 
 class Profile(TemplateView):
     model=User
@@ -207,15 +207,15 @@ class Profile(TemplateView):
     template_name = "profile.html"
     
     def get(self,request,school_url,username):
-        object = User.objects.get(username=username)
+        obj = User.objects.get(username=username)
         current_week = date.today().isocalendar()[1] 
-        return render(request, 'profile.html', {'object': object, 'school_url': school_url, 'current_week': current_week})
+        return render(request, 'profile.html', {'obj': obj, 'school_url': school_url, 'current_week': current_week})
 
 def create_grade(request, school_url=None, slug=None):
     model = grade_level
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
 
     if request.method == "POST":
         form = GradeForm(request.POST)
@@ -230,9 +230,9 @@ def create_grade(request, school_url=None, slug=None):
 
 def create_classroom(request, school_url=None, username=None, slug=None):
     model = classroom
-    object = school.objects.get(url=school_url)
-    school_url = object.url
-    school_pk = object.id
+    obj = school.objects.get(url=school_url)
+    school_url = obj.url
+    school_pk = obj.id
     user = User.objects.get(username=username)
     user_pk = user.id
 
@@ -273,12 +273,17 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
     
-    object = lesson_school_info.objects.get(school_lesson_id=planning_id)
-    classroom = object.classroom
-    teacher_objective = object.objective
-    teacher_subject = object.subject
+    obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    classroom = obj.classroom
+    teacher_objective = obj.objective
+    teacher_subject = obj.subject
     subject_summary = classroom_subject_summary.objects.filter(classroom=classroom)
-    results = match_standard(object.objective, object.subject )
+    results = match_standard(obj.objective, obj.subject)
+    matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
+    matches = list(map(lambda x: x[0], matches))
+    #for match in matches:
+        #activity_match = activities.objects.filter(intro=match[0])
+
 
     if request.method == "POST":
         form = WeeklyCreateForm(request.POST)
@@ -320,20 +325,20 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
             fridayblooms = get_MI_BL(fridayactivity)
             fridayvocabulary = form.cleaned_data['fridayvocabulary']
 
-            if 'Monday' in object.days:
-                monday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , blooms=mondayblooms , vocabulary=mondayvocabulary)
+            if 'Monday' in obj.days:
+                monday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , bl=mondayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=mondayvocabulary)
                 monday.save()
-            if 'Tuesday' in object.days:
-                tuesday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Tuesday', intro=tuesdayintro, activity=tuesdayactivity , wrap_up=tuesdaywrap_up , resources=tuesdayresources , blooms=tuesdayblooms , vocabulary=tuesdayvocabulary)
+            if 'Tuesday' in obj.days:
+                tuesday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goale=activity_title, subject=subject, week_of=week_of, standard=standard, day='Tuesday', intro=tuesdayintro, activity=tuesdayactivity , wrap_up=tuesdaywrap_up , resources=tuesdayresources , bl=tuesdayblooms[0], mi1=tuesdayblooms[1], mi2=tuesdayblooms[2], mi3=tuesdayblooms[3], vocabulary=tuesdayvocabulary)
                 tuesday.save()
-            if 'Wednesday' in object.days:
-                wednesday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Wednesday', intro=wednesdayintro, activity=wednesdayactivity , wrap_up=wednesdaywrap_up , resources=wednesdayresources , blooms=wednesdayblooms , vocabulary=wednesdayvocabulary)
+            if 'Wednesday' in obj.days:
+                wednesday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Wednesday', intro=wednesdayintro, activity=wednesdayactivity , wrap_up=wednesdaywrap_up , resources=wednesdayresources , bl=wednesdayblooms[0], mi1=wednesdayblooms[1], mi2=wednesdayblooms[2], mi3=wednesdayblooms[3], vocabulary=wednesdayvocabulary)
                 wednesday.save()
-            if 'Thursday' in object.days:
-                thursday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Thursday', intro=thursdayintro, activity=thursdayactivity , wrap_up=thursdaywrap_up , resources=thursdayresources , blooms=thursdayblooms , vocabulary=thursdayvocabulary)
+            if 'Thursday' in obj.days:
+                thursday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Thursday', intro=thursdayintro, activity=thursdayactivity , wrap_up=thursdaywrap_up , resources=thursdayresources , bl=thursdayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=thursdayvocabulary)
                 thursday.save()
-            if 'Friday' in object.days:
-                friday = activities.objects.create(school_lesson_id=school_lesson_id, activity_title=activity_title, subject=subject, week_of=week_of, standard=standard, day='Friday', intro=fridayintro, activity=fridayactivity , wrap_up=fridaywrap_up , resources=fridayresources , blooms=fridayblooms , vocabulary=fridayvocabulary)
+            if 'Friday' in obj.days:
+                friday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Friday', intro=fridayintro, activity=fridayactivity , wrap_up=fridaywrap_up , resources=fridayresources , bl=fridayblooms[0], mi1=fridayblooms[1], mi2=fridayblooms[2], mi3=fridayblooms[3], vocabulary=fridayvocabulary)
                 friday.save()
             return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
     else:
@@ -344,7 +349,7 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
         form.fields['school_lesson_id'].initial = planning_id
         form.fields['week_of'].initial = week_of
         
-    return render(request, 'weekly_create.html', {'form': form, 'school_url': school_url, 'username': username, 'object': object, 'results': results})
+    return render(request, 'weekly_create.html', {'form': form, 'matches': matches, 'school_url': school_url, 'username': username, 'obj': obj, 'results': results})
 
 
 def WeeklyActivity(request, school_url=None, week_of=None, username=None):
@@ -358,18 +363,18 @@ def WeeklyActivity(request, school_url=None, week_of=None, username=None):
 
 
 def SingleActivity(request, school_url=None, first_id=None, activity_id=None):
-    object = activities.objects.filter(id=activity_id)
-    return render(request, 'single_activity.html', {'object': object, 'school_url': school_url})
+    obj = activities.objects.filter(id=activity_id)
+    return render(request, 'single_activity.html', {'obj': obj, 'school_url': school_url})
 
 
 def CreateActivity(request, school_url=None, planning_id=None, username=None):
     model = lesson_school_info
     model= standards
-    object = lesson_school_info.objects.get(school_lesson_id=planning_id)
-    teacher_objective = object.objective
-    teacher_subject = object.subject
-    week_of = object.week_of
-    days = object.days 
+    obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    teacher_objective = obj.objective
+    teacher_subject = obj.subject
+    week_of = obj.week_of
+    days = obj.days 
 
     if request.method == "POST":
         form = ActivityForm(request.POST)
@@ -379,7 +384,7 @@ def CreateActivity(request, school_url=None, planning_id=None, username=None):
     else:
         results = match_standard(teacher_objective, teacher_subject)
         form = ActivityForm()
-    return render(request, 'activity.html', {'form': form, 'results': results, 'object': object, 'teacher_objective': teacher_objective })
+    return render(request, 'activity.html', {'form': form, 'results': results, 'obj': obj, 'teacher_objective': teacher_objective })
 
 
 def CreateAssessment(request, school_url=None):
