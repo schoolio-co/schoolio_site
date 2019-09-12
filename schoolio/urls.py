@@ -17,35 +17,28 @@ from quiz.views import elearning, landing, blog, user_profile, QuizListView, Cat
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
 
-from postman.views import (InboxView, SentView, ArchivesView, TrashView,
-        WriteView, ReplyView, MessageView, ConversationView,
-        ArchiveView, DeleteView, UndeleteView, MarkReadView, MarkUnreadView,
-        IndexView)
 from django.contrib.auth import views as auth_views
 from ecommerce_app.views import *
+from pinax.messages.views import *
 from cal.views import *
 
 urlpatterns = [
 
-            # Translators: keep consistency of the <option> parameter with the translation for 'm'
-    url(pgettext_lazy('postman_url', r'^inbox/(?:(?P<option>m)/)?$'), InboxView.as_view(), name='inbox'),
-    # Translators: keep consistency of the <option> parameter with the translation for 'm'
-    url(pgettext_lazy('postman_url', r'^sent/(?:(?P<option>m)/)?$'), SentView.as_view(), name='sent'),
-    # Translators: keep consistency of the <option> parameter with the translation for 'm'
-    url(pgettext_lazy('postman_url', r'^archives/(?:(?P<option>m)/)?$'), ArchivesView.as_view(), name='archives'),
-    # Translators: keep consistency of the <option> parameter with the translation for 'm'
-    url(pgettext_lazy('postman_url', r'^trash/(?:(?P<option>m)/)?$'), TrashView.as_view(), name='trash'),
-    url(pgettext_lazy('postman_url', r'^write/(?:(?P<recipients>[^/#]+)/)?$'), WriteView.as_view(), name='write'),
-    url(pgettext_lazy('postman_url', r'^reply/(?P<message_id>[\d]+)/$'), ReplyView.as_view(), name='reply'),
-    url(pgettext_lazy('postman_url', r'^view/(?P<message_id>[\d]+)/$'), MessageView.as_view(), name='view'),
-    # Translators: 't' stands for 'thread'
-    url(pgettext_lazy('postman_url', r'^view/t/(?P<thread_id>[\d]+)/$'), ConversationView.as_view(), name='view_conversation'),
-    url(pgettext_lazy('postman_url', r'^archive/$'), ArchiveView.as_view(), name='archive'),
-    url(pgettext_lazy('postman_url', r'^delete/$'), DeleteView.as_view(), name='delete'),
-    url(pgettext_lazy('postman_url', r'^undelete/$'), UndeleteView.as_view(), name='undelete'),
-    url(pgettext_lazy('postman_url', r'^mark-read/$'), MarkReadView.as_view(), name='mark-read'),
-    url(pgettext_lazy('postman_url', r'^mark-unread/$'), MarkUnreadView.as_view(), name='mark-unread'),
-    url(r'^inboxindex/$', IndexView.as_view()),
+    url(r"^inbox/$", 
+        view=InboxView.as_view(),
+        name="inbox"),
+    url(r"^create/$", 
+        view=MessageCreateView.as_view(),
+        name="message_create"),
+    url(r"^create/(?P<user_id>\d+)/$", 
+        view=MessageCreateView.as_view(),
+        name="message_user_create"),
+    url(r"^thread/(?P<pk>\d+)/$", 
+        view=ThreadView.as_view(),
+        name="thread_detail"),
+    url(r"^thread/(?P<pk>\d+)/delete/$", 
+        view=ThreadDeleteView.as_view(),
+        name="thread_delete"),
 
     url(r'^$',
         view=landing.as_view(),

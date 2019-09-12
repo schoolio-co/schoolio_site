@@ -94,7 +94,7 @@
                 {% endif %}
                 </ul>
                 {% if user.is_authenticated %}
-                  <a class="btn btn-outline-secondary" href="#" >Inbox</a>
+                <a href="{% url 'inbox' %}"><i class="fa fa-envelope"></i> Messages</a>
                   {% endif %}
             </div>
           </div>
@@ -151,6 +151,7 @@
     <footer class="footer-area section_gap">
       <div class="container">
         <div class="row">
+                   <!--================ Footer Links  
           <div class="col-lg-2 col-md-6 single-footer-widget">
             <h4>Top Products</h4>
             <ul>
@@ -175,6 +176,7 @@
               <li><a href="#">Guides</a></li>
             </ul>
           </div>
+          =================-->
         </div>
         <div class="row footer-bottom d-flex justify-content-between">
           <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">

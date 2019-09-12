@@ -4,16 +4,16 @@
 {% if object_list %}
     {% for user in object_list %}
         {% if user.is_teacher%}
-        <li><a href="{% url 'profile' school_url=school_url slug=user.username %}">Teacher: {{ user }}</a>
+        <li><a href="{% url 'profile' school_url=school_url username=user.username %}">Teacher: {{ user }}</a>
         <p>{{user.last_name}}, {{user.first_name}}</p></li>
         {% elif user.is_parent %}
-        <li><a href="{% url 'profile' school_url=school_url slug=user.username %}">Parent: {{ user }}</a>
+        <li><a href="{% url 'profile' school_url=school_url username=user.username %}">Parent: {{ user }}</a>
         <p>{{user.last_name}}, {{user.first_name}}</p></li>
         {% elif user.is_student%}
-        <li><a href="{% url 'profile' school_url=school_url slug=user.username %}">Student: {{ user }}</a>
+        <li><a href="{% url 'profile' school_url=school_url username=user.username %}">Student: {{ user }}</a>
         <p>{{user.last_name}}, {{user.first_name}}</p></li>
         {% else %}
-        <li><a href="{% url 'profile' school_url=school_url slug=user.username %}">Admin: {{ user }}</a>
+        <li><a href="{% url 'profile' school_url=school_url username=user.username %}">Admin: {{ user }}</a>
         <p>{{user.last_name}}, {{user.first_name}}</p></li>
         {% endif %}
     {% endfor %}

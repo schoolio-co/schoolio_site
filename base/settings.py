@@ -33,7 +33,7 @@ PAYPAL_TEST = False
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quiz',
     'storages',
-    'postman',
     'schoolio',
+    "pinax.messages",
     "ecommerce_app",
     'multichoice',
     'true_false',
@@ -216,6 +216,26 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+POSTMAN_I18N_URLS = True  # default is False
+POSTMAN_DISALLOW_ANONYMOUS = True  # default is False
+POSTMAN_DISALLOW_MULTIRECIPIENTS = True  # default is False
+POSTMAN_DISALLOW_COPIES_ON_REPLY = True  # default is False
+POSTMAN_DISABLE_USER_EMAILING = True  # default is False
+#POSTMAN_FROM_EMAIL = 'from@host.tld'  # default is DEFAULT_FROM_EMAIL
+# POSTMAN_PARAMS_EMAIL = get_params_email  # default is None
+# POSTMAN_AUTO_MODERATE_AS = True  # default is None
+# POSTMAN_SHOW_USER_AS = 'get_full_name'  # default is None
+# POSTMAN_NAME_USER_AS = 'last_name'  # default is None
+# POSTMAN_QUICKREPLY_QUOTE_BODY = True  # default is False
+# POSTMAN_NOTIFIER_APP = None  # default is 'notification'
+# POSTMAN_MAILER_APP = None  # default is 'mailer'
+#POSTMAN_AUTOCOMPLETER_APP = {
+    # 'name': '',  # default is 'ajax_select'
+    # 'field': '',  # default is 'AutoCompleteField'
+    # 'arg_name': '',  # default is 'channel'
+    # 'arg_default': 'postman_friends',  # no default, mandatory to enable the feature
+#}  # default is {}
 
 
 SECURE_SSL_REDIRECT = False

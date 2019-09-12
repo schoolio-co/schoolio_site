@@ -8,10 +8,14 @@
 <p>{{ obj.first_name }} {{ obj.last_name }} </p>
 <p>{{ obj.school }}</p>
 
+<!--================ Student Profiles  
 <li><a href="{% url 'Student_Profiles' school_url=school_url %}">Students</a></li>
+ =================-->
 
 {% if obj.is_teacher %}
+<!--================ Assessment Link
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
+ =================-->
 <li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
 <li><a href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">Weekly Activities</a></li>
 {% endif %}
@@ -20,7 +24,9 @@
 <li><a href="{% url 'create_classroom' username=obj.username school_url=school_url %}">Add Classroom</a></li>
 <li><a href="{% url 'create_grade' school_url=school_url %}">Add Grade</a></li>
 <li><a href="{% url 'user_list' school_url=school_url %}">All Users</a></li>
+<!--================ Assessment Link
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
+=================-->
 <li><a href="{% url 'school_lesson' school_url=school_url username=obj.username %}">School Lesson</a></li>
 <li><a href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">Weekly Activities</a></li>
 {% endif %}

@@ -80,9 +80,9 @@ class classroom_subject_summary(models.Model):
 							blank=True,
         					null=True)
 	subject = models.TextField()
-	lu_level = models.IntegerField()
-	mu_level = models.IntegerField()
-	hu_level = models.IntegerField()
+	lu_level = models.FloatField(null=True, blank=True)
+	mu_level = models.FloatField(null=True, blank=True)
+	hu_level = models.FloatField(null=True, blank=True)
 	logical_level = models.IntegerField()
 	linguistic_level = models.IntegerField()
 	kinesthetic_level = models.IntegerField()

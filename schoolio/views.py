@@ -189,7 +189,7 @@ class Student_Profiles(TemplateView):
     school_url = 'school_url'
     template_name = "student_profiles.html"
     
-    def get(self,request,school_url,username):
+    def get(self,request,school_url):
         obj = student_profiles.objects.all()
         return render(request, 'student_profiles.html', {'obj': obj, 'school_url': school_url})
 
@@ -203,7 +203,7 @@ def UserList(request,school_url=None):
 class Profile(TemplateView):
     model=User
     school_url = 'school_url'
-    slug_field = 'username'
+    username = 'username'
     template_name = "profile.html"
     
     def get(self,request,school_url,username):
@@ -253,12 +253,16 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
     teacher = User.objects.get(username=username)
     teacher_pk = teacher.username
     current_week = date.today().isocalendar()[1] 
+    obj = school.objects.get(url=school_url)
+    school_pk = obj.id
 
     if request.method == "POST":
         form = SchoolLessonForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
             week_of = prev.week_of
+            subeject_summary = classroom_subject_summary.objects.create(classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
+            subeject_summary.save() 
             prev.save()
         return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
     else:
@@ -268,6 +272,7 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
         else:
             form.fields['week_of'].initial = current_week
         form.fields['planning_teacher'].initial = teacher_pk
+        form.fields['school'].initial = school_pk
     return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
 
 
@@ -277,10 +282,11 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
     classroom = obj.classroom
     teacher_objective = obj.objective
     teacher_subject = obj.subject
-    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom)
+    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom).first()
     results = match_standard(obj.objective, obj.subject)
-    matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
-    matches = list(map(lambda x: x[0], matches))
+    if results:
+        matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
+        matches = list(map(lambda x: x[0], matches))
     #for match in matches:
         #activity_match = activities.objects.filter(intro=match[0])
 
