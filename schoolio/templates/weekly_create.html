@@ -9,13 +9,7 @@
     {% endfor %}
 {% endif %}
 
-{% for match in matches %}
-    <li>{{ match.intro }}
-    {{ match.activity }}
-    {{ match.wrap_up }}</li>
-{% endfor %}
-
-
+{% if matches %}
 <form method="POST">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -58,7 +52,6 @@
         {% endfor %}
     {% endfor %}
         </select>
-
     </div>
         {% if 'Monday' in obj.days %}
         <h4>Monday</h4>
@@ -66,29 +59,29 @@
             <div class="form-group col-md-4">
             {{ form.mondayintro.errors }}
             <label >Introduction: </label>
-            <textarea class="form-control" name='mondayintro' rows="2"></textarea>
+            <textarea class="form-control" name='mondayintro'  rows="2">{{ matches.0.intro }}</textarea>
         </div>
         <div class="form-group col-md-4">
             {{ form.mondayactivity.errors }}
             <label >Activity: </label>
-            <textarea class="form-control" name='mondayactivity' rows="2"></textarea>
+            <textarea class="form-control" name='mondayactivity' rows="2">{{ matches.0.activity }}</textarea>
         </div>
         <div class="form-group col-md-4">
             {{ form.mondaywrap_up.errors }}
             <label >Wrap Up: </label>
-            <textarea class="form-control" name='mondaywrap_up' rows="2"></textarea>
+            <textarea class="form-control" name='mondaywrap_up' rows="2">{{ matches.0.wrap_up }}</textarea>
         </div>
     </div>
         <div class="form-row">
             <div class="form-group col-md-4">
             {{ form.mondayresources.errors }}
             <label >Resources: </label>
-            <input type="text" class="form-control" name='mondayresources'>
+            <input type="text" class="form-control" value='{{ matches.0.resources }}' name='mondayresources'>
         </div>
         <div class="form-group col-md-4">
             {{ form.mondayvocabulary.errors }}
             <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='mondayvocabulary'>
+            <input type="text" class="form-control" value='{{ matches.0.vocabulary }}' name='mondayvocabulary'>
         </div>
         </div>
         {% endif %}
@@ -98,34 +91,29 @@
             <div class="form-group col-md-4">
             {{ form.tuesdayintro.errors }}
             <label >Introduction: </label>
-            <textarea class="form-control" name='tuesdayintro' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdayintro'  rows="2">{{ matches.1.intro }}</textarea>
         </div>
         <div class="form-group col-md-4">
             {{ form.tuesdayactivity.errors }}
             <label >Activity: </label>
-            <textarea class="form-control" name='tuesdayactivity' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdayactivity'  rows="2">{{ matches.1.activity }}</textarea>
         </div>
         <div class="form-group col-md-4">
             {{ form.tuesdaywrap_up.errors }}
             <label >Wrap Up: </label>
-            <textarea class="form-control" name='tuesdaywrap_up' rows="2"></textarea>
+            <textarea class="form-control" name='tuesdaywrap_up' rows="2">{{ matches.1.wrap_up }}</textarea>
         </div>
     </div>
         <div class="form-row">
             <div class="form-group col-md-4">
             {{ form.tuesdayresources.errors }}
             <label >Resources: </label>
-            <input type="text" class="form-control" name='tuesdayresources'>
-        </div>
-        <div class="form-group col-md-4">
-            {{ form.tuesdayblooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='tuesdayblooms'>
+            <input type="text" class="form-control" value='{{ matches.1.resources }}' name='tuesdayresources'>
         </div>
         <div class="form-group col-md-4">
             {{ form.tuesdayvocabulary.errors }}
             <label >Vocabulary: </label>
-            <input type="text" class="form-control" name='tuesdayvocabulary'>
+            <input type="text" class="form-control" value='{{ matches.1.vocabulary }}' name='tuesdayvocabulary'>
         </div>
         </div>
         {% endif %}
@@ -242,5 +230,5 @@
         {% endif %}
     <input type="submit" value="Save Activity" class="btn btn-secondary">
 </form>
-
+{% endif %}
 {% endblock %}
