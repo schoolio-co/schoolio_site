@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, Import_Data, School_Register, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations
+from .views import SchoolRegistration, CreateEvent, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, delete_update
 from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
@@ -44,7 +44,15 @@ urlpatterns = [
         view=landing.as_view(),
         name='landing'),
 
-    url(r'^school-registration/$',
+    url(r'home/(?P<school_url>[\w-]+)/create-update/$',
+        view=CreateUpdate,
+        name='create_update'),
+
+    url(r'home/(?P<school_url>[\w-]+)/create-event/$',
+        view=CreateEvent,
+        name='create_event'),
+
+    url(r'home/(?P<school_url>[\w-]+)/school-registration/$',
         view=SchoolRegistration.as_view(),
         name='school_registration'),
 
@@ -67,6 +75,11 @@ urlpatterns = [
     url('logout/(?P<school_url>[\w-]+)',
         view=logout_user,
         name='logout'),
+    
+    url('update-delete/(?P<school_url>[\w-]+)/(?P<update_id>[\w-]+)',
+        view=delete_update,
+        name='delete_update'),
+
 
     url(r'^school-register/',
         view=School_Register,

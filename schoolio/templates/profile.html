@@ -1,35 +1,209 @@
 {% extends 'basetwo.html' %}
+{% load i18n %}
+{% load pinax_messages_tags %}
 {% block title %}Hello, {{ obj.username }}{% endblock %}
 {% block content %}
 
-<h3>Profile</h3> 
-<h3>User Profile</h3> 
-<p>{{ obj.username }}</p>
-<p>{{ obj.first_name }} {{ obj.last_name }} </p>
-<p>{{ obj.school }}</p>
+<section class="course_details_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 course_details_left">
+                    <div class="main_image">
+                        <img class="img-fluid" src="img/courses/course-details.jpg" alt="">
+                    </div>
+                    <div class="content_wrapper">
+                            <h4 class="title">Plan Lessons</h4>
+                            <div class="content">
+                                <ul class="course_list">
+                                        {% if obj.is_teacher or obj.is_admin %}
+                                    <li class="justify-content-between d-flex">
+                                        <p>School Lesson</p>
+                                        <a class="primary-btn text-uppercase" href="{% url 'school_lesson' school_url=school_url username=obj.username %}">Create Lesson</a>
+                                    </li>
+                                    <li class="justify-content-between d-flex">
+                                        <p>Weekly Lessons</p>
+                                        <a class="primary-btn text-uppercase" href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">View By Week</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        <h4 class="title">Set Up Classes</h4>
+                        <div class="content">
+                            <ul class="course_list">
+                                {% if obj.is_admin %}
+                                <li class="justify-content-between d-flex">
+                                    <p>Add Classroom</p>
+                                    <a class="primary-btn text-uppercase" href="{% url 'create_classroom' username=obj.username school_url=school_url %}">Add Classroom</a>
+                                </li>
+                                <li class="justify-content-between d-flex">
+                                    <p>Add Grade</p>
+                                    <a class="primary-btn text-uppercase" href="{% url 'create_grade' school_url=school_url %}">Add Grade</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 right-contents">
+                    <ul>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>My Profile</p>
+                                <span class="or">{{ obj.first_name }} {{ obj.last_name }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>Username </p>
+                                <span>{{ obj.username }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex" href="#">
+                                <p>School </p>
+                                <span>{{ obj.school }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% if obj.id == user.id %}
+                    <a href="{% url 'inbox' %}" class="primary-btn2 text-uppercase enroll rounded-0 text-white">My Inbox</a>
+                    {% else %}
+                    <a href="{% url 'message_user_create' user_id=obj.id %}" class="primary-btn2 text-uppercase enroll rounded-0 text-white">Message User</a>
+                    {% endif %}
+                    <br/>
+                    <br/>
+                    <h4 class="with-actions">
+                            Inbox 
+                            <a class="button" href="{% url 'message_create' %}">
+                                <i class="fas fa-envelope"></i>
+                                New Message
+                            </a>       
+                    </h4>
+                    <div class="content">
+                            <section class="mailbox">
+                                    {% for thread in threads %}
+                                        <div class="thread {% if thread|unread:user %}unread{% endif %}">
+                                            <a href="{{thread.get_absolute_url}}">
+                                                <div class="participants">{{ thread.users.all|join:", " }}</div>
+                                                <div class="latest-message">
+                                                    <p class="subject">{{ thread.subject }}</p>
+                                                    <p class="content">{{ thread.latest_message.content }}</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% empty %}
+                                        <div class="no-messages">You have no messages.</div>
+                                    {% endfor %}
+                                </section>
+                        </div>
+                    <div class="comments-area mb-30">
+                    <div class="comment-list">
+                        <div class="single-comment single-reviews justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="desc">
+                                    <h5><a href="{% url 'user_list' school_url=school_url %}">View All Users</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
 <!--================ Student Profiles  
 <li><a href="{% url 'Student_Profiles' school_url=school_url %}">Students</a></li>
  =================-->
 
-{% if obj.is_teacher %}
+
 <!--================ Assessment Link
 <li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
  =================-->
-<li><a href="{% url 'school_lesson' school_url=school_url %}">School Lesson</a></li>
-<li><a href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">Weekly Activities</a></li>
-{% endif %}
 
-{% if obj.is_admin %}
-<li><a href="{% url 'create_classroom' username=obj.username school_url=school_url %}">Add Classroom</a></li>
-<li><a href="{% url 'create_grade' school_url=school_url %}">Add Grade</a></li>
-<li><a href="{% url 'user_list' school_url=school_url %}">All Users</a></li>
-<!--================ Assessment Link
-<li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
-=================-->
-<li><a href="{% url 'school_lesson' school_url=school_url username=obj.username %}">School Lesson</a></li>
-<li><a href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">Weekly Activities</a></li>
-{% endif %}
+ <!--================ Comment Section
+ <div class="comments-area mb-30">
+        <div class="comment-list">
+            <div class="single-comment single-reviews justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c1.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5><a href="#">Emilly Blunt</a>
+                            <div class="star">
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star"></span>
+                                <span class="ti-star"></span>
+                            </div>
+                        </h5>
+                        <p class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comment-list">
+            <div class="single-comment single-reviews justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c2.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5><a href="#">Elsie Cunningham</a>
+                            <div class="star">
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star"></span>
+                                <span class="ti-star"></span>
+                            </div>
+                        </h5>
+                        <p class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comment-list">
+            <div class="single-comment single-reviews justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c3.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5><a href="#">Maria Luna</a>
+                            <div class="star">
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star checked"></span>
+                                <span class="ti-star"></span>
+                                <span class="ti-star"></span>
+                            </div>
+                        </h5>
+                        <p class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<br/>
+ =================-->
+
 {% endblock %}
 
 

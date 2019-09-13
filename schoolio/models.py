@@ -147,6 +147,17 @@ class day_of_the_week(models.Model):
 	def __str__(self):
 		return "%s" % (self.days)
 
+class create_updates(models.Model):
+	update_title = models.TextField(max_length=150)
+	update = models.TextField(max_length=1000)
+	school = models.ForeignKey(school, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+
+	def __str__(self):
+		return "%s" % (self.update_title)
+
 class subjects(models.Model):
 	subject = models.CharField(max_length=50)
 

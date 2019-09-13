@@ -1,13 +1,118 @@
 {% extends 'basetwo.html' %}
+{% load i18n %}
+{% load pinax_messages_tags %}
 {% block title %}Welcome to {{ obj.name }}!{% endblock %}
 {% block content %}
 <br/>
-<h3>School Profile</h3> 
-<p>{{ obj.name }}</p>
-<p>{{ obj.address }}</p>
-<p>{{ obj.url }}</p>
-<p>{{ obj.id }}</p>
 
+
+<section class="course_details_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 course_details_left">
+                    <!----<div class="main_image">
+                        <img class="img-fluid" src="img/courses/course-details.jpg" alt="">
+                    </div>-->
+                    <div class="content_wrapper">
+                            <h4 class="title">Updates</h4>
+                            <div class="content">
+                                {% if obj2 %}
+                                {% for item in obj2 %}
+                                <ul class="course_list">
+                                    <li class="justify-content-between d-flex">
+                                        <h5>{{ item.update_title }}</h5>
+                                        {% if user.is_admin %}
+                                        <a class="primary-btn text-uppercase" href="{% url 'delete_update' school_url=school_url update_id=item.id %}">Delete Update</a>
+                                        {% endif %}
+                                    </li>
+                                    <p>{{ item.update }}</p>
+                                    
+                                </ul>
+                                {% endfor %}
+                                {% else %}
+                                <ul class="course_list">
+                                        <li class="justify-content-between d-flex">
+                                            <h5>No Updates</h5>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                                <br/>
+                                <ul class="course_list">
+                                        {% if user.is_admin %}
+                                    <li class="justify-content-between d-flex">
+                                        <p>Add Update</p>
+                                        <a class="primary-btn text-uppercase" href="{% url 'create_update' school_url=school_url %}">Add New Update</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        <h4 class="title">Upcoming Events</h4>
+                        <br/>
+                        <div class="content">
+                            <br/>
+                        </div>
+                        <br/>
+                        {% if obj3 %}
+                                <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                    <th>{% trans "Event" %}</th>
+                                <th>{% trans "Syll/Paper" %}</th>
+                                <th>{% trans "Start" %}</th>
+                                <th>{% trans "Finish" %}</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                {% for event in obj3 %}
+
+                                    <tr>
+                                    <th>{{ event.title }}</th>
+                                    <th>{{ event.category }}</th>
+                                    <th>{{ event.start_time }}</th>
+                                    <th>{{ event.end_time }}</th> 
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+
+                                </table>
+
+                            {% else %}
+                                <p>{% trans "There are no available exams" %}.</p>
+                                {% endif %}
+                            </ul>
+                            <br/>
+                            <form id="searchform" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
+                            <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+                                <button class="searchbutton" type="submit">Search</button>
+                            </form>
+                            <br/>
+                            {% if user.is_admin %}
+                            <a class="primary-btn text-uppercase" href="{% url 'create_event' school_url=school_url %}">Add Event</a>
+                            {% endif %}
+                        </div>
+                </div>
+            <div class="col-lg-4 right-contents">
+                <ul>
+                    <li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>School: </p>
+                            <span class="or">{{ obj.name }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="justify-content-between d-flex" href="#">
+                            <p>Address: </p>
+                            <span>{{ obj.address }}</span>
+                        </a>
+                    </li>
+                </ul>      
+                <a href="{% url 'role_registration' school_url=school_url %}" class="primary-btn2 text-uppercase enroll rounded-0 text-white">Register</a>   
+            </div>
+        </div>
+</section>
 
 
 

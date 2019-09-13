@@ -17,8 +17,10 @@ from datetime import date
 from django import views
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm
-from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary
+from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
+from  cal.forms import EventForm
+from cal.models import Event
+from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .import_csv import import_csv 
@@ -82,13 +84,17 @@ def School_Register(request):
 
 class School_Profile(TemplateView):
     model=school
+    model=create_updates
+    model=Event
     school_url = 'school_url'
     template_name = "school_profile.html"
     
     def get(self,request,school_url):
         obj = school.objects.get(url=school_url)
+        obj2 = create_updates.objects.filter(school=obj.id)
+        obj3 = Event.objects.filter(school=obj.id)
         school_url = obj.url
-        return render(request, 'school_profile.html', {'obj': obj, 'school_url': school_url })
+        return render(request, 'school_profile.html', {'obj': obj, 'obj2': obj2, 'obj3': obj3, 'school_url': school_url })
 
 
 def Parent_Register(request, school_url=None, username=None):
@@ -404,3 +410,40 @@ def CreateAssessment(request, school_url=None):
     else:
         form = AssessmentForm()
     return render(request, 'assessment.html', {'form': form, 'school_url': school_url})
+
+
+def CreateUpdate(request, school_url=None):
+    obj = school.objects.get(url=school_url)
+    school_pk = obj.id
+
+    if request.method == "POST":
+        form = CreateUpdateForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('school_profile', school_url=school_url)
+    else:
+        form = CreateUpdateForm()
+        form.fields['school'].initial = school_pk
+    return render(request, 'create_update.html', {'form': form, 'school_url': school_url})
+
+def CreateEvent(request, school_url=None):
+    obj = school.objects.get(url=school_url)
+    school_pk = obj.id
+    date_now = date.today().isocalendar()
+
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('school_profile', school_url=school_url)
+        else:
+            print(form.errors)
+    else:
+        form = EventForm()
+        form.fields['school'].initial = school_pk
+    return render(request, 'create_event.html', {'form': form, 'school_url': school_url})
+
+def delete_update(request, school_url, update_id):
+    query = create_updates.objects.get(id=update_id)
+    query.delete()
+    return redirect('school_profile', school_url=school_url)

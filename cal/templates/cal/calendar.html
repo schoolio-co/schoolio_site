@@ -1,18 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'basetwo.html' %}
 {% load i18n %}
 {% block title %}{% trans "Exam Schedule 2019" %}{% endblock %}
 
 {% block content %}
 
 	<br/>
-<h3>Exam Schedule 2019</h3>
+<h3>Event Search</h3>
 <br/>
 <div>
 		<ul class="list-group list-group-horizontal">
-		<li><a type="button" class="btn btn-light" href="{% url 'home' %}" role="button">Back to Homepage</a></li>
-		<br/>
-		<li><a type="button" class="btn btn-light" href="{% url 'calendar' %}" role="button">All Exam Dates</a></li>
-		<br/>
 		<li>
 		<form id="searchform" action="{% url 'event_search_list_view' %}" method="get" accept-charset="utf-8">
       <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
@@ -21,9 +17,7 @@
 		</li>
 	</ul>
 	<br/>
-	<h5>Search by subject or keywords to find test dates.</h5>
-	<p>please note information provided by Ministry of Education and may change without notice. 
-		Please use this schedule as reference and make sure to confirm with your test centre.</p>
+	<h5>Event Search Results</h5>
 </div>
 <br/>
 {% if event_list %}

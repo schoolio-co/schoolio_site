@@ -5,7 +5,7 @@ from django.forms import ModelChoiceField
 from django.forms import formset_factory
 from django.db import transaction
 import datetime
-from .models import school, school_user, User, grade_level, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
+from .models import school, school_user, User, grade_level, create_updates, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
 
       
 class SchoolForm(forms.ModelForm):
@@ -185,3 +185,9 @@ class ClassroomSubjectSummaryForm(forms.ModelForm):
             model = classroom_subject_summary
             fields = '__all__'
 
+
+class CreateUpdateForm(forms.ModelForm):
+
+    class Meta:
+            model = create_updates
+            fields = '__all__'
