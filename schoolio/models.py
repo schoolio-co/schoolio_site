@@ -56,6 +56,7 @@ class school_user(models.Model):
 
 class classroom(models.Model):
 	classroom = models.CharField(max_length=30)
+	class_period = models.CharField(max_length=30)
 	grade = models.ForeignKey(grade_level, 
 							on_delete=models.CASCADE,
 							blank=True,
@@ -132,10 +133,11 @@ class student_profiles(models.Model):
 		return "%s" % (self.user)
 
 class standards(models.Model):
-	subject = models.TextField(max_length=50)
-	standard = models.TextField(max_length=100)
-	skill_topic = models.TextField(max_length=100)
-	objective = models.TextField(max_length=150)
+	grade_level = models.TextField(max_length=50)
+	subject = models.TextField(max_length=500)
+	standard = models.TextField(max_length=500)
+	skill_topic = models.TextField(max_length=500)
+	objective = models.TextField(max_length=500)
 	competency = models.TextField(max_length=1000)
 
 	def __str__(self):
@@ -222,7 +224,7 @@ class activities(models.Model):
 	standard =  models.CharField(max_length=500)
 	intro = models.CharField(max_length=500)
 	activity = models.TextField(max_length=1000)
-	wrap_up = models.CharField(max_length=500)
+	wrap_up = models.CharField("Essential Questions", max_length=500)
 	resources = models.CharField(max_length=100)
 	bl = models.CharField(max_length=50)
 	mi1 = models.CharField(max_length=50)

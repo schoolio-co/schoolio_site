@@ -42,11 +42,11 @@ class RoleRegistrations(TemplateView):
 
 
 def Import_Data(request, *args, **kwargs):
-    path = 'schoolio/standards/Grade One.csv'
+    path = 'schoolio/standards/Grade One Standards - all_standards (1).csv'
     with open(path) as f:
         for line in f:
             line = line.split(',') 
-            obj, created = standards.objects.get_or_create(subject=line[0], standard=line[1], skill_topic=line[2], objective=line[3], competency=line[4])
+            obj, created = standards.objects.get_or_create(subject=line[0], standard=line[1], skill_topic=line[2], objective=line[3], competency=line[4], grade_level=line[5])
             obj.save()
     return render(request, 'import.html')
 
@@ -366,7 +366,7 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
 
 def WeeklyActivity(request, school_url=None, week_of=None, username=None):
  
-    object2 = activities.objects.select_related().filter(week_of=week_of)
+    object2 = activities.objects.select_related().filter(week_of=week_of).order_by('subject')
     previous = int(week_of) - 1 
     object1 = activities.objects.select_related().filter(week_of=previous)
     next_week = int(week_of) + 1 

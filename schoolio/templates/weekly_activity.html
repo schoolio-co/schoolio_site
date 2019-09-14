@@ -14,14 +14,11 @@
       <div class="col-md-2">
           <p>Monday</p>
           {% for x in object2 %}
-          {% if 'Monday' in x.day %}
-          {% for subject in x.subject.split %}
-          {{ subject }}
-            <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
-          {% endfor %}
-          {% endif %}
-        {% endfor %}
-        
+                {% if 'Monday' in x.day %}
+                {{ x.subject }}
+                  <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+                {% endif %}
+            {% endfor %}
         
       </div>
       <div class="col-md-2">
