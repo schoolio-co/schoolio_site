@@ -4,7 +4,6 @@ from django.forms.models import inlineformset_factory
 from django.forms import ModelChoiceField
 from django.forms import formset_factory
 from django.db import transaction
-from searchableselect.widgets import SearchableSelect
 import datetime
 from .models import school, school_user, TeacherSchedule, User, grade_level, create_updates, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
 
