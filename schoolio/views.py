@@ -19,8 +19,7 @@ from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from .forms import SchoolForm, TeacherScheduleForm, AdministratorForm, AddStudentClassroomForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
 from  cal.forms import EventForm
-from cal.models import Event
-from .models import school, school_user, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
+from .models import school, school_user, Event, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .import_csv import import_csv 

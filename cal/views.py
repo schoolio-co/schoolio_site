@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView, TemplateView, FormView
 import operator
 from django.db.models import Q
 from functools import reduce
-from .models import *
+from schoolio.models import Event
 from .utils import Calendar
 
 def cal_index(request):

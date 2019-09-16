@@ -6,7 +6,7 @@ from django.forms import ModelChoiceField
 from django.forms import formset_factory
 from django.db import transaction
 from datetime import datetime
-from .models import Event
+from schoolio.models import Event
 
 class EventForm(forms.ModelForm):
     start_time = forms.DateTimeField(initial=datetime.now().strftime("%Y-%m-%d %H:%M"), required=False)
