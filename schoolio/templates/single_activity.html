@@ -17,6 +17,8 @@
     <li>{{j.mi3}}</li>
 	<li>{{j.vocabulary}}</li>
 	<li>{{j.day}}</li>
+{{ classroom }}
+    <li><a href="{% url 'assessment' school_url=school_url planning_id=j.school_lesson_id %}">Assessment</a></li>
 
 {% endfor %}
 {% endblock %}

@@ -9,7 +9,7 @@
     {% endfor %}
 {% endif %}
 
-{% if matches %}
+
 <form method="POST">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -230,5 +230,5 @@
         {% endif %}
     <input type="submit" value="Save Activity" class="btn btn-secondary">
 </form>
-{% endif %}
+
 {% endblock %}

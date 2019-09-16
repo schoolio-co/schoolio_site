@@ -4,6 +4,8 @@
 {% block title %}Hello, {{ obj.username }}{% endblock %}
 {% block content %}
 
+<h5><a href="{% url 'teacher_schedule' school_url=school_url %}">Teacher Schedule</a>
+</h5>
 <section class="course_details_area section_gap">
         <div class="container">
             <div class="row">
@@ -122,7 +124,7 @@
 
 
 <!--================ Assessment Link
-<li><a href="{% url 'assessment' school_url=school_url %}">Assessment</a></li>
+
  =================-->
 
  <!--================ Comment Section

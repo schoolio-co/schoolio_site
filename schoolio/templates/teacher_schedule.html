@@ -1,0 +1,10 @@
+{% block content %}
+<h2>Teacher Schedule</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add School" class="btn btn-secondary">
+</form>
+
+{% endblock %}

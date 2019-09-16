@@ -4,8 +4,9 @@ from django.forms.models import inlineformset_factory
 from django.forms import ModelChoiceField
 from django.forms import formset_factory
 from django.db import transaction
+from searchableselect.widgets import SearchableSelect
 import datetime
-from .models import school, school_user, User, grade_level, create_updates, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
+from .models import school, school_user, TeacherSchedule, User, grade_level, create_updates, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
 
       
 class SchoolForm(forms.ModelForm):
@@ -90,19 +91,74 @@ class StudentForm(UserCreationForm):
         student = school_user.objects.create(user=user)
         return user
 
-
-
 class GradeForm(forms.ModelForm):
 
     class Meta:
         model = grade_level
         fields = '__all__'
 
-class ClassroomForm(forms.ModelForm):
+class SchoolProfileForm(forms.ModelForm):
+    GRADE_CHOICES=[
+        ('twos', 'twos'),
+        ('threes', 'threes'),
+        ('fours', 'fours'),
+        ('fives', 'fives'),
+        ('PreK', 'PreK'),
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
+        ('11', '11'),
+        ('12', '12'),
+    ]
+    grade_level = forms.ChoiceField(choices=GRADE_CHOICES)
+    
+    class Meta:
+        model = student_profiles
+        fields = '__all__'
 
+class ClassroomForm(forms.Form):
+    GRADE_CHOICES=[
+        ('twos', 'twos'),
+        ('threes', 'threes'),
+        ('fours', 'fours'),
+        ('fives', 'fives'),
+        ('PreK', 'PreK'),
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
+        ('11', '11'),
+        ('12', '12'),
+    ]
+    classroom_name = forms.CharField(max_length=30, required=False)
+    grade_level = forms.ChoiceField(choices=GRADE_CHOICES)
+    subject = forms.CharField(max_length=30, required=False)
+
+    class Meta:
+        fields = '__all__'
+
+class AddStudentClassroomForm(forms.ModelForm):
+    student = forms.ModelMultipleChoiceField(queryset = student_profiles.objects.all(), required=False)
+    
     class Meta:
         model = classroom
         fields = '__all__'
+    
 
 class SchoolLessonForm(forms.ModelForm):
     DAY_CHOICES=[
@@ -112,7 +168,7 @@ class SchoolLessonForm(forms.ModelForm):
         ('Thursday', 'Thursday'),
         ('Friday', 'Friday'),
     ]
-    days = forms.MultipleChoiceField(choices=DAY_CHOICES, widget = forms.CheckboxSelectMultiple)
+    days = forms.MultipleChoiceField(choices=DAY_CHOICES)
 
 
     class Meta:
@@ -190,4 +246,10 @@ class CreateUpdateForm(forms.ModelForm):
 
     class Meta:
             model = create_updates
+            fields = '__all__'
+
+class TeacherScheduleForm(forms.ModelForm):
+
+    class Meta:
+            model = TeacherSchedule
             fields = '__all__'

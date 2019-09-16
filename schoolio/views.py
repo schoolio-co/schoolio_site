@@ -17,10 +17,10 @@ from datetime import date
 from django import views
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from .forms import SchoolForm, AdministratorForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
+from .forms import SchoolForm, TeacherScheduleForm, AdministratorForm, AddStudentClassroomForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
 from  cal.forms import EventForm
 from cal.models import Event
-from .models import school, school_user, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
+from .models import school, school_user, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .import_csv import import_csv 
@@ -121,6 +121,7 @@ def Parent_Register(request, school_url=None, username=None):
 
 def Student_Register(request, school_url=None, username=None):
     model = User
+    model = student_profiles
     obj = school.objects.get(url=school_url)
     school_url = obj.url
     school_pk = obj.id
@@ -133,18 +134,14 @@ def Student_Register(request, school_url=None, username=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            student_profile = student_profiles.objects.create(user=user)
+            student_profile.save()
             return render(request, 'register.html', {'username': username, 'school_url': school_url})
 
     else:
         data = {'school': school_pk }
         form = StudentForm(initial=data)
     return render(request, 'register.html', {'form': form, 'school_url': school_url})
-
-@receiver(post_save, sender=User)
-def create_modelb(sender, instance, created, **kwargs):
-    if created and User.is_student:
-        if not hasattr(instance, 'student_profiles'):
-            student_profiles.objects.create(user=instance)
 
 def Admin_Register(request, school_url=None, username=None):
     model = User
@@ -245,14 +242,34 @@ def create_classroom(request, school_url=None, username=None, slug=None):
     if request.method == "POST":
         form = ClassroomForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('school_profile', school_url=school_url)
+            classroom_name = form.cleaned_data['classroom_name']
+            grade_level = form.cleaned_data['grade_level']
+            subject =  form.cleaned_data['subject']
+            return redirect('add_students', school_url=school_url, username=username, classroom_name=classroom_name, grade_level=grade_level, subject=subject)
 
     else:
-        data = {'school': school_pk, 
-                'teacher': user_pk }
+        data = {'school': school_pk}
         form = ClassroomForm(initial=data)
     return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url })
+
+def add_students_classroom(request, school_url=None, username=None, classroom_name=None, grade_level=None, subject=None):
+    model = classroom
+    add_students = 'True'
+
+    if request.method == "POST":
+        form = AddStudentClassroomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('school_profile', school_url=school_url)
+        
+
+    else:
+        data = {'school': school_url,
+                'Classroom': classroom_name,
+                'grade_level': grade_level,
+                'subject': subject}
+        form = AddStudentClassroomForm(initial=data)
+    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url, 'add_students': add_students })
 
 
 def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
@@ -267,8 +284,8 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
         if form.is_valid():
             prev = form.save(commit=False)
             week_of = prev.week_of
-            subeject_summary = classroom_subject_summary.objects.create(classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
-            subeject_summary.save() 
+            subject_summary = classroom_subject_summary.objects.create(classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
+            subject_summary.save() 
             prev.save()
         return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
     else:
@@ -293,6 +310,8 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
     if results:
         matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
         matches = list(map(lambda x: x[0], matches))
+    else:
+        matches = []
     #for match in matches:
         #activity_match = activities.objects.filter(intro=match[0])
 
@@ -399,17 +418,30 @@ def CreateActivity(request, school_url=None, planning_id=None, username=None):
     return render(request, 'activity.html', {'form': form, 'results': results, 'obj': obj, 'teacher_objective': teacher_objective })
 
 
-def CreateAssessment(request, school_url=None):
+def CreateAssessment(request, school_url=None, planning_id=None, username=None):
+    obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    obj2 = classroom.objects.get(id=int(obj.classroom_id))
+    students = obj2.student
     if request.method == "POST":
         form = AssessmentForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
             school.url = prev.url
             prev.save()
-        return render(request, 'assessment.html', {'slug': school.url})
+        return render(request, 'assessment.html', {'school_url': school.url})
     else:
         form = AssessmentForm()
-    return render(request, 'assessment.html', {'form': form, 'school_url': school_url})
+    return render(request, 'assessment.html', {'form': form, 'school_url': school_url, 'classroom': classroom, 'obj2': obj2, 'students': students })
+
+def TeacherSchedule(request, school_url=None):
+    if request.method == "POST":
+        form = TeacherScheduleForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return render(request, 'teacher_schedule.html', {'school_url': school_url})
+    else:
+        form = TeacherScheduleForm()
+    return render(request, 'teacher_create.html', {'form': form, 'school_url': school_url})
 
 
 def CreateUpdate(request, school_url=None):

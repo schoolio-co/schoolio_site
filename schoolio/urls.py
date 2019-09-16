@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, CreateEvent, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, delete_update
+from .views import SchoolRegistration, CreateEvent, TeacherSchedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, delete_update
 from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
@@ -92,6 +92,14 @@ urlpatterns = [
     url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/create_classroom/',
         view=create_classroom,
         name='create_classroom'),
+
+    url(r'^class/(?P<school_url>[\w-]+)/teacher_schedule/',
+        view=TeacherSchedule,
+        name='teacher_schedule'),
+    
+    url(r'^add_students/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<classroom_name>[\w-]+)/(?P<grade_level>[\w-]+)/(?P<subject>[\w-]+)/create_classroom/',
+        view=add_students_classroom,
+        name='add_students'),
     
     url(r'^(?P<school_url>[\w-]+)/admin-register/',
     view=Admin_Register,
@@ -129,7 +137,7 @@ urlpatterns = [
         view=Create_School_Lesson,
         name='school_lesson_week'),
     
-    url(r'^(?P<school_url>[\w-]+)/assessment/',
+    url(r'^assessment/(?P<school_url>[\w-]+)/(?P<planning_id>[\w-]+)/',
         view=CreateAssessment,
         name='assessment'),
 
@@ -145,7 +153,7 @@ urlpatterns = [
         view=WeeklyActivity,
         name='weekly_activity'),
 
-    url(r'^l/activity/(?P<activity_id>[\w-]+)/',
+    url(r'^l/(?P<school_url>[\w-]+)/activity/(?P<activity_id>[\w-]+)/',
         view=SingleActivity,
         name='single_activity'),
 

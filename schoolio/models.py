@@ -51,86 +51,9 @@ class school_user(models.Model):
 
 
 	def __str__(self):
-		return "%s %s" % (self.username)
+		return "%s" % (self.username)
 
 
-class classroom(models.Model):
-	classroom = models.CharField(max_length=30)
-	class_period = models.CharField(max_length=30)
-	grade = models.ForeignKey(grade_level, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	school = models.ForeignKey(school, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	teacher = models.ForeignKey(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='teacher')
-	
-
-	def __str__(self):
-		return "%s" % (self.classroom)
-
-class classroom_subject_summary(models.Model):
-	classroom = models.ForeignKey(classroom,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	subject = models.TextField()
-	lu_level = models.FloatField(null=True, blank=True)
-	mu_level = models.FloatField(null=True, blank=True)
-	hu_level = models.FloatField(null=True, blank=True)
-	logical_level = models.IntegerField()
-	linguistic_level = models.IntegerField()
-	kinesthetic_level = models.IntegerField()
-	musical_level = models.IntegerField()
-	visual_level = models.IntegerField()
-	naturalist_level = models.IntegerField()
-	group_level = models.IntegerField()
-	independent_level = models.IntegerField()
-	
-
-	
-
-	def __str__(self):
-		return "%s" % (self.classroom)
-
-
-class student_profiles(models.Model):
-	user = models.OneToOneField(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='student_info')
-	teacher = models.ForeignKey(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='teacher_info')
-	parent = models.ForeignKey(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='parent_info')
-	classroom = models.ForeignKey(classroom,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	grade = models.ForeignKey(grade_level,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	school = models.ForeignKey(school, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-
-	def __str__(self):
-		return "%s" % (self.user)
 
 class standards(models.Model):
 	grade_level = models.TextField(max_length=50)
@@ -166,25 +89,39 @@ class subjects(models.Model):
 	def __str__(self):
 		return "%s" % (self.subject)
 
-
-
-class assessments(models.Model):
-	activity =  models.ForeignKey(school, 
+class student_profiles(models.Model):
+	user = models.OneToOneField(User,
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True, 
+							related_name='student_info')
+	grade_level = models.CharField(max_length=30)
+	school = models.ForeignKey(school, 
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	assessment = models.TextField(max_length=500)
-	is_formal = models.BooleanField(default=False)
-	is_final = models.BooleanField(default=False)
-	is_informal = models.BooleanField(default=False)
-	student = models.ManyToManyField(User,
-							blank=True,
-        					null=True, 
-							related_name='student_assessment')
-	assessment_mark = models.TextField(max_length=50)
 
 	def __str__(self):
-		return "%s" % (self.assessment)
+		return "%s" % (self.user)
+
+class classroom(models.Model):
+	Classroom = models.CharField(max_length=30)
+	subject = models.ForeignKey(subjects, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	grade_level = models.CharField(max_length=30)
+	school = models.ForeignKey(school, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	student = models.ManyToManyField(student_profiles,
+							blank=True,
+							related_name='student')
+	
+
+	def __str__(self):
+		return "%s" % (self.Classroom)
 
 
 class lesson_school_info(models.Model):
@@ -237,6 +174,25 @@ class activities(models.Model):
 	def __str__(self):
 		return "%s" % (self.intro)
 
+
+class assessments(models.Model):
+	activity =  models.ForeignKey(activities, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	assessment = models.TextField(max_length=500)
+	is_formal = models.BooleanField(default=False)
+	is_final = models.BooleanField(default=False)
+	is_informal = models.BooleanField(default=False)
+	classroom = models.ForeignKey(classroom, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	assessment_mark = models.TextField(max_length=50)
+
+	def __str__(self):
+		return "%s" % (self.assessment)
+
 class classroom_averages(models.Model):
 	classroom = models.ForeignKey(classroom, 
 							on_delete=models.CASCADE,
@@ -252,3 +208,43 @@ class classroom_averages(models.Model):
 	lu_low = models.TextField()
 	lu_med= models.TextField()
 	lu_high = models.TextField()
+
+class classroom_subject_summary(models.Model):
+	classroom = models.ForeignKey(classroom,
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	subject = models.TextField()
+	lu_level = models.FloatField(null=True, blank=True)
+	mu_level = models.FloatField(null=True, blank=True)
+	hu_level = models.FloatField(null=True, blank=True)
+	logical_level = models.IntegerField()
+	linguistic_level = models.IntegerField()
+	kinesthetic_level = models.IntegerField()
+	musical_level = models.IntegerField()
+	visual_level = models.IntegerField()
+	naturalist_level = models.IntegerField()
+	group_level = models.IntegerField()
+	independent_level = models.IntegerField()
+	
+	def __str__(self):
+		return "%s" % (self.classroom)
+
+class TeacherSchedule(models.Model):
+	classroom = models.ForeignKey(classroom,
+						on_delete=models.CASCADE,
+						blank=True,
+						null=True)
+	location = models.CharField(max_length=100)
+	Subject = models.CharField(max_length=100)
+	teacher = models.ForeignKey(User, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True, 
+							related_name='teacher')
+	period = models.IntegerField()
+	day = models.CharField(max_length=100)
+
+	def __str__(self):
+		return "%s" % (self.teacher)
+

@@ -16,7 +16,7 @@
           {% for x in object2 %}
                 {% if 'Monday' in x.day %}
                 {{ x.subject }}
-                  <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+                  <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
                 {% endif %}
             {% endfor %}
         
@@ -27,7 +27,7 @@
           {% if 'Tuesday' in x.day %}
           {% for subject in x.subject.split %}
           {{ subject }}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
         {% endfor %}
           {% endif %}
       {% endfor %}
@@ -38,7 +38,7 @@
           {% if 'Wednesday' in x.day %}
           {% for subject in x.subject.split %}
           {{ subject }}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
           {% endfor %}
           {% endif %}
       {% endfor %}
@@ -49,7 +49,7 @@
           {% if 'Thursday' in x.day %}
           {% for subject in x.subject.split %}
           {{ subject }}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
           {% endfor %}
           {% endif %}
       {% endfor %}
@@ -60,7 +60,7 @@
           {% if 'Friday' in x.day %}
           {% for subject in x.subject.split %}
           {{ subject }}
-          <li><a href="{% url 'single_activity' activity_id=x.id %}">{{ x.intro }}</a></li>
+          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
       {% endfor %}
           {% endif %}
       {% endfor %}
