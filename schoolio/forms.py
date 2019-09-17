@@ -167,7 +167,7 @@ class SchoolLessonForm(forms.ModelForm):
         ('Thursday', 'Thursday'),
         ('Friday', 'Friday'),
     ]
-    days = forms.MultipleChoiceField(choices=DAY_CHOICES)
+    days = forms.MultipleChoiceField(choices=DAY_CHOICES, widget=forms.RadioSelect())
 
 
     class Meta:
