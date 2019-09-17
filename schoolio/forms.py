@@ -152,7 +152,7 @@ class ClassroomForm(forms.Form):
         fields = '__all__'
 
 class AddStudentClassroomForm(forms.ModelForm):
-    student = forms.ModelMultipleChoiceField(queryset = student_profiles.objects.all(), required=False)
+    student = forms.ModelMultipleChoiceField(queryset = student_profiles.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
     
     class Meta:
         model = classroom
@@ -167,7 +167,7 @@ class SchoolLessonForm(forms.ModelForm):
         ('Thursday', 'Thursday'),
         ('Friday', 'Friday'),
     ]
-    days = forms.MultipleChoiceField(choices=DAY_CHOICES, widget=forms.RadioSelect())
+    days = forms.MultipleChoiceField(choices=DAY_CHOICES, widget=forms.CheckboxSelectMultiple)
 
 
     class Meta:

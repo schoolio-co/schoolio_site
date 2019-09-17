@@ -286,7 +286,9 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
             subject_summary = classroom_subject_summary.objects.create(classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
             subject_summary.save() 
             prev.save()
-        return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
+            return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
+        else:
+            return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
     else:
         form = SchoolLessonForm()
         if week_of:
