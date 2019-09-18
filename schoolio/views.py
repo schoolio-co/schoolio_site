@@ -17,9 +17,9 @@ from datetime import date
 from django import views
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
-from .forms import SchoolForm, TeacherScheduleForm, AdministratorForm, AddStudentClassroomForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
+from .forms import SchoolForm, TeacherScheduleForm, StudentAssessmentForm, AdministratorForm, AddStudentClassroomForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
 from  cal.forms import EventForm
-from .models import school, school_user, Event, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
+from .models import school, school_user, Event, student_assessment, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .import_csv import import_csv 
@@ -231,7 +231,6 @@ def create_grade(request, school_url=None, slug=None):
     return render(request, 'create_classroom.html', {'form': form, 'school_url': school_url })
 
 def create_classroom(request, school_url=None, username=None, slug=None):
-    model = classroom
     obj = school.objects.get(url=school_url)
     school_url = obj.url
     school_pk = obj.id
@@ -301,7 +300,6 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
 
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
-    
     obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
     classroom = obj.classroom
     teacher_objective = obj.objective
@@ -420,19 +418,44 @@ def CreateActivity(request, school_url=None, planning_id=None, username=None):
 
 
 def CreateAssessment(request, school_url=None, planning_id=None, username=None):
+    model = lesson_school_info
+    model = classroom
+
     obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
-    obj2 = classroom.objects.get(id=int(obj.classroom_id))
+    classroom_name = obj.classroom_id
+    obj2 = classroom.objects.get(id=classroom_name)
     students = obj2.student
     if request.method == "POST":
         form = AssessmentForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
-            school.url = prev.url
             prev.save()
-        return render(request, 'assessment.html', {'school_url': school.url})
+        return redirect('addstudentassessment', school_url=school_url, planning_id=planning_id, assessment_id=prev)
     else:
         form = AssessmentForm()
     return render(request, 'assessment.html', {'form': form, 'school_url': school_url, 'classroom': classroom, 'obj2': obj2, 'students': students })
+
+
+def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_id=None):
+    model = student_assessment
+    model = assessments
+
+    obj = assessments.objects.get(id=assessment_id)
+    classroom_name = obj.classroom_id
+    obj2 = classroom.objects.get(id=classroom_name)
+    students = obj2.student
+
+    if request.method == "POST":
+        form = StudentAssessmentForm(request.POST)
+        if form.is_valid():
+            prev = form.save(commit=False)
+            prev.save()
+        return render(request, 'assessment.html', {'school_url': school_url})
+    else:
+        form = StudentAssessmentForm()
+    return render(request, 'student_assessment.html', {'form': form, 'school_url': school_url, 'students': students})
+
+
 
 def TeacherSchedule(request, school_url=None):
     if request.method == "POST":

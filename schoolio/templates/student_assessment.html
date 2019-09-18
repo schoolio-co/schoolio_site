@@ -1,16 +1,16 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 
-<h3>Assessment</h3>
+<h3>Student Assessments</h3>
+
 
 <form method="POST">
     {% csrf_token %}
     {{form.errors}}
     {{ form.as_p }}
-    <input type="submit" value="All Done" class="btn btn-secondary">
+    <input type="submit" value="Add Assessment" class="btn btn-secondary">
 </form>
 
-{{ obj2 }}
 
-{{ students }}
+
 {% endblock %}

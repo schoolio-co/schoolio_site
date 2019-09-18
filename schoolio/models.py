@@ -188,10 +188,22 @@ class assessments(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	assessment_mark = models.TextField(max_length=50)
+	assessment_total = models.IntegerField()
 
 	def __str__(self):
-		return "%s" % (self.assessment)
+		return "%s" % (self.pk)
+
+class student_assessment(models.Model):
+	assessment =  models.ForeignKey(assessments, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	student = models.ManyToManyField(student_profiles,
+							blank=True,)
+	assessment_mark = models.IntegerField()
+
+	def __str__(self):
+		return "%s" % (self.student)
 
 class classroom_averages(models.Model):
 	classroom = models.ForeignKey(classroom, 
