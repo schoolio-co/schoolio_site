@@ -43,7 +43,8 @@ class school_user(models.Model):
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
 	username = models.CharField(max_length=30)
-	email = models.EmailField()
+	email = models.EmailField(blank=True,
+        					  null=True)
 	school = models.ForeignKey(school, 
 							on_delete=models.CASCADE,
 							blank=True,
@@ -96,10 +97,13 @@ class student_profiles(models.Model):
         					null=True, 
 							related_name='student_info')
 	grade_level = models.CharField(max_length=30)
+	student_id = models.CharField(max_length=10, blank=True, unique=True, default=1111-1234)
 	school = models.ForeignKey(school, 
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
+	d_o_b = models.DateTimeField(blank=True,
+        					     null=True)
 
 	def __str__(self):
 		return "%s" % (self.user)
