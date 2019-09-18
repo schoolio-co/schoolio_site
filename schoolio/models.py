@@ -110,10 +110,6 @@ class student_profiles(models.Model):
 
 class classroom(models.Model):
 	Classroom = models.CharField(max_length=30)
-	subject = models.ForeignKey(subjects, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
 	grade_level = models.CharField(max_length=30)
 	school = models.ForeignKey(school, 
 							on_delete=models.CASCADE,

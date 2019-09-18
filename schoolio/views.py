@@ -41,13 +41,19 @@ class RoleRegistrations(TemplateView):
 
 
 def Import_Data(request, *args, **kwargs):
-    path = 'schoolio/standards/Grade One Standards - all_standards (1).csv'
+
+    path = 'schoolio/standards/students (1).csv'
+    school_name = school.objects.get(url='gardner')
     with open(path) as f:
         for line in f:
             line = line.split(',') 
-            obj, created = standards.objects.get_or_create(subject=line[0], standard=line[1], skill_topic=line[2], objective=line[3], competency=line[4], grade_level=line[5])
+            obj, created = User.objects.get_or_create(first_name=line[0], last_name=line[1], password=line[2], username=line[3], is_student=True, school=school_name)
+            user = User.objects.get(username=line[3])
+            obj2, created = student_profiles.objects.get_or_create(user=user, grade_level=line[5], school=school_name)
+            obj2.save()
             obj.save()
     return render(request, 'import.html')
+
 
 def login_user(request, school_url=None):
 
