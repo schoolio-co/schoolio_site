@@ -7,7 +7,7 @@ class school(models.Model):
 	name = models.CharField(max_length=30)
 	address = models.TextField(max_length=250)
 	url = models.SlugField(
-        max_length=60, blank=False,
+        max_length=255, blank=False,
         help_text=_("www.schoolio.co/...."),
         verbose_name=_("www.schoolio.co/...."))
 
