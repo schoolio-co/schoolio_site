@@ -6,8 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 class school(models.Model):
 	name = models.CharField(max_length=30)
 	address = models.TextField(max_length=250)
-	url = models.SlugField(
-        max_length=255, blank=False,
+	url = models.SlugField(blank=False,
         help_text=_("www.schoolio.co/...."),
         verbose_name=_("www.schoolio.co/...."))
 
