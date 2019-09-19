@@ -1,9 +1,16 @@
 {% extends 'basetwo.html' %}
 {% block content %}
+
 <h3>Class Profile</h3> 
-<p>{{ obj.name }}</p>
-<p>{{ obj.address }}</p>
-<p>{{ obj.url }}</p>
-<p>{{ obj.id }}</p>
+<p>{{ obj.Classroom }}</p>
+<p>{{ obj.grade_level }}</p>
+<p>{{ obj.school }}</p>
+{% for student in obj.student.all %}
+<li>{{ student.first_name }}, {{ student.last_name }} </li>
+{% endfor %}
+<a href="{% url 'add_students' school_url=school_url classroom_id=obj.id grade_level=obj.grade_level %}">{{ obj }} classroom: Edit Student List</a>
+
+
 
 {% endblock %}
+

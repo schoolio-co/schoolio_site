@@ -47,11 +47,9 @@ def Import_Data(request, *args, **kwargs):
     with open(path) as f:
         for line in f:
             line = line.split(',') 
-            obj, created = User.objects.get_or_create(first_name=line[0], last_name=line[1], password=line[2], username=line[3], is_student=True, school=school_name)
-            user = User.objects.get(username=line[3])
-            obj2, created = student_profiles.objects.get_or_create(user=user, grade_level=line[5], school=school_name)
+            obj2, created = student_profiles.objects.get_or_create(first_name=line[0], last_name=line[1], student_ref=line[3], grade_level=line[5], school=school_name)
             obj2.save()
-            obj.save()
+            
     return render(request, 'import.html')
 
 
@@ -201,6 +199,11 @@ class Student_Profiles(TemplateView):
         obj = student_profiles.objects.all()
         return render(request, 'student_profiles.html', {'obj': obj, 'school_url': school_url})
 
+def Student_Profile(request, school_url=None, student_id=None):
+    obj = student_profiles.objects.get(id=student_id)
+
+    return render(request, 'student_profile.html', {'obj': obj, 'school_url': school_url})
+
 def UserList(request,school_url=None):
     obj = school.objects.get(url=school_url)
     school_pk = obj.id
@@ -236,44 +239,65 @@ def create_grade(request, school_url=None, slug=None):
         form = GradeForm(initial=data)
     return render(request, 'create_classroom.html', {'form': form, 'school_url': school_url })
 
-def create_classroom(request, school_url=None, username=None, slug=None):
+def create_classroom(request, school_url=None):
     obj = school.objects.get(url=school_url)
     school_url = obj.url
     school_pk = obj.id
-    user = User.objects.get(username=username)
-    user_pk = user.id
+    classrooms = classroom.objects.filter(school=school_pk)
 
     if request.method == "POST":
         form = ClassroomForm(request.POST)
         if form.is_valid():
             classroom_name = form.cleaned_data['classroom_name']
             grade_level = form.cleaned_data['grade_level']
-            subject =  form.cleaned_data['subject']
-            return redirect('add_students', school_url=school_url, username=username, classroom_name=classroom_name, grade_level=grade_level, subject=subject)
+            return redirect('add_students_new', school_url=school_url, classroom_name=classroom_name, grade_level=grade_level)
 
     else:
-        data = {'school': school_pk}
+        data = {'school': school_url}
         form = ClassroomForm(initial=data)
-    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url })
+    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url, 'classrooms': classrooms })
 
-def add_students_classroom(request, school_url=None, username=None, classroom_name=None, grade_level=None, subject=None):
+def SingleClassroom(request, school_url=None, classroom_id=None):
+    classroom_id = classroom_id
+    obj = classroom.objects.get(id=classroom_id)
+
+    return render(request, 'classroom.html', {'obj': obj, 'school_url': school_url})
+
+def add_students_new_classroom(request, school_url=None, classroom_name=None, grade_level=None):
     model = classroom
-    add_students = 'True'
+    obj = school.objects.get(url=school_url)
+    school_pk = obj.id
 
     if request.method == "POST":
-        form = AddStudentClassroomForm(request.POST)
+        form = AddStudentClassroomForm(request.POST, grade_level)
         if form.is_valid():
             form.save()
             return redirect('school_profile', school_url=school_url)
-        
-
+    
     else:
-        data = {'school': school_url,
-                'Classroom': classroom_name,
+        data = {'Classroom': classroom_name, 
                 'grade_level': grade_level,
-                'subject': subject}
+                'school': school_pk}
         form = AddStudentClassroomForm(initial=data)
-    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url, 'add_students': add_students })
+        form.fields["student"].queryset = student_profiles.objects.filter(grade_level=grade_level)
+    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url})
+
+
+def add_students_classroom(request, school_url=None, classroom_id=None, grade_level=None):
+    model = classroom
+    obj = classroom.objects.get(id=classroom_id)
+    school_id = obj.school_id
+    if request.method == "POST":
+        form = AddStudentClassroomForm(request.POST, grade_level, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect('school_profile', school_url=school_url)
+    
+    else:
+        
+        form = AddStudentClassroomForm(instance=obj)
+        form.fields["student"].queryset = student_profiles.objects.filter(grade_level=grade_level)
+    return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url})
 
 
 def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
@@ -459,7 +483,7 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
         return render(request, 'assessment.html', {'school_url': school_url})
     else:
         form = StudentAssessmentForm()
-    return render(request, 'student_assessment.html', {'form': form, 'school_url': school_url, 'students': students})
+    return render(request, 'student_assessment.html', {'form': form, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
 
 
 

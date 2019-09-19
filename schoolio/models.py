@@ -91,13 +91,10 @@ class subjects(models.Model):
 		return "%s" % (self.subject)
 
 class student_profiles(models.Model):
-	user = models.OneToOneField(User,
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='student_info')
+	student_ref = models.CharField(max_length=50)
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
 	grade_level = models.CharField(max_length=30)
-	student_id = models.CharField(max_length=10, blank=True, unique=True, default=1111-1234)
 	school = models.ForeignKey(school, 
 							on_delete=models.CASCADE,
 							blank=True,
@@ -106,7 +103,7 @@ class student_profiles(models.Model):
         					     null=True)
 
 	def __str__(self):
-		return "%s" % (self.user)
+		return '%s %s' % (self.first_name, self.last_name)
 
 class classroom(models.Model):
 	Classroom = models.CharField(max_length=30)
@@ -127,10 +124,6 @@ class classroom(models.Model):
 class lesson_school_info(models.Model):
 	school_lesson_id = models.AutoField(primary_key=True)
 	classroom = models.ForeignKey(classroom, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	grade = models.ForeignKey(grade_level, 
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
@@ -180,7 +173,7 @@ class assessments(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	assessment = models.TextField(max_length=500)
+	assessment = models.CharField(max_length=150)
 	is_formal = models.BooleanField(default=False)
 	is_final = models.BooleanField(default=False)
 	is_informal = models.BooleanField(default=False)
@@ -214,12 +207,12 @@ class classroom_averages(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	mi_one = models.TextField()
-	mi_two = models.TextField()
-	mi_three = models.TextField()
-	lu_low = models.TextField()
-	lu_med= models.TextField()
-	lu_high = models.TextField()
+	mi_one = models.CharField(max_length=30)
+	mi_two = models.CharField(max_length=30)
+	mi_three = models.CharField(max_length=30)
+	lu_low = models.CharField(max_length=30)
+	lu_med = models.CharField(max_length=30)
+	lu_high = models.CharField(max_length=30)
 
 class classroom_subject_summary(models.Model):
 	classroom = models.ForeignKey(classroom,

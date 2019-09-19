@@ -16,5 +16,10 @@
     <input type="submit" value="All Done" class="btn btn-secondary">
 </form>
 
-
+<br/>
+{% if classrooms %}
+{% for class in classrooms %}
+<li><a href="{% url 'single_classroom' school_url=school_url classroom_id=class.id %}">{{ class }}</a>
+{% endfor %}
+{% endif %}
 {% endblock %}

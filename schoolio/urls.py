@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, CreateEvent, TeacherSchedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
+from .views import SchoolRegistration, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, TeacherSchedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
 from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
@@ -89,18 +89,27 @@ urlpatterns = [
         view=create_grade,
         name='create_grade'),
     
-    url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/create_classroom/',
+    url(r'^class/(?P<school_url>[\w-]+)/create_classroom/',
         view=create_classroom,
         name='create_classroom'),
+
+    url(r'^class/(?P<school_url>[\w-]+)/(?P<classroom_id>[\w-]+)/classroom/',
+        view=SingleClassroom,
+        name='single_classroom'),
 
     url(r'^class/(?P<school_url>[\w-]+)/teacher_schedule/',
         view=TeacherSchedule,
         name='teacher_schedule'),
-    
-    url(r'^add_students/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<classroom_name>[\w-]+)/(?P<grade_level>[\w-]+)/(?P<subject>[\w-]+)/create_classroom/',
+
+    url(r'^add-students-new/(?P<school_url>[\w-]+)/(?P<classroom_name>[\w-]+)/(?P<grade_level>[\w-]+)/create-new-classroom/',
+        view=add_students_new_classroom,
+        name='add_students_new'),
+
+    url(r'^add-students/(?P<school_url>[\w-]+)/(?P<grade_level>[\w-]+)/(?P<classroom_id>[\w-]+)/create-classroom/',
         view=add_students_classroom,
         name='add_students'),
     
+
     url(r'^(?P<school_url>[\w-]+)/admin-register/',
     view=Admin_Register,
     name='admin_register'),
@@ -125,7 +134,11 @@ urlpatterns = [
     view=Student_Profiles.as_view(),
     name='Student_Profiles'),
 
-    url(r'(?P<school_url>[\w-]+)/user/(?P<username>[\w-]+)/',
+    url(r'student/(?P<school_url>[\w-]+)/(?P<student_id>[\w-]+)/',
+    view=Student_Profile,
+    name='Student'),
+
+    url(r'(?P<school_url>[\w-]+)/user-profile/(?P<username>[\w-]+)/',
         view=Profile.as_view(),
         name='profile'),
     

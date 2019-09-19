@@ -32,7 +32,7 @@
                                 {% if obj.is_admin %}
                                 <li class="justify-content-between d-flex">
                                     <p>Add Classroom</p>
-                                    <a class="primary-btn text-uppercase" href="{% url 'create_classroom' username=obj.username school_url=school_url %}">Add Classroom</a>
+                                    <a class="primary-btn text-uppercase" href="{% url 'create_classroom' school_url=school_url %}">Add Classroom</a>
                                 </li>
                                 <li class="justify-content-between d-flex">
                                     <p>Add Grade</p>

@@ -2,7 +2,6 @@
 {% block content %}
 <h1>Student Profiles</h1>
 {% for j in obj %}
-    <p>{{ j }}</p>
-    <p>{{ j.teacher }}</p>
+    <li><a href="{% url 'Student' school_url=school_url student_id=j.id  %}">{{ j }}</a>
 {% endfor %}
 {% endblock %}

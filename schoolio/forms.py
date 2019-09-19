@@ -98,24 +98,23 @@ class GradeForm(forms.ModelForm):
 
 class SchoolProfileForm(forms.ModelForm):
     GRADE_CHOICES=[
-        ('twos', 'twos'),
-        ('threes', 'threes'),
-        ('fours', 'fours'),
-        ('fives', 'fives'),
-        ('PreK', 'PreK'),
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6'),
-        ('7', '7'),
-        ('8', '8'),
-        ('9', '9'),
-        ('10', '10'),
-        ('11', '11'),
-        ('12', '12'),
+        ('Kinders2', 'Kinders2'),
+        ('Kinders3', 'Kinders3'),
+        ('Kinders4', 'Kinders4'),
+        ('Kinders5', 'Kinders5'),
+        ('Zero', 'Zero'),
+        ('One', 'One'),
+        ('Two', 'Two'),
+        ('Three', 'Three'),
+        ('Four', 'Four'),
+        ('Five', 'Five'),
+        ('Six', 'Six'),
+        ('Seven', 'Seven'),
+        ('Eight', 'Eight'),
+        ('Nine', 'Nine'),
+        ('Ten', 'Ten'),
+        ('Eleven', 'Eleven'),
+        ('Twelve', 'Twelve'),
     ]
     grade_level = forms.ChoiceField(choices=GRADE_CHOICES)
     
@@ -125,28 +124,27 @@ class SchoolProfileForm(forms.ModelForm):
 
 class ClassroomForm(forms.Form):
     GRADE_CHOICES=[
-        ('twos', 'twos'),
-        ('threes', 'threes'),
-        ('fours', 'fours'),
-        ('fives', 'fives'),
-        ('PreK', 'PreK'),
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6'),
-        ('7', '7'),
-        ('8', '8'),
-        ('9', '9'),
-        ('10', '10'),
-        ('11', '11'),
-        ('12', '12'),
+        ('Kinders2', 'Kinders2'),
+        ('Kinders3', 'Kinders3'),
+        ('Kinders4', 'Kinders4'),
+        ('Kinders5', 'Kinders5'),
+        ('Zero', 'Zero'),
+        ('One', 'One'),
+        ('Two', 'Two'),
+        ('Three', 'Three'),
+        ('Four', 'Four'),
+        ('Five', 'Five'),
+        ('Six', 'Six'),
+        ('Seven', 'Seven'),
+        ('Eight', 'Eight'),
+        ('Nine', 'Nine'),
+        ('Ten', 'Ten'),
+        ('Eleven', 'Eleven'),
+        ('Twelve', 'Twelve'),
     ]
     classroom_name = forms.CharField(max_length=30, required=False)
     grade_level = forms.ChoiceField(choices=GRADE_CHOICES)
-    subject = forms.CharField(max_length=30, required=False)
+    school = forms.CharField(max_length=30, required=False)
 
     class Meta:
         fields = '__all__'
