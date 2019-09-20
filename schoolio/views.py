@@ -41,10 +41,9 @@ class RoleRegistrations(TemplateView):
 
 
 def Import_Data(request, *args, **kwargs):
-
-    path = 'schoolio/standards/students (1).csv'
+    path2 = 'schoolio/standards/students_full.csv'
     school_name = school.objects.get(url='gardner')
-    with open(path) as f:
+    with open(path2) as f:
         for line in f:
             line = line.split(',') 
             obj2, created = student_profiles.objects.get_or_create(first_name=line[0], last_name=line[1], student_ref=line[3], grade_level=line[5], school=school_name)

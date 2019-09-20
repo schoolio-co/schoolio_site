@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'quiz',
     'storages',
     'schoolio',
@@ -58,6 +59,8 @@ INSTALLED_APPS = [
     'essay',
     'preventconcurrentlogins',
 ]
+
+
 
 STREAM_API_KEY = '4emhs9sqfdtv'
 STREAM_API_SECRET = 'axa749jt5ybghj747dbqaceqf998a4wf27cewcgp4wzgtn5ctdxvr4bqd6kp6pzm'
