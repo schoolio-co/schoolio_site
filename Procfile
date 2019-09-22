@@ -1,1 +1,2 @@
-web: gunicorn base.wsgi --preload --timeout 30 --keep-alive 5 --log-level debug
+
+web: newrelic-admin run-program gunicorn base.wsgi
