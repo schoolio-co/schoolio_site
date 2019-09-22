@@ -9,7 +9,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="icon" href="quiz/static/img/favicon.png" type="image/png" />
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" />
     <title>Schoolio</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
@@ -48,7 +48,7 @@
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <a class="navbar-brand logo_h" href="#"
-              ><img src="static/img/schooliologo.png" alt=""
+              ><img src="{% static 'img/schooliologo.png' %}" alt=""
             /></a>
             <button
               class="navbar-toggler"
@@ -193,7 +193,7 @@
             <div class="owl-carousel active_course">
               <div class="single_course">
                 <div class="course_head">
-                  <img class="img-fluid" src="quiz/static/img/blog/blog1.png" alt="" />
+                  <img class="img-fluid" src="{% static 'img/blog/blog1.png' %}" alt="" />
                 </div>
                 <div class="course_content">
                   <span class="tag mb-4 d-inline-block">edtech</span>
@@ -230,7 +230,7 @@
           <div class="col-lg-6 col-md-6">
             <div class="single_event position-relative">
               <div class="event_thumb">
-                <img src="static/img/event/teacherday.png" alt="" />
+                <img src="{% static 'img/event/teacherday.png' %}" alt="" />
               </div>
               <div class="event_details">
                 <div class="d-flex mb-4">
@@ -271,14 +271,14 @@
         <div class="row justify-content-center d-flex align-items-center">
           <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
             <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/audrey.png" alt="" />
+              <img class="img-fluid" src="{% static 'img/trainer/audrey.png' %}" alt="" />
             </div>
             <div class="meta-text text-sm-center">
               <h4>Audrey Akwenye</h4>
               <p class="designation">Co-Founder/CEO</p>
               <div class="mb-4">
                 <p>
-                  Audrey is an Educator and Data Scientists. She is passionate about using Machine Learning to help Global Education.
+                  Audrey is an Educator and Data Scientist. She is passionate about using Machine Learning to help Global Education.
                 </p>
               </div>
               <div class="align-items-center justify-content-center d-flex">
@@ -290,7 +290,7 @@
 
           <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
             <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/dustan.png" alt="" />
+              <img class="img-fluid" src="{% static 'img/trainer/dustan.png' %}" alt="" />
             </div>
             <div class="meta-text text-sm-center">
               <h4>Dustan Levenstein</h4>
@@ -306,29 +306,9 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
             <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="#" alt="" />
-            </div>
-            <div class="meta-text text-sm-center">
-              <h4>Xlegic Howard Sin'Austin</h4>
-              <p class="designation">Co-Founder/Data Scientist</p>
-              <div class="mb-4">
-                <p>
-                  Data Science and Machine Learning enthusiast. 
-                </p>
-              </div>
-              <div class="align-items-center justify-content-center d-flex">
-                <a href="https://twitter.com/xlegica"><i class="ti-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/xlegic-sinaustin/"><i class="ti-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-            <div class="thumb d-flex justify-content-sm-center">
-              <img class="img-fluid" src="static/img/trainer/lettisia.png" alt="" />
+              <img class="img-fluid" src="{% static 'img/trainer/lettisia.png' %}" alt="" />
             </div>
             <div class="meta-text text-sm-center">
               <h4>Lettisia Tjambari</h4>

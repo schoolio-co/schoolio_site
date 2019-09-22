@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from autoslug import AutoSlugField
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
@@ -239,15 +240,56 @@ class TeacherSchedule(models.Model):
 						on_delete=models.CASCADE,
 						blank=True,
 						null=True)
-	location = models.CharField(max_length=100)
 	Subject = models.CharField(max_length=100)
 	teacher = models.ForeignKey(User, 
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True, 
 							related_name='teacher')
-	period = models.IntegerField()
-	day = models.CharField(max_length=100)
+	school = models.ForeignKey(school, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	monday_first = models.BooleanField(default=False)
+	monday_second = models.BooleanField(default=False)
+	monday_third = models.BooleanField(default=False)
+	monday_fourth = models.BooleanField(default=False)
+	monday_fifth = models.BooleanField(default=False)
+	monday_sixth = models.BooleanField(default=False)
+	monday_seventh = models.BooleanField(default=False)
+	monday_eigth = models.BooleanField(default=False)
+	tuesday_first = models.BooleanField(default=False)
+	tuesday_second = models.BooleanField(default=False)
+	tuesday_third = models.BooleanField(default=False)
+	tuesday_fourth = models.BooleanField(default=False)
+	tuesday_fifth = models.BooleanField(default=False)
+	tuesday_sixth = models.BooleanField(default=False)
+	tuesday_seventh = models.BooleanField(default=False)
+	tuesday_eigth = models.BooleanField(default=False)
+	wednesday_first = models.BooleanField(default=False)
+	wednesday_second = models.BooleanField(default=False)
+	wednesday_third = models.BooleanField(default=False)
+	wednesday_fourth = models.BooleanField(default=False)
+	wednesday_fifth = models.BooleanField(default=False)
+	wednesday_sixth = models.BooleanField(default=False)
+	wednesday_seventh = models.BooleanField(default=False)
+	wednesday_eigth = models.BooleanField(default=False)
+	thursday_first = models.BooleanField(default=False)
+	thursday_second = models.BooleanField(default=False)
+	thursday_third = models.BooleanField(default=False)
+	thursday_fourth = models.BooleanField(default=False)
+	thursday_fifth = models.BooleanField(default=False)
+	thursday_sixth = models.BooleanField(default=False)
+	thursday_seventh = models.BooleanField(default=False)
+	thursday_eigth = models.BooleanField(default=False)
+	friday_first = models.BooleanField(default=False)
+	friday_second = models.BooleanField(default=False)
+	friday_third = models.BooleanField(default=False)
+	friday_fourth = models.BooleanField(default=False)
+	friday_fifth = models.BooleanField(default=False)
+	friday_sixth = models.BooleanField(default=False)
+	friday_seventh = models.BooleanField(default=False)
+	friday_eigth = models.BooleanField(default=False)
 
 	def __str__(self):
 		return "%s" % (self.teacher)

@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from django.template import loader
+from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import slugify
 from django.template.defaultfilters import stringfilter
 from django.utils.text import normalize_newlines
 from django.views.generic import View, FormView, TemplateView, DetailView, ListView
@@ -249,7 +251,9 @@ def create_classroom(request, school_url=None):
         if form.is_valid():
             classroom_name = form.cleaned_data['classroom_name']
             grade_level = form.cleaned_data['grade_level']
-            return redirect('add_students_new', school_url=school_url, classroom_name=classroom_name, grade_level=grade_level)
+            classroom_url = slugify(classroom_name)
+
+            return redirect('add_students_new', school_url=school_url, classroom_url=classroom_url, grade_level=grade_level)
 
     else:
         data = {'school': school_url}
@@ -262,7 +266,7 @@ def SingleClassroom(request, school_url=None, classroom_id=None):
 
     return render(request, 'classroom.html', {'obj': obj, 'school_url': school_url})
 
-def add_students_new_classroom(request, school_url=None, classroom_name=None, grade_level=None):
+def add_students_new_classroom(request, school_url=None, classroom_url=None, grade_level=None):
     model = classroom
     obj = school.objects.get(url=school_url)
     school_pk = obj.id
@@ -274,7 +278,7 @@ def add_students_new_classroom(request, school_url=None, classroom_name=None, gr
             return redirect('school_profile', school_url=school_url)
     
     else:
-        data = {'Classroom': classroom_name, 
+        data = {'Classroom': classroom_url, 
                 'grade_level': grade_level,
                 'school': school_pk}
         form = AddStudentClassroomForm(initial=data)
@@ -486,15 +490,26 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
 
 
 
-def TeacherSchedule(request, school_url=None):
+def Teacher_Schedule(request, school_url=None):
     if request.method == "POST":
         form = TeacherScheduleForm(request.POST)
         if form.is_valid():
-            form.save()
-        return render(request, 'teacher_schedule.html', {'school_url': school_url})
+            prev = form.save(commit=False)
+            username = prev.teacher
+            prev.save()
+        return redirect('teacher_scheduleview', school_url=school_url, username=username)
     else:
         form = TeacherScheduleForm()
     return render(request, 'teacher_create.html', {'form': form, 'school_url': school_url})
+
+
+def TeacherScheduleView(request, school_url=None, username=None):
+    school_name = school.objects.get(url=school_url)
+    school_pk = school_name.id
+    teacher_name = User.objects.get(username=username)
+    teacher_pk = teacher_name.id
+    teacher_weekly = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
+    return render(request, 'teacher_schedule.html', {'school_url': school_url, 'teacher_weekly': teacher_weekly})
 
 
 def CreateUpdate(request, school_url=None):

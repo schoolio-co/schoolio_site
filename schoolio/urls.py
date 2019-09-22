@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, TeacherSchedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
+from .views import SchoolRegistration, TeacherScheduleView, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, Teacher_Schedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
 from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
@@ -98,14 +98,18 @@ urlpatterns = [
         name='single_classroom'),
 
     url(r'^class/(?P<school_url>[\w-]+)/teacher_schedule/',
-        view=TeacherSchedule,
+        view=Teacher_Schedule,
         name='teacher_schedule'),
 
-    url(r'^add-students-new/(?P<school_url>[\w-]+)/(?P<classroom_name>[\w-]+)/(?P<grade_level>[\w-]+)/create-new-classroom/',
+    url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/teacher_schedule/',
+        view=TeacherScheduleView,
+        name='teacher_scheduleview'),
+
+    url(r'add-students-new/(?P<school_url>[\w-]+)/(?P<classroom_url>[\w-]+)/(?P<grade_level>[\w-]+)/create-new-classroom/',
         view=add_students_new_classroom,
         name='add_students_new'),
 
-    url(r'^add-students/(?P<school_url>[\w-]+)/(?P<grade_level>[\w-]+)/(?P<classroom_id>[\w-]+)/create-classroom/',
+    url(r'add-students/(?P<school_url>[\w-]+)/(?P<grade_level>[\w-]+)/(?P<classroom_id>[\w-]+)/create-classroom/',
         view=add_students_classroom,
         name='add_students'),
     

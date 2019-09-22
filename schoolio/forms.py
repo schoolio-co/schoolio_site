@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.models import inlineformset_factory
 from django.forms import ModelChoiceField
-from django.forms import formset_factory
 from django.db import transaction
 import datetime
 from .models import school, school_user, student_assessment, TeacherSchedule, User, grade_level, create_updates, classroom, student_profiles, lesson_school_info, assessments, activities, standards, day_of_the_week, subjects, classroom_subject_summary  
@@ -152,10 +151,11 @@ class ClassroomForm(forms.Form):
 class AddStudentClassroomForm(forms.ModelForm):
     student = forms.ModelMultipleChoiceField(queryset = student_profiles.objects.all(), required=False, widget=forms.CheckboxSelectMultiple)
     
+    
     class Meta:
         model = classroom
         fields = '__all__'
-    
+        readonly_fields = ('Classroom',)
 
 class SchoolLessonForm(forms.ModelForm):
     DAY_CHOICES=[
