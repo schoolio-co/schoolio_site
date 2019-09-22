@@ -18,7 +18,6 @@ from quiz.views import elearning, landing, blog, user_profile, QuizListView, Cat
     QuizMarkingDetail, QuizDetailView, QuizTake
 
 from django.contrib.auth import views as auth_views
-from ecommerce_app.views import *
 from pinax.messages.views import *
 from cal.views import *
 
@@ -198,44 +197,6 @@ urlpatterns = [
     url(r'^quizzes/$',
         view=QuizListView.as_view(),
         name='quiz_index'),
-
-    url(r'^index/$',
-        view=index,
-        name='index'),
-
-
-    path('product/<int:product_id>/<slug:product_slug>/',
-        view=show_product, 
-        name='product_detail'),
-
-
-    url(r'^cart/$', 
-        view=show_cart, 
-        name='show_cart'),
-
-    url(r'^checkout/$', 
-        view=checkout, 
-        name='checkout'),
-
-    path('process-payment/', 
-        view=process_payment, 
-        name='process_payment'),
-
-    path('payment-done/', 
-        view=payment_done, 
-        name='payment_done'),
-
-    path('payment-cancelled/', 
-        view=payment_canceled, 
-        name='payment_cancelled'),
-    
-     path('subscribe/', 
-        view=subscription, 
-        name='subscription'),
-
-    path('process_subscription/', 
-        view=process_subscription, 
-        name='process_subscription'),
 
     url(r'^cal_index/$', 
         view=cal_index, name='cal_index'),

@@ -33,7 +33,7 @@ PAYPAL_TEST = False
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'storages',
     'schoolio',
     "pinax.messages",
-    "ecommerce_app",
     'multichoice',
     'true_false',
     "cal",
