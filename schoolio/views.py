@@ -263,8 +263,9 @@ def create_classroom(request, school_url=None):
 def SingleClassroom(request, school_url=None, classroom_id=None):
     classroom_id = classroom_id
     obj = classroom.objects.get(id=classroom_id)
+    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_id)
 
-    return render(request, 'classroom.html', {'obj': obj, 'school_url': school_url})
+    return render(request, 'classroom.html', {'obj': obj, 'school_url': school_url, 'subject_summary':subject_summary })
 
 def add_students_new_classroom(request, school_url=None, classroom_url=None, grade_level=None):
     model = classroom
@@ -305,10 +306,11 @@ def add_students_classroom(request, school_url=None, classroom_id=None, grade_le
 
 def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
     teacher = User.objects.get(username=username)
-    teacher_pk = teacher.username
+    teacher_pk = teacher.id
     current_week = date.today().isocalendar()[1] 
     obj = school.objects.get(url=school_url)
     school_pk = obj.id
+    teacher_weekly = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
 
     if request.method == "POST":
         form = SchoolLessonForm(request.POST)
@@ -329,7 +331,7 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
             form.fields['week_of'].initial = current_week
         form.fields['planning_teacher'].initial = teacher_pk
         form.fields['school'].initial = school_pk
-    return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
+    return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url, 'teacher_weekly': teacher_weekly})
 
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):

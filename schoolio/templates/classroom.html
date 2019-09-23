@@ -9,7 +9,22 @@
 <li>{{ student.first_name }}, {{ student.last_name }} </li>
 {% endfor %}
 <a href="{% url 'add_students' school_url=school_url classroom_id=obj.id grade_level=obj.grade_level %}">{{ obj }} classroom: Edit Student List</a>
+<br/>
+<br/>
+<h4>Subject Summary</h4>
+{% for summary in subject_summary %}
+<p>{{ summary.subject }}</p>
+<li>{{ summary.lu_level }}</li>
+<li>{{ summary.mu_level }}</li>
+<li>{{ summary.hu_level }}</li>
+<li>{{ summary.logical_level }}</li>
+<li>{{ summary.linguistic_level }}</li>
+<li>{{ summary.visual_level }}</li>
+<li>{{ summary.naturalist_level }}</li>
+<li>{{ summary.group_level }}</li>
+<li>{{ summary.independent_level }}</li>
 
+{% endfor %}
 
 
 {% endblock %}

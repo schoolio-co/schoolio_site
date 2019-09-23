@@ -1,6 +1,12 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 <h3>Lesson School</h3>
+<h5><a href="{% url 'teacher_schedule' school_url=school_url %}">Edit Schedule</a>
+</h5>
+
+{% for schedule in teacher_weekly %}
+<p>{{ schedule.classroom }} - {{ schedule.Subject}}</p>
+{% endfor %}
 
 {% if form %}
 <form method="post">
