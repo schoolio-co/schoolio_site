@@ -213,7 +213,7 @@ urlpatterns = [
         view=CategoriesListView.as_view(),
         name='quiz_category_list_all'),
 
-    url(r'^category/(?P<category_name>[\w|\W-]+)/$',
+    url(r'category/(?P<category_name>[\w|\W-]+)/$',
         view=ViewQuizListByCategory.as_view(),
         name='quiz_category_list_matching'),
 
@@ -234,7 +234,7 @@ urlpatterns = [
         view=QuizDetailView.as_view(),
         name='quiz_start_page'),
 
-    url(r'^(?P<quiz_name>[\w-]+)/take/$',
+    url(r'quizzes/(?P<quiz_name>[\w-]+)/take/$',
         view=QuizTake.as_view(),
         name='quiz_question'),
 
