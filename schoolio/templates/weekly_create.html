@@ -2,7 +2,7 @@
 {% block content %}
 <br/>
 <h3>Step One: Review Weekly Activity Information </h3>
-
+{{ classroom_name }} - {{ teacher_subject }}
 {% if messages %}
     {% for message in messages %}
     <h4>{{ message }}</h4>
@@ -53,7 +53,8 @@
     {% endfor %}
         </select>
     </div>
-        {% if 'Monday' in obj.days %}
+    {% for schedule in teacher_schedule %}
+    {% if schedule.monday_first or schedule.monday_second or schedule.monday_third or schedule.monday_fourth or schedule.monday_fifth or schedule.monday_sixth or schedule.monday_seventh or schedule.monday_eight is True %}
         <h4>Monday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -83,9 +84,37 @@
             <label >Vocabulary: </label>
             <input type="text" class="form-control" value='{{ matches.0.vocabulary }}' name='mondayvocabulary'>
         </div>
+        <div class="form-group col-md-4">
+            {{ form.mondayday.errors }}
+            <label >Day: </label>
+            <input type="text" class="form-control" value='Monday' name='mondayday'>
+        </div>
+        <div class="form-group col-md-4">
+                {{ form.mondayperiod.errors }}
+                <label >Period: </label>
+                {% if schedule.monday_first is True %}
+                <input type="text" class="form-control" value='1' name='mondayperiod'>
+                {% elif schedule.monday_second is True %}
+                <input type="text" class="form-control" value='2' name='mondayperiod'>
+                {% elif schedule.monday_third is True %}
+                <input type="text" class="form-control" value='3' name='mondayperiod'>
+                {% elif schedule.monday_fourth is True %}
+                <input type="text" class="form-control" value='4' name='mondayperiod'>
+                {% elif schedule.monday_fifth is True %}
+                <input type="text" class="form-control" value='5' name='mondayperiod'>
+                {% elif schedule.monday_sixth is True %}
+                <input type="text" class="form-control" value='6' name='mondayperiod'>
+                {% elif schedule.monday_seventh is True %}
+                <input type="text" class="form-control" value='7' name='mondayperiod'>
+                {% elif schedule.monday_eight is True %}
+                <input type="text" class="form-control" value='8' name='mondayperiod'>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
-        {% if 'Tuesday' in obj.days %}
+        {% endfor %}
+        {% for schedule in teacher_schedule %}
+        {% if schedule.tuesday_first or schedule.tuesday_second or schedule.tuesday_third or schedule.tuesday_fourth or schedule.tuesday_fifth or schedule.tuesday_sixth or schedule.tuesday_seventh or schedule.tuesday_eight is True %}
         <h4>Tuesday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -115,9 +144,37 @@
             <label >Vocabulary: </label>
             <input type="text" class="form-control" value='{{ matches.1.vocabulary }}' name='tuesdayvocabulary'>
         </div>
+        <div class="form-group col-md-4">
+                {{ form.tuesdayday.errors }}
+                <label >Day: </label>
+                <input type="text" class="form-control" value='Tuesday' name='tuesdayday'>
+            </div>
+        <div class="form-group col-md-4">
+                {{ form.tuesdayperiod.errors }}
+                <label >Period: </label>
+                {% if schedule.tuesday_first is True %}
+                <input type="text" class="form-control" value='1' name='tuesdayperiod'>
+                {% elif schedule.tuesday_second is True %}
+                <input type="text" class="form-control" value='2' name='tuesdayperiod'>
+                {% elif schedule.tuesday_third is True %}
+                <input type="text" class="form-control" value='3' name='tuesdayperiod'>
+                {% elif schedule.tuesday_fourth is True %}
+                <input type="text" class="form-control" value='4' name='tuesdayperiod'>
+                {% elif schedule.tuesday_fifth is True %}
+                <input type="text" class="form-control" value='5' name='tuesdayperiod'>
+                {% elif schedule.tuesday_sixth is True %}
+                <input type="text" class="form-control" value='6' name='tuesdayperiod'>
+                {% elif schedule.tuesday_seventh is True %}
+                <input type="text" class="form-control" value='7' name='tuesdayperiod'>
+                {% elif schedule.tuesday_eight is True %}
+                <input type="text" class="form-control" value='8' name='tuesdayperiod'>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
-        {% if 'Wednesday' in obj.days %}
+        {% endfor %}
+        {% for schedule in teacher_schedule %}
+        {% if schedule.wednesday_first or schedule.wednesday_second or schedule.wednesday_third or schedule.wednesday_fourth or schedule.wednesday_fifth or schedule.wednesday_sixth or schedule.wednesday_seventh or schedule.wednesday_eight is True %}
         <h4>Wednesday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -143,18 +200,41 @@
             <input type="text" class="form-control" name='wednesdayresources'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.wednesdayblooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='wednesdayblooms'>
-        </div>
-        <div class="form-group col-md-4">
             {{ form.wednesdayvocabulary.errors }}
             <label >Vocabulary: </label>
             <input type="text" class="form-control" name='wednesdayvocabulary'>
         </div>
+        <div class="form-group col-md-4">
+                {{ form.wednesdayday.errors }}
+                <label >Day: </label>
+                <input type="text" class="form-control" value='Wednesday' name='wednesdayday'>
+            </div>
+        <div class="form-group col-md-4">
+                {{ form.wednesdayperiod.errors }}
+                <label >Period: </label>
+                {% if schedule.wednesday_first is True %}
+                <input type="text" class="form-control" value='1' name='wednesdayperiod'>
+                {% elif schedule.wednesday_second is True %}
+                <input type="text" class="form-control" value='2' name='wednesdayperiod'>
+                {% elif schedule.wednesday_third is True %}
+                <input type="text" class="form-control" value='3' name='wednesdayperiod'>
+                {% elif schedule.wednesday_fourth is True %}
+                <input type="text" class="form-control" value='4' name='wednesdayperiod'>
+                {% elif schedule.wednesday_fifth is True %}
+                <input type="text" class="form-control" value='5' name='wednesdayperiod'>
+                {% elif schedule.wednesday_sixth is True %}
+                <input type="text" class="form-control" value='6' name='wednesdayperiod'>
+                {% elif schedule.wednesday_seventh is True %}
+                <input type="text" class="form-control" value='7' name='wednesdayperiod'>
+                {% elif schedule.wednesday_eight is True %}
+                <input type="text" class="form-control" value='8' name='wednesdayperiod'>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
-        {% if 'Thursday' in obj.days %}
+        {% endfor %}
+        {% for schedule in teacher_schedule %}
+        {% if schedule.thursday_first or schedule.thursday_second or schedule.thursday_third or schedule.thursday_fourth or schedule.thursday_fifth or schedule.thursday_sixth or schedule.thursday_seventh or schedule.thursday_eight is True %}
         <h4>Thursday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -180,18 +260,42 @@
             <input type="text" class="form-control" name='thursdayresources'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.thursdayblooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='thursdayblooms'>
-        </div>
-        <div class="form-group col-md-4">
             {{ form.thursdayvocabulary.errors }}
             <label >Vocabulary: </label>
             <input type="text" class="form-control" name='thursdayvocabulary'>
         </div>
+        <div class="form-group col-md-4">
+                {{ form.thursdayday.errors }}
+                <label >Day: </label>
+                <input type="text" class="form-control" value='Thursday' name='thursdayday'>
+            </div>
+        <div class="form-group col-md-4">
+                {{ form.thursdayperiod.errors }}
+                <label >Period: </label>
+                {% if schedule.thursday_first is True %}
+                <input type="text" class="form-control" value='1' name='thursdayperiod'>
+                {% elif schedule.thursday_second is True %}
+                <input type="text" class="form-control" value='2' name='thursdayperiod'>
+                {% elif schedule.thursday_third is True %}
+                <input type="text" class="form-control" value='3' name='thursdayperiod'>
+                {% elif schedule.thursday_fourth is True %}
+                <input type="text" class="form-control" value='4' name='thursdayperiod'>
+                {% elif schedule.thursday_fifth is True %}
+                <input type="text" class="form-control" value='5' name='thursdayperiod'>
+                {% elif schedule.thursday_sixth is True %}
+                <input type="text" class="form-control" value='6' name='thursdayperiod'>
+                {% elif schedule.thursday_seventh is True %}
+                <input type="text" class="form-control" value='7' name='thursdayperiod'>
+                {% elif schedule.thursday_eight is True %}
+                <input type="text" class="form-control" value='8' name='thursdayperiod'>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
-        {% if 'Friday' in obj.days %}
+        {% endfor %}
+        {% for schedule in teacher_schedule %}
+        {% if schedule.friday_first or schedule.friday_second or schedule.friday_third or schedule.friday_fourth or schedule.friday_fifth or schedule.friday_sixth or schedule.friday_seventh or schedule.friday_eight is True %}
+        
         <h4>Friday</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -217,18 +321,41 @@
             <input type="text" class="form-control" name='fridayresources'>
         </div>
         <div class="form-group col-md-4">
-            {{ form.fridayblooms.errors }}
-            <label >Blooms: </label>
-            <input type="text" class="form-control" name='fridayblooms'>
-        </div>
-        <div class="form-group col-md-4">
             {{ form.fridayvocabulary.errors }}
             <label >Vocabulary: </label>
             <input type="text" class="form-control" name='fridayvocabulary'>
         </div>
+        <div class="form-group col-md-4">
+                {{ form.fridayday.errors }}
+                <label >Day: </label>
+                <input type="text" class="form-control" value='Friday' name='fridayday'>
+            </div>
+        <div class="form-group col-md-4">
+                {{ form.fridayperiod.errors }}
+                <label >Period: </label>
+                {% if schedule.friday_first is True %}
+                <input type="text" class="form-control" value='1' name='fridayperiod'>
+                {% elif schedule.friday_second is True %}
+                <input type="text" class="form-control" value='2' name='fridayperiod'>
+                {% elif schedule.friday_third is True %}
+                <input type="text" class="form-control" value='3' name='fridayperiod'>
+                {% elif schedule.friday_fourth is True %}
+                <input type="text" class="form-control" value='4' name='fridayperiod'>
+                {% elif schedule.friday_fifth is True %}
+                <input type="text" class="form-control" value='5' name='fridayperiod'>
+                {% elif schedule.friday_sixth is True %}
+                <input type="text" class="form-control" value='6' name='fridayperiod'>
+                {% elif schedule.friday_seventh is True %}
+                <input type="text" class="form-control" value='7' name='fridayperiod'>
+                {% elif schedule.friday_eight is True %}
+                <input type="text" class="form-control" value='8' name='fridayperiod'>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
+        {% endfor %}
     <input type="submit" value="Save Activity" class="btn btn-secondary">
 </form>
 
 {% endblock %}
+

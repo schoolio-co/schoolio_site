@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, TeacherScheduleView, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, Teacher_Schedule, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
+from .views import SchoolRegistration, WeeklyActivityClassroom, delete_activity, TeacherScheduleView, delete_schedule, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
 from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake
@@ -79,6 +79,10 @@ urlpatterns = [
         view=delete_update,
         name='delete_update'),
 
+     url('activity-delete/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<activity_id>[\w-]+)',
+        view=delete_activity,
+        name='delete_activity'),
+
 
     url(r'^school-register/',
         view=School_Register,
@@ -96,13 +100,13 @@ urlpatterns = [
         view=SingleClassroom,
         name='single_classroom'),
 
-    url(r'^class/(?P<school_url>[\w-]+)/teacher_schedule/',
-        view=Teacher_Schedule,
-        name='teacher_schedule'),
-
     url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/teacher_schedule/',
         view=TeacherScheduleView,
         name='teacher_scheduleview'),
+
+    url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<schedule_id>[\w-]+)/schedule_delete/',
+        view=delete_schedule,
+        name='teacher_scheduledelete'),
 
     url(r'add-students-new/(?P<school_url>[\w-]+)/(?P<classroom_url>[\w-]+)/(?P<grade_level>[\w-]+)/create-new-classroom/',
         view=add_students_new_classroom,
@@ -173,6 +177,10 @@ urlpatterns = [
         view=WeeklyActivity,
         name='weekly_activity'),
 
+    url(r'weekly-classroom/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<week_of>[\w-]+)/(?P<classroom_id>[\w-]+)/activity/',
+        view=WeeklyActivityClassroom,
+        name='weekly_activity_classroom'),
+
     url(r'^l/(?P<school_url>[\w-]+)/activity/(?P<activity_id>[\w-]+)/',
         view=SingleActivity,
         name='single_activity'),
@@ -230,7 +238,7 @@ urlpatterns = [
         name='quiz_marking_detail'),
 
     #  passes variable 'quiz_name' to quiz_take view
-    url(r'^(?P<slug>[\w-]+)/$',
+    url(r'quizzes/(?P<slug>[\w-]+)/$',
         view=QuizDetailView.as_view(),
         name='quiz_start_page'),
 

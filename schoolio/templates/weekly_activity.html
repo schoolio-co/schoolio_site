@@ -1,8 +1,10 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 <br/>
-<p>hello {{ username }}!</p>
-
+<h4>Hello {{ teacher_name }}!</h4>
+<a class="primary-btn2 text-uppercase rounded-1 text-black" href="{% url 'school_lesson' school_url=school_url username=teacher_name %}">Build a Lesson</a>
+<br>
+<br>
     <div class="row seven-cols">
       <div class="col-md-1">
         {% if object1 %}
@@ -12,58 +14,80 @@
         {% endif %}
       </div>
       <div class="col-md-2">
-          <p>Monday</p>
+          <h5>Monday</h5>
           {% for x in object2 %}
-                {% if 'Monday' in x.day %}
-                {{ x.subject }}
-                  <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
-                {% endif %}
+          {% if 'Monday' in x.day %}
+          <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ x.subject }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
+                <p class="card-text">{{ x.activity}}</p>
+                <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+               
+              </div>
+            </div>
+            {% endif %}
             {% endfor %}
-        
       </div>
       <div class="col-md-2">
-          <p>Tuesday</p>
+          <h5>Tuesday</h5>
           {% for x in object2 %}
-          {% if 'Tuesday' in x.day %}
-          {% for subject in x.subject.split %}
-          {{ subject }}
-          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
-        {% endfor %}
-          {% endif %}
-      {% endfor %}
+                {% if 'Tuesday' in x.day %}
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ x.subject }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
+                      <p class="card-text">{{ x.activity}}</p>
+                      <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
       </div>
       <div class="col-md-2">
-          <p>Wednesday</p>
+          <h5>Wednesday</h5>
           {% for x in object2 %}
-          {% if 'Wednesday' in x.day %}
-          {% for subject in x.subject.split %}
-          {{ subject }}
-          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
-          {% endfor %}
-          {% endif %}
-      {% endfor %}
+                {% if 'Wednesday' in x.day %}
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ x.subject }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
+                      <p class="card-text">{{ x.activity}}</p>
+                      <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
       </div>
       <div class="col-md-2">
-          <p>Thursday</p>
+          <h5>Thursday</h5>
           {% for x in object2 %}
-          {% if 'Thursday' in x.day %}
-          {% for subject in x.subject.split %}
-          {{ subject }}
-          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
-          {% endfor %}
-          {% endif %}
-      {% endfor %}
+                {% if 'Thursday' in x.day %}
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ x.subject }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
+                      <p class="card-text">{{ x.activity}}</p>
+                      <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
       </div>
       <div class="col-md-2">
-          <p>Friday </p>
+          <h5>Friday </h5>
           {% for x in object2 %}
-          {% if 'Friday' in x.day %}
-          {% for subject in x.subject.split %}
-          {{ subject }}
-          <li><a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}">{{ x.intro }}</a></li>
-      {% endfor %}
-          {% endif %}
-      {% endfor %}
+                {% if 'Friday' in x.day %}
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ x.subject }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
+                      <p class="card-text">{{ x.activity}}</p>
+                      <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
       </div>
 
       <div class="col-md-1">

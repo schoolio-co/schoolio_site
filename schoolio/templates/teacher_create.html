@@ -1,11 +1,99 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 <h2>Teacher Schedule</h2>
-
+{{ form.non_field_errors }}
 <form method="POST">
     {% csrf_token %}
-   {{ form.as_p }}
+<div class="fieldWrapper">
+    {{ form.classroom.errors }}
+    <label">Classroom:</label>
+    {{ form.classroom }}
+</div>
+<div class="fieldWrapper">
+    {{ form.Subject.errors }}
+    <label">Subject:</label>
+    {{ form.Subject }}
+</div>
+<div class="fieldWrapper">
+    {{ form.teacher.errors }}
+    <label">Teacher:</label>
+    {{ form.teacher }}
+</div>
+<div class="fieldWrapper">
+        {{ form.school.errors }}
+        <label">School:</label>
+        {{ form.school }}
+    </div>
+<br/>
+<div class="container">
+        <div class="row">
+          <div class="col">-</div>
+          <div class="col">Mon</div>
+          <div class="col">Tues</div>
+          <div class="col">Wed</div>
+          <div class="col">Thurs</div>
+          <div class="col">Fri</div>
+          <div class="w-100"></div>
+          <div class="col">1st</div>
+          <div class="col">{{ form.monday_first }}</div>
+          <div class="col">{{ form.tuesday_first }}</div>
+          <div class="col">{{ form.wednesday_first }}</div>
+          <div class="col">{{ form.thursday_first }}</div>
+          <div class="col">{{ form.friday_first }}</div>
+          <div class="w-100"></div>
+          <div class="col">2nd</div>
+          <div class="col">{{ form.monday_second }}</div>
+          <div class="col">{{ form.tuesday_second }}</div>
+          <div class="col">{{ form.wednesday_second }}</div>
+          <div class="col">{{ form.thursday_second }}</div>
+          <div class="col">{{ form.friday_second }}</div>
+          <div class="w-100"></div>
+          <div class="col">3rd</div>
+          <div class="col">{{ form.monday_third }}</div>
+          <div class="col">{{ form.tuesday_third }}</div>
+          <div class="col">{{ form.wednesday_third }}</div>
+          <div class="col">{{ form.thursday_third }}</div>
+          <div class="col">{{ form.friday_third }}</div>
+          <div class="w-100"></div>
+          <div class="col">4th</div>
+          <div class="col">{{ form.monday_fourth }}</div>
+          <div class="col">{{ form.tuesday_fourth }}</div>
+          <div class="col">{{ form.wednesday_fourth }}</div>
+          <div class="col">{{ form.thursday_fourth }}</div>
+          <div class="col">{{ form.friday_fourth }}</div>
+          <div class="w-100"></div>
+          <div class="col">5th</div>
+          <div class="col">{{ form.monday_fifth }}</div>
+          <div class="col">{{ form.tuesday_fifth }}</div>
+          <div class="col">{{ form.wednesday_fifth }}</div>
+          <div class="col">{{ form.thursday_fifth }}</div>
+          <div class="col">{{ form.friday_fifth }}</div>
+          <div class="w-100"></div>
+          <div class="col">6th</div>
+          <div class="col">{{ form.monday_sixth }}</div>
+          <div class="col">{{ form.tuesday_sixth }}</div>
+          <div class="col">{{ form.wednesday_sixth }}</div>
+          <div class="col">{{ form.thursday_sixth }}</div>
+          <div class="col">{{ form.friday_sixth }}</div>
+          <div class="w-100"></div>
+          <div class="col">7th</div>
+          <div class="col">{{ form.monday_seventh }}</div>
+          <div class="col">{{ form.tuesday_seventh }}</div>
+          <div class="col">{{ form.wednesday_seventh }}</div>
+          <div class="col">{{ form.thursday_seventh }}</div>
+          <div class="col">{{ form.friday_seventh }}</div>
+          <div class="w-100"></div>
+          <div class="col">8th</div>
+          <div class="col">{{ form.monday_eigth }}</div>
+          <div class="col">{{ form.tuesday_eigth }}</div>
+          <div class="col">{{ form.wednesday_eigth }}</div>
+          <div class="col">{{ form.thursday_eigth }}</div>
+          <div class="col">{{ form.friday_eigth }}</div>
+        </div>
+      </div>
+      <br/>
     <input type="submit" value="Add Schedule" class="btn btn-secondary">
 </form>
 {% endblock %}
+
 

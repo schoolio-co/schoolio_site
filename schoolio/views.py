@@ -336,10 +336,18 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
     obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
-    classroom = obj.classroom
+    classroom_name = obj.classroom
+    classroom_id = obj.classroom_id
     teacher_objective = obj.objective
     teacher_subject = obj.subject
-    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom).first()
+    teacher = User.objects.get(id=username)
+    teacher_pk = teacher.id 
+    teacher_name = teacher.username
+    obj2 = school.objects.get(url=school_url)
+    school_pk = obj2.id
+    classroom_match = classroom.objects.get(Classroom=classroom_name)
+    teacher_schedule = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk, classroom=classroom_match, Subject=teacher_subject)
+    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_match).first()
     results = match_standard(obj.objective, obj.subject)
     if results:
         matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
@@ -358,76 +366,103 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
             subject =  form.cleaned_data['subject']
             week_of =  form.cleaned_data['week_of']
             standard =  form.cleaned_data['standard']
-            day = form.cleaned_data['day']
             mondayintro = form.cleaned_data['mondayintro']
             mondayactivity = form.cleaned_data['mondayactivity']
             mondaywrap_up = form.cleaned_data['mondaywrap_up']
             mondayresources = form.cleaned_data['mondayresources']
             mondayblooms = get_MI_BL(mondayactivity)
             mondayvocabulary = form.cleaned_data['mondayvocabulary']
+            mondayperiod = form.cleaned_data['mondayperiod']
+            mondayday = form.cleaned_data['mondayday']
             tuesdayintro = form.cleaned_data['tuesdayintro']
             tuesdayactivity = form.cleaned_data['tuesdayactivity']
             tuesdaywrap_up = form.cleaned_data['tuesdaywrap_up']
             tuesdayresources = form.cleaned_data['tuesdayresources']
             tuesdayblooms = get_MI_BL(tuesdayactivity)
             tuesdayvocabulary = form.cleaned_data['tuesdayvocabulary']
+            tuesdayperiod = form.cleaned_data['tuesdayperiod']
+            tuesdayday = form.cleaned_data['tuesdayday']
             wednesdayintro = form.cleaned_data['wednesdayintro']
             wednesdayactivity = form.cleaned_data['wednesdayactivity']
             wednesdaywrap_up = form.cleaned_data['wednesdaywrap_up']
             wednesdayresources = form.cleaned_data['wednesdayresources']
             wednesdayblooms = get_MI_BL(wednesdayactivity)
             wednesdayvocabulary = form.cleaned_data['wednesdayvocabulary']
+            wednesdayperiod = form.cleaned_data['wednesdayperiod']
+            wednesdayday = form.cleaned_data['wednesdayday']
             thursdayintro = form.cleaned_data['thursdayintro']
             thursdayactivity = form.cleaned_data['thursdayactivity']
             thursdaywrap_up = form.cleaned_data['thursdaywrap_up']
             thursdayresources = form.cleaned_data['thursdayresources']
             thursdayblooms = get_MI_BL(thursdayactivity)
             thursdayvocabulary = form.cleaned_data['thursdayvocabulary']
+            thursdayperiod = form.cleaned_data['thursdayperiod']
+            thursdayday = form.cleaned_data['thursdayday']
             fridayintro = form.cleaned_data['fridayintro']
             fridayactivity = form.cleaned_data['fridayactivity']
             fridaywrap_up = form.cleaned_data['fridaywrap_up']
             fridayresources = form.cleaned_data['fridayresources']
             fridayblooms = get_MI_BL(fridayactivity)
             fridayvocabulary = form.cleaned_data['fridayvocabulary']
+            fridayperiod = form.cleaned_data['fridayperiod']
+            fridayday = form.cleaned_data['fridayday']
 
-            if 'Monday' in obj.days:
-                monday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , bl=mondayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=mondayvocabulary)
+            if mondayday:
+                monday = activities.objects.create(school_lesson_id=obj, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Monday', period = mondayperiod, intro=mondayintro, activity=mondayactivity , wrap_up=mondaywrap_up , resources=mondayresources , bl=mondayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=mondayvocabulary)
                 monday.save()
-            if 'Tuesday' in obj.days:
-                tuesday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Tuesday', intro=tuesdayintro, activity=tuesdayactivity , wrap_up=tuesdaywrap_up , resources=tuesdayresources , bl=tuesdayblooms[0], mi1=tuesdayblooms[1], mi2=tuesdayblooms[2], mi3=tuesdayblooms[3], vocabulary=tuesdayvocabulary)
+            if tuesdayday:
+                tuesday = activities.objects.create(school_lesson_id=obj, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Tuesday', period = tuesdayperiod, intro=tuesdayintro, activity=tuesdayactivity , wrap_up=tuesdaywrap_up , resources=tuesdayresources , bl=tuesdayblooms[0], mi1=tuesdayblooms[1], mi2=tuesdayblooms[2], mi3=tuesdayblooms[3], vocabulary=tuesdayvocabulary)
                 tuesday.save()
-            if 'Wednesday' in obj.days:
-                wednesday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Wednesday', intro=wednesdayintro, activity=wednesdayactivity , wrap_up=wednesdaywrap_up , resources=wednesdayresources , bl=wednesdayblooms[0], mi1=wednesdayblooms[1], mi2=wednesdayblooms[2], mi3=wednesdayblooms[3], vocabulary=wednesdayvocabulary)
+            if wednesdayday:
+                wednesday = activities.objects.create(school_lesson_id=obj, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Wednesday', period = wednesdayperiod, intro=wednesdayintro, activity=wednesdayactivity , wrap_up=wednesdaywrap_up , resources=wednesdayresources , bl=wednesdayblooms[0], mi1=wednesdayblooms[1], mi2=wednesdayblooms[2], mi3=wednesdayblooms[3], vocabulary=wednesdayvocabulary)
                 wednesday.save()
-            if 'Thursday' in obj.days:
-                thursday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Thursday', intro=thursdayintro, activity=thursdayactivity , wrap_up=thursdaywrap_up , resources=thursdayresources , bl=thursdayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=thursdayvocabulary)
+            if thursdayday:
+                thursday = activities.objects.create(school_lesson_id=obj, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Thursday', period = thursdayperiod, intro=thursdayintro, activity=thursdayactivity , wrap_up=thursdaywrap_up , resources=thursdayresources , bl=thursdayblooms[0], mi1=mondayblooms[1], mi2=mondayblooms[2], mi3=mondayblooms[3], vocabulary=thursdayvocabulary)
                 thursday.save()
-            if 'Friday' in obj.days:
-                friday = activities.objects.create(school_lesson_id=school_lesson_id, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Friday', intro=fridayintro, activity=fridayactivity , wrap_up=fridaywrap_up , resources=fridayresources , bl=fridayblooms[0], mi1=fridayblooms[1], mi2=fridayblooms[2], mi3=fridayblooms[3], vocabulary=fridayvocabulary)
+            if fridayday:
+                friday = activities.objects.create(school_lesson_id=obj, weekly_goal=activity_title, subject=subject, week_of=week_of, standard=standard, day='Friday', period = fridayperiod, intro=fridayintro, activity=fridayactivity , wrap_up=fridaywrap_up , resources=fridayresources , bl=fridayblooms[0], mi1=fridayblooms[1], mi2=fridayblooms[2], mi3=fridayblooms[3], vocabulary=fridayvocabulary)
                 friday.save()
-            return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=username)
+            return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=teacher_name)
     else:
         choices = results
         form = WeeklyCreateForm()
         form.fields['standard'].initial = choices
         form.fields['subject'].initial = teacher_subject
-        form.fields['school_lesson_id'].initial = planning_id
+        form.fields['school_lesson_id'].initial = obj
         form.fields['week_of'].initial = week_of
         
-    return render(request, 'weekly_create.html', {'form': form, 'matches': matches, 'school_url': school_url, 'username': username, 'obj': obj, 'results': results})
+    return render(request, 'weekly_create.html', {'form': form, 'matches': matches, 'school_url': school_url, 'username': username, 'obj': obj, 'results': results, 'teacher_schedule':teacher_schedule, 'teacher_subject': teacher_subject, 'classroom_name': classroom_name })
 
 
 def WeeklyActivity(request, school_url=None, week_of=None, username=None):
- 
-    object2 = activities.objects.select_related().filter(week_of=week_of).order_by('subject')
+    teacher = User.objects.get(username=username)
+    teacher_pk = teacher.id 
+    teacher_name = teacher.username
+    obj2 = school.objects.get(url=school_url)
+    school_pk = obj2.id
+    teacher_schedule = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
+    object2 = activities.objects.select_related().filter(school_lesson_id__planning_teacher=teacher_pk).filter(week_of=week_of).order_by('period')
     previous = int(week_of) - 1 
     object1 = activities.objects.select_related().filter(week_of=previous)
     next_week = int(week_of) + 1 
     object3 = activities.objects.select_related().filter(week_of=next_week)
-    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'username': username, 'school_url': school_url, 'previous': previous, 'next_week': next_week})
+    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week, 'teacher_schedule': teacher_schedule })
+
+def WeeklyActivityClassroom(request, school_url=None, week_of=None, username=None, classroom_id=None):
+    teacher = User.objects.get(username=username)
+    teacher_name = teacher.username
+    classroom_match = classroom.objects.get(id=classroom_id)
+    classroom_lesson = lesson_school_info(classroom=classroom_match)
+    classroom_lesson_id = classroom_lesson.school_lesson_id
+    object2 = activities.objects.select_related().filter(week_of=week_of, school_lesson_id=classroom_lesson_id)
+    previous = int(week_of) - 1 
+    object1 = activities.objects.select_related().filter(week_of=previous, school_lesson_id=classroom_id)
+    next_week = int(week_of) + 1 
+    object3 = activities.objects.select_related().filter(week_of=next_week, school_lesson_id=classroom_id)
+    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week})
 
 
-def SingleActivity(request, school_url=None, first_id=None, activity_id=None):
+def SingleActivity(request, school_url=None, activity_id=None):
     obj = activities.objects.filter(id=activity_id)
     return render(request, 'single_activity.html', {'obj': obj, 'school_url': school_url})
 
@@ -451,6 +486,10 @@ def CreateActivity(request, school_url=None, planning_id=None, username=None):
         form = ActivityForm()
     return render(request, 'activity.html', {'form': form, 'results': results, 'obj': obj, 'teacher_objective': teacher_objective })
 
+def delete_activity(request, school_url, username, activity_id):
+    query = activities.objects.get(id=activity_id)
+    query.delete()
+    return redirect('profile', school_url=school_url, username=username)
 
 def CreateAssessment(request, school_url=None, planning_id=None, username=None):
     model = lesson_school_info
@@ -491,8 +530,15 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
     return render(request, 'student_assessment.html', {'form': form, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
 
 
+def TeacherScheduleView(request, school_url=None, username=None):
+    current_week = date.today().isocalendar()[1] 
+    school_name = school.objects.get(url=school_url)
+    school_pk = school_name.id
+    teacher = User.objects.get(username=username)
+    teacher_pk = teacher.id
+    teacher_name = teacher.username
+    teacher_weekly = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
 
-def Teacher_Schedule(request, school_url=None):
     if request.method == "POST":
         form = TeacherScheduleForm(request.POST)
         if form.is_valid():
@@ -502,17 +548,12 @@ def Teacher_Schedule(request, school_url=None):
         return redirect('teacher_scheduleview', school_url=school_url, username=username)
     else:
         form = TeacherScheduleForm()
-    return render(request, 'teacher_create.html', {'form': form, 'school_url': school_url})
+    return render(request, 'teacher_schedule.html', {'school_url': school_url, 'form': form, 'teacher_weekly': teacher_weekly, 'teacher_name': teacher_name, 'current_week': current_week})
 
-
-def TeacherScheduleView(request, school_url=None, username=None):
-    school_name = school.objects.get(url=school_url)
-    school_pk = school_name.id
-    teacher_name = User.objects.get(username=username)
-    teacher_pk = teacher_name.id
-    teacher_weekly = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
-    return render(request, 'teacher_schedule.html', {'school_url': school_url, 'teacher_weekly': teacher_weekly})
-
+def delete_schedule(request, school_url, username, schedule_id):
+    query = TeacherSchedule.objects.filter(id=schedule_id)
+    query.delete()
+    return redirect('teacher_scheduleview', school_url=school_url, username=username )
 
 def CreateUpdate(request, school_url=None):
     obj = school.objects.get(url=school_url)

@@ -133,7 +133,6 @@ class lesson_school_info(models.Model):
 	week_of = models.CharField(max_length=30)	
 	date = models.DateTimeField(default=now)
 	subject = models.CharField(max_length=100)
-	days = models.CharField(max_length=100)	
 	objective = models.TextField(max_length=500)
 	planning_teacher = models.CharField(max_length=30)
 
@@ -146,7 +145,10 @@ class lesson_school_info(models.Model):
 
 		
 class activities(models.Model):
-	school_lesson_id = models.IntegerField()
+	school_lesson_id = models.ForeignKey(lesson_school_info, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
 	weekly_goal = models.CharField(max_length=500)
 	subject =  models.CharField(max_length=500)
 	week_of =  models.CharField(max_length=5)
@@ -161,7 +163,7 @@ class activities(models.Model):
 	mi3 = models.CharField(max_length=50)
 	vocabulary = models.CharField(max_length=100)
 	day = models.CharField(max_length=100)
-	
+	period = models.CharField(max_length=50)
 
 	def __str__(self):
 		return "%s" % (self.intro)

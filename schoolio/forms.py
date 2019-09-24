@@ -158,14 +158,6 @@ class AddStudentClassroomForm(forms.ModelForm):
         readonly_fields = ('Classroom',)
 
 class SchoolLessonForm(forms.ModelForm):
-    DAY_CHOICES=[
-        ('Monday', 'Monday'),
-        ('Tuesday', 'Tuesday'),
-        ('Wednesday', 'Wednesday'),
-        ('Thursday', 'Thursday'),
-        ('Friday', 'Friday'),
-    ]
-    days = forms.MultipleChoiceField(choices=DAY_CHOICES, widget=forms.CheckboxSelectMultiple)
 
 
     class Meta:
@@ -186,30 +178,40 @@ class WeeklyCreateForm(forms.Form):
     mondayresources = forms.CharField(max_length=500, required=False)
     mondayblooms = forms.CharField(max_length=500, required=False)
     mondayvocabulary = forms.CharField(max_length=30, required=False)
+    mondayday = forms.CharField(max_length=30, required=False)
+    mondayperiod = forms.CharField(max_length=30, required=False)
     tuesdayintro = forms.CharField(max_length=500, required=False)
     tuesdayactivity = forms.CharField(max_length=1000, required=False)
     tuesdaywrap_up = forms.CharField(max_length=500, required=False)
     tuesdayresources = forms.CharField(max_length=500, required=False)
     tuesdayblooms = forms.CharField(max_length=500, required=False)
     tuesdayvocabulary = forms.CharField(max_length=30, required=False)
+    tuesdayperiod = forms.CharField(max_length=30, required=False)
+    tuesdayday = forms.CharField(max_length=30, required=False)
     wednesdayintro = forms.CharField(max_length=500, required=False)
     wednesdayactivity = forms.CharField(max_length=1000, required=False)
     wednesdaywrap_up = forms.CharField(max_length=500, required=False)
     wednesdayresources = forms.CharField(max_length=500, required=False)
     wednesdayblooms = forms.CharField(max_length=500, required=False)
     wednesdayvocabulary = forms.CharField(max_length=30, required=False)
+    wednesdayperiod = forms.CharField(max_length=30, required=False)
+    wednesdayday = forms.CharField(max_length=30, required=False)
     thursdayintro = forms.CharField(max_length=500, required=False)
     thursdayactivity = forms.CharField(max_length=1000, required=False)
     thursdaywrap_up = forms.CharField(max_length=500, required=False)
     thursdayresources = forms.CharField(max_length=500, required=False)
     thursdayblooms = forms.CharField(max_length=500, required=False)
     thursdayvocabulary = forms.CharField(max_length=30, required=False)
+    thursdayperiod = forms.CharField(max_length=30, required=False)
+    thursdayday = forms.CharField(max_length=30, required=False)
     fridayintro = forms.CharField(max_length=500, required=False)
     fridayactivity = forms.CharField(max_length=1000, required=False)
     fridaywrap_up = forms.CharField(max_length=500, required=False)
     fridayresources = forms.CharField(max_length=500, required=False)
     fridayblooms = forms.CharField(max_length=500, required=False)
     fridayvocabulary = forms.CharField(max_length=30, required=False)
+    fridayperiod = forms.CharField(max_length=30, required=False)
+    fridayday = forms.CharField(max_length=30, required=False)
 
 
 class AssessmentForm(forms.ModelForm):

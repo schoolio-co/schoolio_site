@@ -1,19 +1,28 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 <h3>Lesson School</h3>
-<h5><a href="{% url 'teacher_schedule' school_url=school_url %}">Edit Schedule</a>
-</h5>
 
-{% for schedule in teacher_weekly %}
-<p>{{ schedule.classroom }} - {{ schedule.Subject}}</p>
-{% endfor %}
+<ul class="nav nav-tabs">
+        {% for schedule in teacher_weekly %}
+        <li><a data-toggle="pill" class="primary-btn2 text-uppercase enroll rounded-0 text-black"  href="#{{ schedule.classroom }}{{ schedule.Subject}}">{{ schedule.classroom }} - {{ schedule.Subject}}</a></li>
+        <br/>
+        {% endfor %}
+      </ul>
+      
+      <div class="tab-content">
+            {% for schedule in teacher_weekly %}
+        <div id="{{ schedule.classroom }}{{ schedule.Subject}}" class="tab-pane fade">
+          <h3>{{ schedule.classroom }} - {{ schedule.Subject}}</h3>
+          <p>{% if form %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Submit">
+                </form>
+                {% endif %}</p>
+        </div>
+        {% endfor %}
+      </div>
 
-{% if form %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-{% endif %}
 
 {% endblock %}

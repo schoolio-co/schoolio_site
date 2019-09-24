@@ -14,17 +14,13 @@
                                 <ul class="course_list">
                                         {% if obj.is_teacher or obj.is_admin %}
                                     <li class="justify-content-between d-flex">
-                                        <p>School Lesson</p>
-                                        <a class="primary-btn text-uppercase" href="{% url 'school_lesson' school_url=school_url username=obj.username %}">Create Lesson</a>
-                                    </li>
-                                    <li class="justify-content-between d-flex">
                                         <p>Weekly Lessons</p>
                                         <a class="primary-btn text-uppercase" href="{% url 'weekly_activity' school_url=school_url username=obj.username week_of=current_week %}">View By Week</a>
                                     </li>
                                     <li class="justify-content-between d-flex">
-                                        <p>Teacher Schedule</p>
-                                        <a class="primary-btn text-uppercase" href="{% url 'teacher_schedule' school_url=school_url %}">Teacher Schedule</a>
-                                    </li>
+                                            <p>Teacher Schedule View</p>
+                                            <a class="primary-btn text-uppercase" href="{% url 'teacher_scheduleview' school_url=school_url username=user.username %}">Teacher Schedule</a>
+                                        </li>
                                     {% endif %}
                                 </ul>
                             </div>

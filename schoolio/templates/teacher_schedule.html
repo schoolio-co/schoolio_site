@@ -1,287 +1,726 @@
 {% extends 'basetwo.html' %}
 {% block content %}
-<h2>{{ teacher_weekly.teacher }} Schedule</h2>
-{% for schedule in teacher_weekly %}
+<h2>{{ teacher_name }} Schedule</h2>
 
 <div class="form-row">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-2">      
+{% for schedule in teacher_weekly %}
 {% if schedule.monday_first is True %}
-<p>First Period</p>
+<p>Monday - First</p>
 <div class="dropdown">
         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
+        </button> 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
+          <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
         </div>
       </div>
 {% endif %}
-{% if schedule.monday_second is True %}
-<p>Second Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_third is True %}
-<p>Third Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_fourth is True %}
-<p>Fourth Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_fifth is True %}
-<p>Fifth Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_sixth is True %}
-<p>Sixth Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_seventh is True %}
-<p>Seventh Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-{% if schedule.monday_eight is True %}
-<p>Eight Period</p>
-<div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ schedule.classroom }} - {{ schedule.Subject }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
-      </div>
-{% endif %}
-</div>
-        <div class="form-group col-md-2">
-        {% if schedule.tuesday_first is True %}
-        <p>First Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_second is True %}
-        <p>Second Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_third is True %}
-        <p>Third Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_fourth is True %}
-        <p>Fourth Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_fifth is True %}
-        <p>Fifth Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_sixth is True %}
-        <p>Sixth Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_seventh is True %}
-        <p>Seventh Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        {% if schedule.tuesday_eight is True %}
-        <p>Eight Period</p>
-        <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-        <li>{{ schedule.Subject }}</li>
-        {% endif %}
-        </div>
-        <div class="form-group col-md-2">
-                {% if schedule.wednesday_first is True %}
-                <p>First Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_second is True %}
-                <p>Second Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_third is True %}
-                <p>Third Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_fourth is True %}
-                <p>Fourth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_fifth is True %}
-                <p>Fifth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_sixth is True %}
-                <p>Sixth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_seventh is True %}
-                <p>Seventh Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.wednesday_eight is True %}
-                <p>Eight Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-        </div>
-        <div class="form-group col-md-2">
-                {% if schedule.thursday_first is True %}
-                <p>First Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_second is True %}
-                <p>Second Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_third is True %}
-                <p>Third Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_fourth is True %}
-                <p>Fourth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_fifth is True %}
-                <p>Fifth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_sixth is True %}
-                <p>Sixth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_seventh is True %}
-                <p>Seventh Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.thursday_eight is True %}
-                <p>Eight Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-        </div>
-        <div class="form-group col-md-2">
-                {% if schedule.friday_first is True %}
-                <p>First Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_second is True %}
-                <p>Second Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_third is True %}
-                <p>Third Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_fourth is True %}
-                <p>Fourth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_fifth is True %}
-                <p>Fifth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_sixth is True %}
-                <p>Sixth Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_seventh is True %}
-                <p>Seventh Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-                {% if schedule.friday_eight is True %}
-                <p>Eight Period</p>
-                <li><a href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">{{ schedule.classroom }}</a></li>
-                <li>{{ schedule.Subject }}</li>
-                {% endif %}
-        </div>
-    </div>
 {% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_second is True %}
+<p>Monday - Second</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+        <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=user.username week_of=current_week classroom_id=schedule.classroom_id %}">View Lessons</a>
+        <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_third is True %}
+<p>Monday - Third</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_fourth is True %}
+<p>Monday - Fourth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_fifth is True %}
+<p>Monday - Fifth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_sixth is True %}
+<p>Monday - Sixth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_seventh is True %}
+<p>Monday - Seventh</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_eight is True %}
+<p>Monday - Eight</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+</div>
 
-    
+        <div class="form-group col-md-2">
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_first is True %}
 
+<p>Tuesday - First</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_second is True %}
+<p>Tuesday - Second</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_third is True %}
+<p>Tuesday - Third</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_fourth is True %}
+<p>Tuesday - Fourth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_fifth is True %}
+<p>Tuesday - Fifth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_sixth is True %}
+<p>Tuesday - Sixth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_seventh is True %}
+<p>Tuesday - Seventh</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.tuesday_eight is True %}
+<p>Tuesday - Eight</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+</div>
 
+        <div class="form-group col-md-2">
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_first is True %}
+
+<p>Wednesday - First</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_second is True %}
+<p>Wednesday - Second</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_third is True %}
+<p>Wednesday - Third</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_fourth is True %}
+<p>Wednesday - Fourth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_fifth is True %}
+<p>Wednesday - Fifth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_sixth is True %}
+<p>Wednesday - Sixth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.wednesday_seventh is True %}
+<p>Wednesday - Seventh</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.monday_eight is True %}
+<p>Wednesday - Eight</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+</div>
+
+        <div class="form-group col-md-2">
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_first is True %}
+
+<p>Thursday - First</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_second is True %}
+<p>Thursday - Second</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_third is True %}
+<p>Thursday - Third</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_fourth is True %}
+<p>Thursday - Fourth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_fifth is True %}
+<p>Thursday - Fifth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_sixth is True %}
+<p>Thursday - Sixth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_seventh is True %}
+<p>Thursday - Seventh</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.thursday_eight is True %}
+<p>Thursday - Eight</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+</div>
+
+        <div class="form-group col-md-2">
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_first is True %}
+<p>Friday - First</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_second is True %}
+<p>Friday - Second</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_third is True %}
+<p>Friday - Third</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_fourth is True %}
+<p>Friday - Fourth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_fifth is True %}
+<p>Friday - Fifth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_sixth is True %}
+<p>Friday - Sixth</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_seventh is True %}
+<p>Friday - Seventh</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+{% for schedule in teacher_weekly %}
+{% if schedule.friday_eight is True %}
+<p>Friday - Eight</p>
+<div class="dropdown">
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ schedule.classroom }} - {{ schedule.Subject }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="#">Edit Schedule</a>
+          <a class="dropdown-item" href="#">Add Assessment</a>
+        </div>
+      </div>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+<br/>
+<br/>
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Add to Teacher Schedule
+  </a>
+  <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+{{ form.non_field_errors }}
+<form method="POST">
+    {% csrf_token %}
+<div class="fieldWrapper">
+    {{ form.classroom.errors }}
+    <label">Classroom:</label>
+    {{ form.classroom }}
+</div>
+<div class="fieldWrapper">
+    {{ form.Subject.errors }}
+    <label">Subject:</label>
+    {{ form.Subject }}
+</div>
+<div class="fieldWrapper">
+    {{ form.teacher.errors }}
+    <label">Teacher:</label>
+    {{ form.teacher }}
+</div>
+<div class="fieldWrapper">
+        {{ form.school.errors }}
+        <label">School:</label>
+        {{ form.school }}
+    </div>
+<br/>
+<div class="container">
+        <div class="row">
+          <div class="col">-</div>
+          <div class="col">Mon</div>
+          <div class="col">Tues</div>
+          <div class="col">Wed</div>
+          <div class="col">Thurs</div>
+          <div class="col">Fri</div>
+          <div class="w-100"></div>
+          <div class="col">1st</div>
+          <div class="col">{{ form.monday_first }}</div>
+          <div class="col">{{ form.tuesday_first }}</div>
+          <div class="col">{{ form.wednesday_first }}</div>
+          <div class="col">{{ form.thursday_first }}</div>
+          <div class="col">{{ form.friday_first }}</div>
+          <div class="w-100"></div>
+          <div class="col">2nd</div>
+          <div class="col">{{ form.monday_second }}</div>
+          <div class="col">{{ form.tuesday_second }}</div>
+          <div class="col">{{ form.wednesday_second }}</div>
+          <div class="col">{{ form.thursday_second }}</div>
+          <div class="col">{{ form.friday_second }}</div>
+          <div class="w-100"></div>
+          <div class="col">3rd</div>
+          <div class="col">{{ form.monday_third }}</div>
+          <div class="col">{{ form.tuesday_third }}</div>
+          <div class="col">{{ form.wednesday_third }}</div>
+          <div class="col">{{ form.thursday_third }}</div>
+          <div class="col">{{ form.friday_third }}</div>
+          <div class="w-100"></div>
+          <div class="col">4th</div>
+          <div class="col">{{ form.monday_fourth }}</div>
+          <div class="col">{{ form.tuesday_fourth }}</div>
+          <div class="col">{{ form.wednesday_fourth }}</div>
+          <div class="col">{{ form.thursday_fourth }}</div>
+          <div class="col">{{ form.friday_fourth }}</div>
+          <div class="w-100"></div>
+          <div class="col">5th</div>
+          <div class="col">{{ form.monday_fifth }}</div>
+          <div class="col">{{ form.tuesday_fifth }}</div>
+          <div class="col">{{ form.wednesday_fifth }}</div>
+          <div class="col">{{ form.thursday_fifth }}</div>
+          <div class="col">{{ form.friday_fifth }}</div>
+          <div class="w-100"></div>
+          <div class="col">6th</div>
+          <div class="col">{{ form.monday_sixth }}</div>
+          <div class="col">{{ form.tuesday_sixth }}</div>
+          <div class="col">{{ form.wednesday_sixth }}</div>
+          <div class="col">{{ form.thursday_sixth }}</div>
+          <div class="col">{{ form.friday_sixth }}</div>
+          <div class="w-100"></div>
+          <div class="col">7th</div>
+          <div class="col">{{ form.monday_seventh }}</div>
+          <div class="col">{{ form.tuesday_seventh }}</div>
+          <div class="col">{{ form.wednesday_seventh }}</div>
+          <div class="col">{{ form.thursday_seventh }}</div>
+          <div class="col">{{ form.friday_seventh }}</div>
+          <div class="w-100"></div>
+          <div class="col">8th</div>
+          <div class="col">{{ form.monday_eigth }}</div>
+          <div class="col">{{ form.tuesday_eigth }}</div>
+          <div class="col">{{ form.wednesday_eigth }}</div>
+          <div class="col">{{ form.thursday_eigth }}</div>
+          <div class="col">{{ form.friday_eigth }}</div>
+        </div>
+      </div>
+      <br/>
+    <input type="submit" value="Add Schedule" class="btn btn-secondary">
+</form>
+</div>
+</div>
 {% endblock %}
