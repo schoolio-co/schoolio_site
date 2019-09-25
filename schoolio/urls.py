@@ -184,9 +184,14 @@ urlpatterns = [
         view=UserList,
         name='user_list'),
 
+
     url(r'^blog/$',
         view=blog.as_view(),
         name='blog'),
 
+
+    url(r'(?P<school_url>[\w-]+)',
+        view=School_Profile.as_view(),
+        name='school_profile'),
 
 ]
