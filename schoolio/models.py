@@ -177,6 +177,10 @@ class assessments(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
+	school_lesson_id = models.ForeignKey(lesson_school_info, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
 	assessment = models.CharField(max_length=150)
 	is_formal = models.BooleanField(default=False)
 	is_final = models.BooleanField(default=False)
@@ -185,7 +189,10 @@ class assessments(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	assessment_total = models.IntegerField()
+	total_possible = models.IntegerField()
+	lu_low = models.CharField(max_length=30)
+	lu_med = models.CharField(max_length=30)
+	lu_high = models.CharField(max_length=30)
 
 	def __str__(self):
 		return "%s" % (self.pk)
@@ -198,25 +205,11 @@ class student_assessment(models.Model):
 	student = models.ManyToManyField(student_profiles,
 							blank=True,)
 	assessment_mark = models.IntegerField()
+	assessment_score = models.IntegerField()
+	understanding_level = models.CharField(max_length=100)
 
 	def __str__(self):
 		return "%s" % (self.student)
-
-class classroom_averages(models.Model):
-	classroom = models.ForeignKey(classroom, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	subject = models.ForeignKey(subjects, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	mi_one = models.CharField(max_length=30)
-	mi_two = models.CharField(max_length=30)
-	mi_three = models.CharField(max_length=30)
-	lu_low = models.CharField(max_length=30)
-	lu_med = models.CharField(max_length=30)
-	lu_high = models.CharField(max_length=30)
 
 class classroom_subject_summary(models.Model):
 	classroom = models.ForeignKey(classroom,
