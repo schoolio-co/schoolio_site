@@ -1,2 +1,2 @@
 
-web: newrelic-admin run-program gunicorn base.wsgi
+web: gunicorn base.wsgi
