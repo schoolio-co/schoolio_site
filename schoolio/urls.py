@@ -184,11 +184,20 @@ urlpatterns = [
         view=UserList,
         name='user_list'),
 
-
     url(r'^blog/$',
         view=blog.as_view(),
         name='blog'),
 
+    url(r'^cal_index/$', 
+        view=cal_index, name='cal_index'),
+
+    url(r'^cal_search/$', 
+        view=EventSearchListView.as_view(), 
+        name='event_search_list_view'),
+    
+    url(r'^calendar/$', 
+        view=CalendarView.as_view(), 
+        name='calendar'),
 
     url(r'(?P<school_url>[\w-]+)',
         view=School_Profile.as_view(),
