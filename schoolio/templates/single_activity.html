@@ -18,6 +18,7 @@
 	<li>{{j.vocabulary}}</li>
     <li>{{j.day }}</li>
     <li>{{j.id }}</li>
+    
 
     <li><a href="{% url 'assessment' school_url=school_url planning_id=j.school_lesson_id %}">Assessment</a></li>
     <li><a href="{% url 'delete_activity' school_url=school_url username=user.username activity_id=j.id %}">Delete Activity</a></li>

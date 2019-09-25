@@ -20,7 +20,6 @@
           <div class="card">
               <div class="card-body">
                 <h5 class="card-title">{{ x.subject }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
                 <p class="card-text">{{ x.activity}}</p>
                 <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
                
@@ -36,7 +35,6 @@
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ x.subject }}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
                     </div>
@@ -51,7 +49,6 @@
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ x.subject }}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
                     </div>
@@ -66,7 +63,6 @@
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ x.subject }}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
                     </div>
@@ -81,7 +77,6 @@
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">{{ x.subject }}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{ x.period }} period</h6>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
                     </div>
@@ -98,5 +93,5 @@
         {% endif %} 
       </div>
     </div>
-<br/>
+<br>
 {% endblock %}

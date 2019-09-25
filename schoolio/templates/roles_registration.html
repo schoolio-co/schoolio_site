@@ -1,11 +1,51 @@
 {% extends 'basetwo.html' %}
+{% load static %}
 {% block content %}
 
-<h3>School Profile</h3> 
+<h3>Let's Get Started!</h3> 
 
-<li><a href="{% url 'admin_register' school_url=school_url %}">Register Administrator</a></li>
-<li><a href="{% url 'teacher_register' school_url=school_url %}">Register Teacher</a></li>
-<li><a href="{% url 'parent_register' school_url=school_url %}">Register Parent</a></li>
-<li><a href="{% url 'student_register' school_url=school_url %}">Register Student</a></li>
+<div class="form-row">
+<div class="form-group col-md-3">
+<div class="card">
+    <img class="card-img-top" src="{% static 'img/student1.png' %}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">I'm a Student</h5>
+        <p class="card-text">Gain Access to Online Learning Support, Set personal learning goals, Share photos with your classmates and keep updated on exams schedules as well as upcoming events </p>
+        <a href="{% url 'student_register' school_url=school_url %}" class="btn btn-primary">Register as Student</a>
+    </div>
+</div>
+</div>
+<div class="form-group col-md-3">
+<div class="card">
+    <img class="card-img-top" src="{% static 'img/parent1.png' %}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">I'm a Parent</h5>
+        <p class="card-text">Track your child's progress, communicate with teachers, and receive reminders for upcoming events, exams, and assignments.</p>
+        <a href="{% url 'parent_register' school_url=school_url %}" class="btn btn-primary">Register as Parent</a>
+    </div>
+</div>
+</div>
+<div class="form-group col-md-3">
+<div class="card">
+    <img class="card-img-top" src="{% static 'img/teacher1.png' %}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">I'm a Teacher</h5>
+        <p class="card-text">Plan and Assess Activities, track student performance and manage curriculum implementation.</p>
+        <a href="{% url 'teacher_register' school_url=school_url %}" class="btn btn-primary">Register as Teacher</a>
+    </div>
+</div>
+</div>
+<div class="form-group col-md-3">
+<div class="card">
+    <img class="card-img-top" src="{% static 'img/principal1.png' %}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">I'm an Administrator</h5>
+        <p class="card-text">Review Student performance accross all grade levels, management standards over the Academic Year, connects the school, teachers, and parents to support students.</p>
+        <a href="{% url 'admin_register' school_url=school_url %}" class="btn btn-primary">Register as Administrator</a>
+    </div>
+</div>
+</div>
+</div>
 
 {% endblock %}
+

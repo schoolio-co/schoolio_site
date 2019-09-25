@@ -3,6 +3,7 @@ from django.utils.timezone import now
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
+
 class school(models.Model):
 	name = models.CharField(max_length=30)
 	address = models.TextField(max_length=250)
@@ -167,6 +168,8 @@ class activities(models.Model):
 
 	def __str__(self):
 		return "%s" % (self.intro)
+
+
 
 
 class assessments(models.Model):
