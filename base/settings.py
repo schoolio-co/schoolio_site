@@ -59,10 +59,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'schoolio',
     "pinax.messages",
-    'multichoice',
-    'true_false',
     "cal",
-    'essay',
 ]
 
 

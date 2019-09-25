@@ -13,9 +13,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
 from .views import SchoolRegistration, WeeklyActivityClassroom, delete_activity, TeacherScheduleView, delete_schedule, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
-from quiz.views import elearning, landing, blog, user_profile, QuizListView, CategoriesListView, \
-    ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
-    QuizMarkingDetail, QuizDetailView, QuizTake
+from quiz.views import landing, blog
 
 from django.contrib.auth import views as auth_views
 from pinax.messages.views import *
@@ -186,66 +184,9 @@ urlpatterns = [
         view=UserList,
         name='user_list'),
 
-        url(r'^elearning$',
-        view=elearning.as_view(),
-        name='elearning'),
-
-
     url(r'^blog/$',
         view=blog.as_view(),
         name='blog'),
 
-     url(r'^profile/$',
-        view=user_profile.as_view(),
-        name='profile'),
-
-    url(r'^quizzes/$',
-        view=QuizListView.as_view(),
-        name='quiz_index'),
-
-    url(r'^cal_index/$', 
-        view=cal_index, name='cal_index'),
-
-    url(r'^cal_search/$', 
-        view=EventSearchListView.as_view(), 
-        name='event_search_list_view'),
-    
-    url(r'^calendar/$', 
-        view=CalendarView.as_view(), 
-        name='calendar'),
-
-    url(r'^category/$',
-        view=CategoriesListView.as_view(),
-        name='quiz_category_list_all'),
-
-    url(r'category/(?P<category_name>[\w|\W-]+)/$',
-        view=ViewQuizListByCategory.as_view(),
-        name='quiz_category_list_matching'),
-
-    url(r'^progress/$',
-        view=QuizUserProgressView.as_view(),
-        name='quiz_progress'),
-
-    url(r'^marking/$',
-        view=QuizMarkingList.as_view(),
-        name='quiz_marking'),
-
-    url(r'^marking/(?P<pk>[\d.]+)/$',
-        view=QuizMarkingDetail.as_view(),
-        name='quiz_marking_detail'),
-
-    #  passes variable 'quiz_name' to quiz_take view
-    url(r'quizzes/(?P<slug>[\w-]+)/$',
-        view=QuizDetailView.as_view(),
-        name='quiz_start_page'),
-
-    url(r'quizzes/(?P<quiz_name>[\w-]+)/take/$',
-        view=QuizTake.as_view(),
-        name='quiz_question'),
-
-
-    url(r'(?P<school_url>[\w-]+)',
-        view=School_Profile.as_view(),
-        name='school_profile'),
 
 ]
