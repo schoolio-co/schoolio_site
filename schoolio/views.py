@@ -42,14 +42,19 @@ class RoleRegistrations(TemplateView):
 
 
 def Import_Data(request, *args, **kwargs):
+    path = 'schoolio/standards/Grade One.csv'
+    with open(path) as f:
+        for line in f:
+            line = line.split(',') 
+            obj, created = standards.objects.get_or_create(subject=line[0], standard=line[1], skill_topic=line[2], objective=line[3], competency=line[4])
+            obj.save()
     path2 = 'schoolio/standards/students_full.csv'
-    school_name = school.objects.get(url='gardner')
+    school_name = school.objects.get(id=1)
     with open(path2) as f:
         for line in f:
             line = line.split(',') 
             obj2, created = student_profiles.objects.get_or_create(first_name=line[0], last_name=line[1], student_ref=line[3], grade_level=line[5], school=school_name)
             obj2.save()
-            
     return render(request, 'import.html')
 
 
@@ -316,7 +321,7 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
         if form.is_valid():
             prev = form.save(commit=False)
             week_of = prev.week_of
-            subject_summary = classroom_subject_summary.objects.create(classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
+            subject_summary = classroom_subject_summary.objects.create(lesson_id = prev.school_lesson_id, classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
             subject_summary.save() 
             prev.save()
             return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
@@ -349,7 +354,7 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
     subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_match).first()
     results = match_standard(obj.objective, obj.subject)
     if results:
-        matches = match_activity(classroom, teacher_objective, results[0][0], teacher_subject)
+        matches = match_activity(classroom_match, teacher_objective, results[0][0], teacher_subject)
         matches = list(map(lambda x: x[0], matches))
     else:
         matches = []

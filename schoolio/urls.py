@@ -60,7 +60,7 @@ urlpatterns = [
         view=RoleRegistrations.as_view(),
         name='role_registration'),
 
-    url(r'^import/$',
+    url(r'import/import/',
         view=Import_Data,
         name='import'),
 

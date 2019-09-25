@@ -7,6 +7,7 @@ from .models import standards, activities, classroom_subject_summary
 from .evaluate import get_MI_BL
 import numpy.random
 
+
 pd.set_option('display.max_colwidth', -1)
 count_vect = CountVectorizer()
 
@@ -56,7 +57,7 @@ def match_activity(classroom_id, teacher_objective, standard, subject):
                 # activity = ''.join(str(i) for i in activity)
                
                 bl, mi1, mi2, mi3 = activity.bl, activity.mi1, activity.mi2, activity.mi3
-                result = 2*numpy.random() - classroom_bl[bl] + classroom_mi[mi1] + \
+                result = 2*numpy.random.random() - classroom_bl[bl] + classroom_mi[mi1] + \
                          classroom_mi[mi2] + classroom_mi[mi3]
                 total = activity, result
                 prediction.append(total)

@@ -223,6 +223,10 @@ class classroom_subject_summary(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
+	lesson_id = models.ForeignKey(lesson_school_info,
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
 	subject = models.TextField()
 	lu_level = models.FloatField(null=True, blank=True)
 	mu_level = models.FloatField(null=True, blank=True)
