@@ -17,8 +17,6 @@ from django.db import transaction
 from django.contrib import messages 
 from datetime import date
 from django import views
-import plotly.offline as opy
-import plotly.graph_objs as go
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from .forms import SchoolForm, TeacherScheduleForm, StudentAssessmentForm, AdministratorForm, AddStudentClassroomForm, TeacherForm, ParentForm, StudentForm, GradeForm, ClassroomForm, ActivityForm, AssessmentForm, SchoolLessonForm, ClassroomSubjectSummaryForm, WeeklyCreateForm, CreateUpdateForm
@@ -41,26 +39,6 @@ class RoleRegistrations(TemplateView):
 
     def get(self,request,school_url):
         return render(request, 'roles_registration.html', {'school_url': school_url})
-
-class Graph(TemplateView):
-    template_name = 'graph.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(Graph, self).get_context_data(**kwargs)
-
-        x = [-2,0,4,6,7]
-        y = [q**2-q+3 for q in x]
-        trace1 = go.Scatter(x=x, y=y, marker={'color': 'red', 'symbol': 104, 'size': 10},
-                            mode="lines",  name='1st Trace')
-
-        data=go.Data([trace1])
-        layout=go.Layout(title="Meine Daten", xaxis={'title':'x1'}, yaxis={'title':'x2'})
-        figure=go.Figure(data=data,layout=layout)
-        div = opy.plot(figure, auto_open=False, output_type='div')
-
-        context['graph'] = div
-
-        return context
 
 
 def Import_Data(request, *args, **kwargs):
