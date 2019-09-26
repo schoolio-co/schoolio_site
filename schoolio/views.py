@@ -264,8 +264,9 @@ def create_classroom(request, school_url=None):
 
 def SingleClassroom(request, school_url=None, classroom_id=None):
     classroom_id = classroom_id
-    obj = classroom.objects.get(id=classroom_id)
-    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_id)
+    obj = classroom.objects.get(Classroom=classroom_id)
+    classroom_pk = obj.id
+    subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_pk)
 
     return render(request, 'classroom.html', {'obj': obj, 'school_url': school_url, 'subject_summary':subject_summary })
 
