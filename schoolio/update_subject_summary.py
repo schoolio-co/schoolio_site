@@ -28,3 +28,23 @@ def get_understanding_level(assessment_id, student_id):
          getattr(ss_obj, ss_attrs[st_assess_obj.understanding_level])+1)
     labels = (None, 'Low', 'Med', 'High')
     return labels[understanding_level]
+
+def update_MI(lesson_id):
+    ss_obj = classroom_subject_summary.objects.all().filter(
+             lesson_id = lesson_id)[0]
+    for activity_obj in activities.objects.all().filter(
+             school_lesson_id = lesson_id):
+        mi_to_ss_attr = {
+"Logical - Mathematical"  : "logical_level",
+"Verbal - Linguistic"     : "linguistic_level",
+"Bodily Kinesthetic"      : "kinesthetic_level",
+"Musical"                 : "musical_level",
+"Visual Spatial"          : "visual_level",
+"Naturalist"              : "naturalist_level",
+"Interpersonal"           : "group_level",
+"Intrapersonal"           : "independent_level"
+}
+        for mi in activity_obj.mi1, activity_obj.mi2, activity_obj.mi3: 
+            attr = mi_to_ss_attr[mi]
+            setattr(ss_obj, attr, getattr(ss_obj, attr)+1)
+
