@@ -251,9 +251,9 @@ class assessments(models.Model):
 							blank=True,
         					null=True)
 	total_possible = models.IntegerField()
-	lu_low = models.CharField(max_length=30)
-	lu_med = models.CharField(max_length=30)
-	lu_high = models.CharField(max_length=30)
+	lu_low  = models.IntegerField(default = 0)
+	lu_med  = models.IntegerField(default = 0)
+	lu_high = models.IntegerField(default = 0)
 
 	def __str__(self):
 		return "%s" % (self.pk)
@@ -269,7 +269,7 @@ class student_assessment(models.Model):
         					null=True)
 	assessment_mark = models.IntegerField()
 	assessment_score = models.IntegerField()
-	understanding_level = models.CharField(max_length=100)
+	understanding_level = models.IntegerField(default = 0)
 
 	def __str__(self):
 		return "%s" % (self.student)

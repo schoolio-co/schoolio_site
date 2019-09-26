@@ -55,10 +55,10 @@ def match_activity(classroom_id, teacher_objective, standard, subject):
 }
         for activity in obj:
                 # activity = ''.join(str(i) for i in activity)
-               
+                bl_total = float(cr_ss.lu_level + cr_ss.mu_level + cr_ss.hu_level)
                 bl, mi1, mi2, mi3 = activity.bl, activity.mi1, activity.mi2, activity.mi3
-                result = 2*numpy.random.random() - classroom_bl[bl] + classroom_mi[mi1] + \
-                         classroom_mi[mi2] + classroom_mi[mi3]
+                result = 2*numpy.random.random() - (classroom_bl[bl]/bl_total) + \
+                         classroom_mi[mi1] + classroom_mi[mi2] + classroom_mi[mi3]
                 total = activity, result
                 prediction.append(total)
         prediction.sort(key=lambda x: x[1], reverse=True)
