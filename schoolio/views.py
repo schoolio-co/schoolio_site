@@ -142,8 +142,6 @@ def Student_Register(request, school_url=None, username=None):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            student_profile = student_profiles.objects.create(user=user)
-            student_profile.save()
             return render(request, 'register.html', {'username': username, 'school_url': school_url})
 
     else:
@@ -201,13 +199,13 @@ class Student_Profiles(TemplateView):
     template_name = "student_profiles.html"
     
     def get(self,request,school_url):
-        obj = student_profiles.objects.all()
+        obj = student_profiles.objects.fiter(school=school_url)
         return render(request, 'student_profiles.html', {'obj': obj, 'school_url': school_url})
 
 def Student_Profile(request, school_url=None, student_id=None):
     obj = student_profiles.objects.get(id=student_id)
-
-    return render(request, 'student_profile.html', {'obj': obj, 'school_url': school_url})
+    obj2 = student_assessment.objects.filter(student=obj).order_by('assessment')
+    return render(request, 'student_profile.html', {'obj': obj, 'obj2': obj2, 'school_url': school_url})
 
 def UserList(request,school_url=None):
     obj = school.objects.get(url=school_url)
@@ -455,14 +453,14 @@ def WeeklyActivity(request, school_url=None, week_of=None, username=None):
 def WeeklyActivityClassroom(request, school_url=None, week_of=None, username=None, classroom_id=None):
     teacher = User.objects.get(username=username)
     teacher_name = teacher.username
-    classroom_match = classroom.objects.get(id=classroom_id)
+    classroom_match = classroom.objects.get(Classroom=classroom_id)
     classroom_lesson = lesson_school_info(classroom=classroom_match)
-    classroom_lesson_id = classroom_lesson.school_lesson_id
-    object2 = activities.objects.select_related().filter(week_of=week_of, school_lesson_id=classroom_lesson_id)
+    classroom_lesson_num = classroom_lesson.school_lesson_id
+    object2 = activities.objects.select_related().filter(week_of=week_of, school_lesson_id=classroom_lesson_num)
     previous = int(week_of) - 1 
-    object1 = activities.objects.select_related().filter(week_of=previous, school_lesson_id=classroom_id)
+    object1 = activities.objects.select_related().filter(week_of=previous, school_lesson_id=classroom_lesson_num)
     next_week = int(week_of) + 1 
-    object3 = activities.objects.select_related().filter(week_of=next_week, school_lesson_id=classroom_id)
+    object3 = activities.objects.select_related().filter(week_of=next_week, school_lesson_id=classroom_lesson_num)
     return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week})
 
 
@@ -552,7 +550,7 @@ def TeacherScheduleView(request, school_url=None, username=None):
         return redirect('teacher_scheduleview', school_url=school_url, username=username)
     else:
         form = TeacherScheduleForm()
-    return render(request, 'teacher_schedule.html', {'school_url': school_url, 'form': form, 'teacher_weekly': teacher_weekly, 'teacher_name': teacher_name, 'current_week': current_week})
+    return render(request, 'teacher_schedule.html', {'school_url': school_url, 'form': form, 'teacher_weekly': teacher_weekly, 'teacher_name': teacher_name, 'teacher_pk':teacher_pk, 'current_week': current_week})
 
 def delete_schedule(request, school_url, username, schedule_id):
     query = TeacherSchedule.objects.filter(id=schedule_id)

@@ -1,17 +1,20 @@
 {% extends 'basetwo.html' %}
 {% block content %}
 
-<h3>Class Profile</h3> 
-<p>{{ obj.Classroom }}</p>
-<p>{{ obj.grade_level }}</p>
-<p>{{ obj.school }}</p>
+<section class="course_details_area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 course_details_left">
+                    <div class="content_wrapper">
+                            <h4 class="title">Student List</h4>
 {% for student in obj.student.all %}
-<li>{{ student.first_name }}, {{ student.last_name }} </li>
+<li><a href="{% url 'Student' school_url=school_url student_id=student.id %}">
+    {{ student.first_name }}, {{ student.last_name }}</a></li>
 {% endfor %}
-<a href="{% url 'add_students' school_url=school_url classroom_id=obj.id grade_level=obj.grade_level %}">{{ obj }} classroom: Edit Student List</a>
-<br/>
-<br/>
-<h4>Subject Summary</h4>
+<br>
+</div>
+</div>
+<!------<h4>Subject Summary</h4>
 {% for summary in subject_summary %}
 <p>{{ summary.subject }}</p>
 <li>{{ summary.lu_level }}</li>
@@ -25,7 +28,37 @@
 <li>{{ summary.independent_level }}</li>
 
 {% endfor %}
+--->
+<div class="col-lg-4 right-contents">
+        <ul>
+            <li>
+                <a class="justify-content-between d-flex" href="#">
+                    <p>Classroom</p>
+                    <span class="or">{{ obj.Classroom }}</span>
+                </a>
+            </li>
+            <li>
+                <a class="justify-content-between d-flex" href="#">
+                    <p>Grade Level </p>
+                    <span>{{ obj.grade_level }}</span>
+                </a>
+            </li>
+            <li>
+                <a class="justify-content-between d-flex" href="#">
+                    <p>School </p>
+                    <span>{{ obj.school }}</span>
+                </a>
+            </li>
+        </ul>
+        <a href="{% url 'add_students' school_url=school_url classroom_id=obj.id grade_level=obj.grade_level %}" class="primary-btn2 text-uppercase enroll rounded-0 text-black">
+                 Edit Student List</a>
 
 
+
+    </div>
+</div>
+
+</div>
+</section>
 {% endblock %}
 

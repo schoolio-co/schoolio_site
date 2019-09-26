@@ -119,7 +119,64 @@ class classroom(models.Model):
 
 	def __str__(self):
 		return "%s" % (self.Classroom)
+class TeacherSchedule(models.Model):
+	classroom = models.ForeignKey(classroom,
+						on_delete=models.CASCADE,
+						blank=True,
+						null=True)
+	Subject = models.CharField(max_length=100)
+	teacher = models.ForeignKey(User, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True, 
+							related_name='teacher')
+	school = models.ForeignKey(school, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	monday_first = models.BooleanField(default=False)
+	monday_second = models.BooleanField(default=False)
+	monday_third = models.BooleanField(default=False)
+	monday_fourth = models.BooleanField(default=False)
+	monday_fifth = models.BooleanField(default=False)
+	monday_sixth = models.BooleanField(default=False)
+	monday_seventh = models.BooleanField(default=False)
+	monday_eigth = models.BooleanField(default=False)
+	tuesday_first = models.BooleanField(default=False)
+	tuesday_second = models.BooleanField(default=False)
+	tuesday_third = models.BooleanField(default=False)
+	tuesday_fourth = models.BooleanField(default=False)
+	tuesday_fifth = models.BooleanField(default=False)
+	tuesday_sixth = models.BooleanField(default=False)
+	tuesday_seventh = models.BooleanField(default=False)
+	tuesday_eigth = models.BooleanField(default=False)
+	wednesday_first = models.BooleanField(default=False)
+	wednesday_second = models.BooleanField(default=False)
+	wednesday_third = models.BooleanField(default=False)
+	wednesday_fourth = models.BooleanField(default=False)
+	wednesday_fifth = models.BooleanField(default=False)
+	wednesday_sixth = models.BooleanField(default=False)
+	wednesday_seventh = models.BooleanField(default=False)
+	wednesday_eigth = models.BooleanField(default=False)
+	thursday_first = models.BooleanField(default=False)
+	thursday_second = models.BooleanField(default=False)
+	thursday_third = models.BooleanField(default=False)
+	thursday_fourth = models.BooleanField(default=False)
+	thursday_fifth = models.BooleanField(default=False)
+	thursday_sixth = models.BooleanField(default=False)
+	thursday_seventh = models.BooleanField(default=False)
+	thursday_eigth = models.BooleanField(default=False)
+	friday_first = models.BooleanField(default=False)
+	friday_second = models.BooleanField(default=False)
+	friday_third = models.BooleanField(default=False)
+	friday_fourth = models.BooleanField(default=False)
+	friday_fifth = models.BooleanField(default=False)
+	friday_sixth = models.BooleanField(default=False)
+	friday_seventh = models.BooleanField(default=False)
+	friday_eigth = models.BooleanField(default=False)
 
+	def __str__(self):
+		return "%s" % (self.teacher)
 
 class lesson_school_info(models.Model):
 	school_lesson_id = models.AutoField(primary_key=True)
@@ -128,6 +185,10 @@ class lesson_school_info(models.Model):
 							blank=True,
         					null=True)
 	school = models.ForeignKey(school, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
+	schedule = models.ForeignKey(TeacherSchedule, 
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
@@ -202,8 +263,10 @@ class student_assessment(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	student = models.ManyToManyField(student_profiles,
-							blank=True,)
+	student = models.ForeignKey(student_profiles, 
+							on_delete=models.CASCADE,
+							blank=True,
+        					null=True)
 	assessment_mark = models.IntegerField()
 	assessment_score = models.IntegerField()
 	understanding_level = models.CharField(max_length=100)
@@ -236,64 +299,7 @@ class classroom_subject_summary(models.Model):
 	def __str__(self):
 		return "%s" % (self.classroom)
 
-class TeacherSchedule(models.Model):
-	classroom = models.ForeignKey(classroom,
-						on_delete=models.CASCADE,
-						blank=True,
-						null=True)
-	Subject = models.CharField(max_length=100)
-	teacher = models.ForeignKey(User, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True, 
-							related_name='teacher')
-	school = models.ForeignKey(school, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	monday_first = models.BooleanField(default=False)
-	monday_second = models.BooleanField(default=False)
-	monday_third = models.BooleanField(default=False)
-	monday_fourth = models.BooleanField(default=False)
-	monday_fifth = models.BooleanField(default=False)
-	monday_sixth = models.BooleanField(default=False)
-	monday_seventh = models.BooleanField(default=False)
-	monday_eigth = models.BooleanField(default=False)
-	tuesday_first = models.BooleanField(default=False)
-	tuesday_second = models.BooleanField(default=False)
-	tuesday_third = models.BooleanField(default=False)
-	tuesday_fourth = models.BooleanField(default=False)
-	tuesday_fifth = models.BooleanField(default=False)
-	tuesday_sixth = models.BooleanField(default=False)
-	tuesday_seventh = models.BooleanField(default=False)
-	tuesday_eigth = models.BooleanField(default=False)
-	wednesday_first = models.BooleanField(default=False)
-	wednesday_second = models.BooleanField(default=False)
-	wednesday_third = models.BooleanField(default=False)
-	wednesday_fourth = models.BooleanField(default=False)
-	wednesday_fifth = models.BooleanField(default=False)
-	wednesday_sixth = models.BooleanField(default=False)
-	wednesday_seventh = models.BooleanField(default=False)
-	wednesday_eigth = models.BooleanField(default=False)
-	thursday_first = models.BooleanField(default=False)
-	thursday_second = models.BooleanField(default=False)
-	thursday_third = models.BooleanField(default=False)
-	thursday_fourth = models.BooleanField(default=False)
-	thursday_fifth = models.BooleanField(default=False)
-	thursday_sixth = models.BooleanField(default=False)
-	thursday_seventh = models.BooleanField(default=False)
-	thursday_eigth = models.BooleanField(default=False)
-	friday_first = models.BooleanField(default=False)
-	friday_second = models.BooleanField(default=False)
-	friday_third = models.BooleanField(default=False)
-	friday_fourth = models.BooleanField(default=False)
-	friday_fifth = models.BooleanField(default=False)
-	friday_sixth = models.BooleanField(default=False)
-	friday_seventh = models.BooleanField(default=False)
-	friday_eigth = models.BooleanField(default=False)
 
-	def __str__(self):
-		return "%s" % (self.teacher)
 
 class Event(models.Model):
     title = models.CharField(max_length=200)

@@ -12,9 +12,9 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button> 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom %}">View Class</a>
           <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
-          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name.id  schedule_id=schedule.id %}">Delete Schedule</a>
         </div>
       </div>
 {% endif %}
@@ -27,10 +27,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-        <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=user.username week_of=current_week classroom_id=schedule.classroom_id %}">View Lessons</a>
-        <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -42,10 +42,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -57,10 +57,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -72,10 +72,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -87,10 +87,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -102,10 +102,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -117,10 +117,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -136,10 +136,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -151,10 +151,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -166,10 +166,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -181,10 +181,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -196,10 +196,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -211,10 +211,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -226,10 +226,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -241,10 +241,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -260,10 +260,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -275,10 +275,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -290,10 +290,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -305,10 +305,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -320,10 +320,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -335,10 +335,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -350,10 +350,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -365,10 +365,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -384,10 +384,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -399,10 +399,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -414,10 +414,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -429,10 +429,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -444,10 +444,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -459,10 +459,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -474,10 +474,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -507,10 +507,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=user.username schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -522,10 +522,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -537,10 +537,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -552,10 +552,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url schedule_id=schedule.id %}">Delete Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -567,10 +567,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -582,10 +582,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -597,10 +597,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}
@@ -612,10 +612,10 @@
         {{ schedule.classroom }} - {{ schedule.Subject }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
-          <a class="dropdown-item" href="#">Edit Schedule</a>
-          <a class="dropdown-item" href="#">Add Assessment</a>
-        </div>
+            <a class="dropdown-item" href="{% url 'single_classroom' school_url=school_url classroom_id=schedule.classroom_id %}">View Class</a>
+            <a class="dropdown-item" href="{% url 'weekly_activity_classroom' school_url=school_url username=teacher_name week_of=current_week classroom_id=schedule.classroom %}">View Lessons</a>
+            <a class="dropdown-item" href="{% url 'teacher_scheduledelete' school_url=school_url username=teacher_name  schedule_id=schedule.id %}">Delete Schedule</a>
+          </div>
       </div>
 {% endif %}
 {% endfor %}

@@ -1,1 +1,19 @@
-{{ obj }}
+{% extends 'basetwo.html' %}
+{% block content %}
+<h1>{{ obj }}</h1>
+
+
+	<li>{{obj.grade_level}}</li>
+	<li>{{obj.school}}</li>
+	<li>{{.d_o_b}}</li>
+
+<h5>Assessments</h5>
+{% if obj2 %}
+    {% for grade in obj2 %}
+    <li>{{ grade }}</li>
+    {% endfor %}
+{% else %}
+<p>No Assessments Yet.</p>
+{% endif %}
+
+{% endblock %}
