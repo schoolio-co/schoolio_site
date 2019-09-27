@@ -249,6 +249,7 @@ class CreateUpdateForm(forms.ModelForm):
 
 class TeacherScheduleForm(forms.ModelForm):
 
+
     class Meta:
             model = TeacherSchedule
             fields = '__all__'

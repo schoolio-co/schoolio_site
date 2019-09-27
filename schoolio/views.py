@@ -57,6 +57,16 @@ def Import_Data(request, *args, **kwargs):
             obj2.save()
     return render(request, 'import.html')
 
+#def Import_Activities(request, *args, **kwargs):
+#    path3 = 'schoolio/standards/students_full.csv'
+#   with open(path3) as f:
+#        for line in f:
+#            line = line.split(',') 
+#            obj3, created = activities.objects.get_or_create(first_name=line[0], last_name=line[1], student_ref=line[3], grade_level=line[5], school=school_name)
+#            obj3.save()
+#    return render(request, 'import.html')
+
+
 
 def login_user(request, school_url=None):
 
@@ -204,7 +214,8 @@ class Student_Profiles(TemplateView):
 
 def Student_Profile(request, school_url=None, student_id=None):
     obj = student_profiles.objects.get(id=student_id)
-    obj2 = student_assessment.objects.filter(student=obj).order_by('assessment')
+    student_name = obj.id
+    obj2 = student_assessment.objects.filter(student=student_name)
     return render(request, 'student_profile.html', {'obj': obj, 'obj2': obj2, 'school_url': school_url})
 
 def UserList(request,school_url=None):
@@ -263,8 +274,7 @@ def create_classroom(request, school_url=None):
     return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url, 'classrooms': classrooms })
 
 def SingleClassroom(request, school_url=None, classroom_id=None):
-    classroom_id = classroom_id
-    obj = classroom.objects.get(Classroom=classroom_id)
+    obj = classroom.objects.get(id=classroom_id)
     classroom_pk = obj.id
     subject_summary = classroom_subject_summary.objects.filter(classroom=classroom_pk)
 
@@ -307,40 +317,33 @@ def add_students_classroom(request, school_url=None, classroom_id=None, grade_le
     return render(request, 'create_classroom.html', {'form':form, 'school_url':school_url})
 
 
-def Create_School_Lesson(request, school_url=None, username=None, week_of=None):
+def Create_School_Lesson(request, school_url=None, username=None, week_of=None, schedule_id=None):
     teacher = User.objects.get(username=username)
     teacher_pk = teacher.id
     current_week = date.today().isocalendar()[1] 
     obj = school.objects.get(url=school_url)
     school_pk = obj.id
-    teacher_weekly = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
+    current_date = date.today().isocalendar()
+    teacher_schedule = TeacherSchedule.objects.get(id=schedule_id)
+
 
     if request.method == "POST":
         form = SchoolLessonForm(request.POST)
         if form.is_valid():
             prev = form.save(commit=False)
             week_of = prev.week_of
-            subject_summary = classroom_subject_summary.objects.create(lesson_id = prev.school_lesson_id, classroom = prev.classroom, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')
-            subject_summary.save() 
             prev.save()
             return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
         else:
-            return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url})
+            print(form.errors)
     else:
         form = SchoolLessonForm()
-        if week_of:
-            form.fields['week_of'].initial = week_of
-        else:
-            form.fields['week_of'].initial = current_week
-        form.fields['planning_teacher'].initial = teacher_pk
-        form.fields['school'].initial = school_pk
-    return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url, 'teacher_weekly': teacher_weekly})
+    return render(request, 'lesson_school.html', {'form': form, 'school_url': school_url, 'current_week': current_week, 'week_of': week_of, 'current_date': current_date, 'teacher_schedule': teacher_schedule})
 
 
 def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=None, username=None):
     obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
     classroom_name = obj.classroom
-    classroom_id = obj.classroom_id
     teacher_objective = obj.objective
     teacher_subject = obj.subject
     teacher = User.objects.get(id=username)
@@ -499,8 +502,10 @@ def CreateAssessment(request, school_url=None, planning_id=None, username=None):
     model = classroom
 
     obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
-    classroom_name = obj.classroom_id
-    obj2 = classroom.objects.get(id=classroom_name)
+    classroom_name = obj.classroom
+    lesson_id = obj.school_lesson_id
+    obj2 = classroom.objects.get(Classroom=classroom_name)
+    classroom_pk = obj2.id
     students = obj2.student
     if request.method == "POST":
         form = AssessmentForm(request.POST)
@@ -510,6 +515,8 @@ def CreateAssessment(request, school_url=None, planning_id=None, username=None):
         return redirect('addstudentassessment', school_url=school_url, planning_id=planning_id, assessment_id=prev)
     else:
         form = AssessmentForm()
+        form.fields['school_lesson_id'].initial = lesson_id
+        form.fields['classroom'].initial = classroom_pk
     return render(request, 'assessment.html', {'form': form, 'school_url': school_url, 'classroom': classroom, 'obj2': obj2, 'students': students })
 
 
@@ -520,17 +527,24 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
     obj = assessments.objects.get(id=assessment_id)
     classroom_name = obj.classroom_id
     obj2 = classroom.objects.get(id=classroom_name)
-    students = obj2.student
-
+    students = obj2.student.all()
+    StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students.count())
+    
     if request.method == "POST":
-        form = StudentAssessmentForm(request.POST)
-        if form.is_valid():
-            prev = form.save(commit=False)
-            prev.save()
-        return render(request, 'assessment.html', {'school_url': school_url})
+        filled_form = StudentAssessmentFormSet(request.POST)
+        if filled_form.is_valid():
+            for form in filled_form:
+                form.save()
+            return render(request, 'assessment.html', {'school_url': school_url})
+        else:
+            print(form.errors)
     else:
-        form = StudentAssessmentForm()
-    return render(request, 'student_assessment.html', {'form': form, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
+        
+        formset = StudentAssessmentFormSet(initial=[{'student': x.id} for x in students])
+        for form in formset:
+            form.fields['assessment'].initial = obj
+            
+    return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
 
 
 def TeacherScheduleView(request, school_url=None, username=None):
@@ -551,6 +565,8 @@ def TeacherScheduleView(request, school_url=None, username=None):
         return redirect('teacher_scheduleview', school_url=school_url, username=username)
     else:
         form = TeacherScheduleForm()
+        form.fields['school'].initial = school_pk 
+        form.fields['teacher'].initial = teacher_pk
     return render(request, 'teacher_schedule.html', {'school_url': school_url, 'form': form, 'teacher_weekly': teacher_weekly, 'teacher_name': teacher_name, 'teacher_pk':teacher_pk, 'current_week': current_week})
 
 def delete_schedule(request, school_url, username, schedule_id):

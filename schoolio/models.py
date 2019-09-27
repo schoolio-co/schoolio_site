@@ -180,20 +180,11 @@ class TeacherSchedule(models.Model):
 
 class lesson_school_info(models.Model):
 	school_lesson_id = models.AutoField(primary_key=True)
-	classroom = models.ForeignKey(classroom, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	school = models.ForeignKey(school, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
-	schedule = models.ForeignKey(TeacherSchedule, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
+	classroom = models.CharField(max_length=100)
+	school = models.CharField(max_length=100)
+	schedule = models.CharField(max_length=100)
 	week_of = models.CharField(max_length=30)	
-	date = models.DateTimeField(default=now)
+	date = models.CharField(max_length=100)
 	subject = models.CharField(max_length=100)
 	objective = models.TextField(max_length=500)
 	planning_teacher = models.CharField(max_length=30)
@@ -234,10 +225,6 @@ class activities(models.Model):
 
 
 class assessments(models.Model):
-	activity =  models.ForeignKey(activities, 
-							on_delete=models.CASCADE,
-							blank=True,
-        					null=True)
 	school_lesson_id = models.ForeignKey(lesson_school_info, 
 							on_delete=models.CASCADE,
 							blank=True,

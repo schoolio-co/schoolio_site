@@ -1,28 +1,65 @@
 {% extends 'basetwo.html' %}
 {% block content %}
-<h3>Lesson School</h3>
+<h3>Let's Build A Lesson!</h3>
 
-<ul class="nav nav-tabs">
-        {% for schedule in teacher_weekly %}
-        <li><a data-toggle="pill" class="primary-btn2 text-uppercase enroll rounded-0 text-black"  href="#{{ schedule.classroom }}{{ schedule.Subject}}">{{ schedule.classroom }} - {{ schedule.Subject}}</a></li>
-        <br/>
-        {% endfor %}
-      </ul>
-      
-      <div class="tab-content">
-            {% for schedule in teacher_weekly %}
-        <div id="{{ schedule.classroom }}{{ schedule.Subject}}" class="tab-pane fade">
-          <h3>{{ schedule.classroom }} - {{ schedule.Subject}}</h3>
-          <p>{% if form %}
+          <h3>{{ teacher_schedule.classroom }} - {{ teacher_schedule.Subject}}</h3>
+         {% if form %}
                 <form method="post">
+                    {{ form.non_field_errors }}
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                        {{ form.classroom.errors }}
+                        <label >classroom: </label>
+                        <input type="text" class="form-control" value='{{ teacher_schedule.classroom }}' name='classroom'>
+                    </div>
+                        <div class="form-group col-md-3">
+                        {{ form.school.errors }}
+                        <label >School: </label>
+                        <input type="text" class="form-control" value='{{ teacher_schedule.school }}' name='school'>
+                    </div>
+                    <div class="form-group col-md-3">
+                        {{ form.school.errors }}
+                        <label >Schedule: </label>
+                        <input type="text" class="form-control" value='{{ teacher_schedule }}' name='schedule'>
+                    </div>
+                    <div class="form-group col-md-3">
+                        {{ form.subject.errors }}
+                        <label >Subject: </label>
+                        <input type="text" class="form-control" value='{{ teacher_schedule.Subject}}' name='subject'>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        {{ form.week_of.errors }}
+                        <label >Planning Week: </label>
+                        {% if week_of %}
+                        <input type="text" class="form-control" value='{{week_of}}'  name='week_of'>
+                        {% else %}
+                        <input type="text" class="form-control" value='{{current_week}}'  name='week_of'>
+                        {% endif %}
+                    </div>
+                        <div class="form-group col-md-4">
+                        {{ form.date.errors }}
+                        <label >Date: </label>
+                        <input type="text" class="form-control" value='{{current_date}}' name='date'>
+                    </div>
+                    <div class="form-group col-md-4">
+                        {{ form.planning_teacher.errors }}
+                        <label >Teacher Id: </label>
+                        <input type="text" class="form-control" value='{{ teacher_schedule.teacher_id }}' name='planning_teacher'>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                        {{ form.objective.errors }}
+                        <label >This Week's Objective: </label>
+                        <textarea class="form-control" name='objective'  rows="2"></textarea>
+                    </div>
                     <input type="submit" value="Submit">
                 </form>
-                {% endif %}</p>
-        </div>
-        {% endfor %}
-      </div>
+             {% endif %}   
+ 
 
 
 {% endblock %}
+

@@ -2,8 +2,11 @@
 {% block content %}
 <br/>
 <h4>Hello {{ teacher_name }}!</h4>
-<a class="primary-btn2 text-uppercase rounded-1 text-black" href="{% url 'school_lesson' school_url=school_url username=teacher_name %}">Build a Lesson</a>
 <br>
+{% for schedule in teacher_schedule %}
+  <li><a  href="{% url 'school_lesson' school_url=school_url username=teacher_name schedule_id=schedule.id %}">{{ schedule.classroom }} - {{ schedule.Subject}}</a></li>
+  <br/>
+  {% endfor %}
 <br>
     <div class="row seven-cols">
       <div class="col-md-1">

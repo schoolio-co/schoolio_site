@@ -144,7 +144,7 @@ urlpatterns = [
         view=Profile.as_view(),
         name='profile'),
     
-    url(r'^school_lesson/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/',
+    url(r'^school_lesson/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/(?P<schedule_id>[\w-]+)/',
         view=Create_School_Lesson,
         name='school_lesson'),
     
