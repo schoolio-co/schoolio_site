@@ -535,18 +535,21 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
     classroom_name = obj.classroom_id
     obj2 = classroom.objects.get(id=classroom_name)
     students = obj2.student.all()
+    lesson_id_match = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    updated = update_MI(lesson_id_match)
     StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students.count())
     formset = StudentAssessmentFormSet(initial=[{'student': x.id} for x in students])
 
 
     if request.method == "POST":
         filled_form = StudentAssessmentFormSet(request.POST)
+        
         if filled_form.is_valid():
             for form in filled_form:
                 prev = form.save(commit=False)
                 student_score = prev.assessment_mark
                 prev.assessment_score = get_assessment_score(student_score, total_score)
-                prev.understanding_level = get_understanding_level(prev.assessment_score)
+                prev.understanding_level = get_understanding_level(prev.assessment_score, obj.id)
                 prev.save()
             return render(request, 'assessment.html', {'school_url': school_url})
         else:
@@ -555,7 +558,7 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
         for form in formset:
             form.fields['assessment'].initial = obj
             
-    return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
+    return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'updated': updated, 'obj': obj, 'obj2': obj2, 'students': students})
 
 
 
