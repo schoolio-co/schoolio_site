@@ -103,6 +103,22 @@
                                     <h5><a href="{% url 'user_list' school_url=school_url %}">View All Users</a>
                                     </h5>
                                 </div>
+                                </div> 
+                            </div>
+                        </div>
+                <h4>My Classes</h4> 
+                {% for class in teacher_schedule %}       
+                <div class="comment-list">
+                        <div class="single-comment single-reviews justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="desc">       
+                                        {% ifchanged class.classroom %}
+                                        <p><a href="{% url 'single_classroom' school_url=school_url classroom_id=class.classroom_id %}">{{ class.classroom }}</a>
+                                        <p>    
+                                        {% endifchanged %}
+                                </div>
+                                {% endfor %}
+                                </div> 
                             </div>
                         </div>
                     </div>           
@@ -110,7 +126,6 @@
             </div>
         </div>
     </section>
-
 
 
 <!--================ Student Profiles  

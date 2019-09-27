@@ -12,7 +12,7 @@ else:
 from django.urls import path
 from django.conf.urls import url
 from django.urls import reverse_lazy
-from .views import SchoolRegistration, WeeklyActivityClassroom, delete_activity, TeacherScheduleView, delete_schedule, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
+from .views import visualizations, SchoolRegistration, WeeklyActivityClassroom, delete_activity, TeacherScheduleView, delete_schedule, add_students_new_classroom, Student_Profile, SingleClassroom, CreateEvent, add_students_classroom, Import_Data, School_Register, CreateUpdate, School_Profile, Student_Profiles, Profile, Admin_Register, Teacher_Register, Student_Register, Parent_Register, create_grade, create_classroom, Create_School_Lesson, CreateAssessment, CreateActivity, UserList, WeeklyActivity, SingleActivity, CreateWeeklyActivity, login_user, logout_user, RoleRegistrations, AddStudentAssessment, delete_update
 from quiz.views import landing, blog
 
 from django.contrib.auth import views as auth_views
@@ -94,6 +94,10 @@ urlpatterns = [
     url(r'^class/(?P<school_url>[\w-]+)/(?P<classroom_id>[\w-]+)/classroom/',
         view=SingleClassroom,
         name='single_classroom'),
+
+    url(r'^visualizations/',
+        view=visualizations,
+        name='visualizations'),
 
     url(r'^class/(?P<school_url>[\w-]+)/(?P<username>[\w-]+)/teacher_schedule/',
         view=TeacherScheduleView,
