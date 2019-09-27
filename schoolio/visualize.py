@@ -2,6 +2,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from .as_dash import create_app
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -33,7 +34,7 @@ def visualize_subject_summary(lesson_id):
 
 
 def visualize_understanding_level(low, medium, high):
-    app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+    app = _create_app()
     
     app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
         html.H1(
@@ -67,7 +68,7 @@ def visualize_understanding_level(low, medium, high):
     ])
     return app
 def visualize_MI(log, verb, bod, mus, vis, nat, inter, intra):
-    app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+    app = _create_app()
     
     app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
         html.H1(

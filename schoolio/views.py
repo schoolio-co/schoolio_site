@@ -37,7 +37,6 @@ def dash(request, **kwargs):
      ''' '''
      return HttpResponse(dispatcher(request))
 
-@csrf_exempt
 def dash_ajax(request,**kwargs):
      ''' '''
      return HttpResponse(dispatcher(request), content_type='application/json')
