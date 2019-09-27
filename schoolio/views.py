@@ -25,6 +25,7 @@ from .models import school, school_user, Event, student_assessment, TeacherSched
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .update_subject_summary import *
+from .visualize import *
 from .import_csv import import_csv 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -48,6 +49,11 @@ class SchoolRegistration(TemplateView):
 
     def get(self,request, *args, **kwargs):
         return render(request, 'home.html')
+
+def visualizations(request, *args, **kwargs):
+    chart_result = visualize_MI(1, 2, 3, 2, 5, 2, 1, 8)
+    return render(request, 'graph.html', {'chart_result': chart_result})
+
 
 class RoleRegistrations(TemplateView):
     template_name = 'roles_registration.html'
@@ -249,7 +255,8 @@ class Profile(TemplateView):
     def get(self,request,school_url,username):
         obj = User.objects.get(username=username)
         current_week = date.today().isocalendar()[1] 
-        return render(request, 'profile.html', {'obj': obj, 'school_url': school_url, 'current_week': current_week})
+        teacher_schedule = TeacherSchedule.objects.filter(teacher=obj.id)
+        return render(request, 'profile.html', {'obj': obj, 'school_url': school_url, 'current_week': current_week, 'teacher_schedule': teacher_schedule})
 
 def create_grade(request, school_url=None, slug=None):
     model = grade_level
@@ -546,21 +553,26 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
 
     obj = assessments.objects.get(id=assessment_id)
     total_score = obj.total_possible
+    classroom_lesson_num = obj.school_lesson_id
     classroom_name = obj.classroom_id
     obj2 = classroom.objects.get(id=classroom_name)
-    students = obj2.student.all()
-    StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students.count())
+    students_count = obj2.student.values().distinct()
+    students = obj2.student.all().distinct()
+    lesson_id_match = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    updated = update_MI(lesson_id_match)
+    StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students_count.count())
     formset = StudentAssessmentFormSet(initial=[{'student': x.id} for x in students])
 
 
     if request.method == "POST":
         filled_form = StudentAssessmentFormSet(request.POST)
+        
         if filled_form.is_valid():
             for form in filled_form:
                 prev = form.save(commit=False)
                 student_score = prev.assessment_mark
                 prev.assessment_score = get_assessment_score(student_score, total_score)
-                prev.understanding_level = get_understanding_level(prev.assessment_score)
+                prev.understanding_level = get_understanding_level(prev.assessment_score, obj.id)
                 prev.save()
             return render(request, 'assessment.html', {'school_url': school_url})
         else:
@@ -569,7 +581,7 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
         for form in formset:
             form.fields['assessment'].initial = obj
             
-    return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
+    return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'updated': updated, 'obj': obj, 'obj2': obj2, 'students': students})
 
 
 

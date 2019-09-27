@@ -25,7 +25,7 @@
                 <h5 class="card-title">{{ x.subject }}</h5>
                 <p class="card-text">{{ x.activity}}</p>
                 <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
-               
+                <li><a href="{% url 'assessment' school_url=school_url planning_id=x.school_lesson_id_id %}">Add Assessment</a></li>
               </div>
             </div>
             {% endif %}
@@ -40,6 +40,7 @@
                       <h5 class="card-title">{{ x.subject }}</h5>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                      <li><a href="{% url 'assessment' school_url=school_url planning_id=x.school_lesson_id_id %}">Add Assessment</a></li>
                     </div>
                   </div>
                   {% endif %}
@@ -54,6 +55,7 @@
                       <h5 class="card-title">{{ x.subject }}</h5>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                      <li><a href="{% url 'assessment' school_url=school_url planning_id=x.school_lesson_id_id %}">Add Assessment</a></li>
                     </div>
                   </div>
                   {% endif %}
@@ -68,6 +70,7 @@
                       <h5 class="card-title">{{ x.subject }}</h5>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                      <li><a href="{% url 'assessment' school_url=school_url planning_id=x.school_lesson_id_id %}">Add Assessment</a></li>
                     </div>
                   </div>
                   {% endif %}
@@ -82,6 +85,7 @@
                       <h5 class="card-title">{{ x.subject }}</h5>
                       <p class="card-text">{{ x.activity}}</p>
                       <a href="{% url 'single_activity' school_url=school_url activity_id=x.id %}" class="card-link">View Activity</a>
+                      <li><a href="{% url 'assessment' school_url=school_url planning_id=x.school_lesson_id_id %}">Add Assessment</a></li>
                     </div>
                   </div>
                   {% endif %}
@@ -97,4 +101,6 @@
       </div>
     </div>
 <br>
+
+
 {% endblock %}

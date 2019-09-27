@@ -1,12 +1,12 @@
 from .models import standards, activities, classroom_subject_summary, assessments, student_assessment
 
 def get_understanding_level(score, assessment_id):
-    assessment_obj = assessments.objects.all().filter(assessment = assessment_id)[0]
+    assessment_obj = assessments.objects.all().filter(id = assessment_id)[0]
     ss_obj = classroom_subject_summary.objects.all().filter(
               lesson_id = assessment_obj.school_lesson_id)[0]
     if score <= 75:
         understanding_level = 1
-    elif score < 90
+    elif score < 90:
         understanding_level = 2
     else:
         understanding_level = 3
