@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'djcelery',
     'quiz',
     'storages',
-    'debug_toolbar',
+    #'debug_toolbar',
     'schoolio',
     "pinax.messages",
     "cal",
