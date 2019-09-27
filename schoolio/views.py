@@ -333,6 +333,9 @@ def Create_School_Lesson(request, school_url=None, username=None, week_of=None, 
             prev = form.save(commit=False)
             week_of = prev.week_of
             prev.save()
+            classroom_match = classroom.objects.get(Classroom=prev.classroom)
+            subject_summary = classroom_subject_summary.objects.create(classroom = classroom_match, lesson_id = prev, subject = prev.subject, lu_level = '.25', mu_level = '.50', hu_level = '.25', logical_level = '1', linguistic_level = '1', kinesthetic_level = '1', musical_level = '1', visual_level = '1', naturalist_level = '1', group_level = '1', independent_level = '1')		
+            subject_summary.save() 
             return redirect('weeklyactivitycreate', planning_id=prev, school_url=school_url, username=teacher_pk, week_of=week_of)
         else:
             print(form.errors)
@@ -430,9 +433,7 @@ def CreateWeeklyActivity(request, school_url=None, planning_id=None, week_of=Non
                 friday.save()
             return redirect('weekly_activity', school_url=school_url, week_of=week_of, username=teacher_name)
     else:
-        choices = results
         form = WeeklyCreateForm()
-        form.fields['standard'].initial = choices
         form.fields['subject'].initial = teacher_subject
         form.fields['school_lesson_id'].initial = obj
         form.fields['week_of'].initial = week_of
@@ -456,7 +457,11 @@ def WeeklyActivity(request, school_url=None, week_of=None, username=None):
 
 def WeeklyActivityClassroom(request, school_url=None, week_of=None, username=None, classroom_id=None):
     teacher = User.objects.get(username=username)
+    teacher_pk = teacher.id 
     teacher_name = teacher.username
+    obj2 = school.objects.get(url=school_url)
+    school_pk = obj2.id
+    teacher_schedule = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
     classroom_match = classroom.objects.get(Classroom=classroom_id)
     classroom_lesson = lesson_school_info(classroom=classroom_match)
     classroom_lesson_num = classroom_lesson.school_lesson_id
@@ -465,7 +470,7 @@ def WeeklyActivityClassroom(request, school_url=None, week_of=None, username=Non
     object1 = activities.objects.select_related().filter(week_of=previous, school_lesson_id=classroom_lesson_num)
     next_week = int(week_of) + 1 
     object3 = activities.objects.select_related().filter(week_of=next_week, school_lesson_id=classroom_lesson_num)
-    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week})
+    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week, 'teacher_schedule': teacher_schedule})
 
 
 def SingleActivity(request, school_url=None, activity_id=None):
@@ -512,7 +517,7 @@ def CreateAssessment(request, school_url=None, planning_id=None, username=None):
         if form.is_valid():
             prev = form.save(commit=False)
             prev.save()
-        return redirect('addstudentassessment', school_url=school_url, planning_id=planning_id, assessment_id=prev)
+        return redirect('addstudentassessment', school_url=school_url, planning_id=planning_id, assessment_id=prev.id)
     else:
         form = AssessmentForm()
         form.fields['school_lesson_id'].initial = lesson_id
@@ -530,6 +535,8 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
     students = obj2.student.all()
     StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students.count())
     
+
+
     if request.method == "POST":
         filled_form = StudentAssessmentFormSet(request.POST)
         if filled_form.is_valid():

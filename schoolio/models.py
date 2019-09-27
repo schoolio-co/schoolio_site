@@ -243,7 +243,7 @@ class assessments(models.Model):
 	lu_high = models.IntegerField(default = 0)
 
 	def __str__(self):
-		return "%s" % (self.pk)
+		return "%s" % (self.assessment)
 
 class student_assessment(models.Model):
 	assessment =  models.ForeignKey(assessments, 
