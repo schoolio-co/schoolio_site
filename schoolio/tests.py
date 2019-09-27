@@ -2,6 +2,7 @@ from django.test import TestCase
 from schoolio.models import *
 from schoolio.standard_matching import match_standard, match_activity
 from schoolio.evaluate import get_MI_BL
+from schoolio.update_subject_summary import *
 
 class SchoolTest(TestCase):
     def setUp(self):
@@ -57,4 +58,39 @@ class MatchTest(TestCase):
         results_activities = match_activities("unique", obj.objective, results_standards[0], obj.subject)
 
 
-
+class UpdateSSTest(TestCase):
+    def setUp(self):
+        school.objects.create(name="anderson", address = "anderson", url = "anderson")
+        school_pk = school.objects.get(name='anderson')
+        User.objects.create(first_name = "Carolyn", last_name = "Luc", email = "as@fid.ohv", school=school_pk,
+            username="cluc")
+        grade_level.objects.create(grade = "1st", school = "anderson")
+        classroom.objects.create(classroom="unique", grade = "1st", school="anderson", teacher = "cluc")
+        classroom_subject_summary.objects.create(classroom="unique", subject="Mathematics", lu_level = 1, mu_level = 2, hu_level = 1,
+          logical_level = 0, linguistic_level = 0, kinesthetic_level = 0, musical_level = 0, visual_level = 0,
+          naturalist_level = 0, group_level = 0, independent_level = 0)
+        standards.objects.create(subject="Mathematics", standard="Counting", skill_topic = "Number range 0 - 100",
+               objective = "Learners will count with and without using concrete objects and understand the need and convenience ofcounting in everyday life",
+               competency = "count concrete objects up to 20and backwards from 20 - 0")
+        activities.objects.create(school_lesson_id = 0,
+           activity_title = "counting",
+           subject="Mathematics",
+           week_of = "September 18",
+           standard = "Counting",
+           intro = "bla",
+           activity = "Count man.",
+           wrap_up = "Did you count?",
+           resources = "It's not that hard.",
+           blooms = get_MI_BL("Count man."),
+           vocabulary = "bla",
+           day = "Wednesday")
+        lesson_school_info.objects.create(school_lesson_id = 3,
+           classroom = "unique", grade = "1st", school="anderson",
+           week_of = "September 18",
+           # date = 
+           subject = "Mathematics",
+           days = "Wednesday",
+           objective = "Learners will count with and without using concrete objects and understand the need and convenience ofcounting in everyday life",
+           planning_teacher = "cluc")
+    def test_subject_summary(self):
+        pass # TODO
