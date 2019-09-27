@@ -34,9 +34,8 @@ def visualize_subject_summary(lesson_id):
 
 
 def visualize_understanding_level(low, medium, high):
-    app = create_app()
-    
-    app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+    return create_app( html.Div(style={'backgroundColor': colors['background']}, children=[
+        dcc.Location(id='url', refresh=False),
         html.H1(
             children='Understanding Levels',
             style={
@@ -51,7 +50,7 @@ def visualize_understanding_level(low, medium, high):
         #}),
     
         dcc.Graph(
-            id='example-graph-2',
+            id='graph',
             figure={
                 'data': [
                     {'x': ['Low', 'Medium', 'High'], 'y': [3, 8, 4], 'type': 'bar'},
@@ -64,13 +63,12 @@ def visualize_understanding_level(low, medium, high):
                     }
                 }
             }
-        )
-    ])
-    return app
+        ),
+        html.Div(id='content')
+    ]))
 def visualize_MI(log, verb, bod, mus, vis, nat, inter, intra):
-    app = create_app()
-    
-    app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+    return create_app(html.Div(style={'backgroundColor': colors['background']}, children=[
+        dcc.Location(id='url', refresh=False),
         html.H1(
             children='Multiple Intelligences',
             style={
@@ -85,7 +83,7 @@ def visualize_MI(log, verb, bod, mus, vis, nat, inter, intra):
         }),
     
         dcc.Graph(
-            id='example-graph-2',
+            id='graph',
             figure={
                 'data': [
                     {'x': [
@@ -114,9 +112,9 @@ intra], 'type': 'bar'},
                     }
                 }
             }
-        )
-    ])
-    return app
+        ),
+        html.Div(id='content')
+    ]))
 
 
 
