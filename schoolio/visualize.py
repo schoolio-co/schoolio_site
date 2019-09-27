@@ -34,7 +34,7 @@ def visualize_subject_summary(lesson_id):
 
 
 def visualize_understanding_level(low, medium, high):
-    app = _create_app()
+    app = create_app()
     
     app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
         html.H1(
@@ -68,7 +68,7 @@ def visualize_understanding_level(low, medium, high):
     ])
     return app
 def visualize_MI(log, verb, bod, mus, vis, nat, inter, intra):
-    app = _create_app()
+    app = create_app()
     
     app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
         html.H1(

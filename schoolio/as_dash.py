@@ -27,9 +27,9 @@ def dispatcher(request):
         return response.get_data()
 
 
-def create_app(app):
+def create_app():
     ''' Creates dash application '''
-    app = dash.Dash()
+    app = dash.Dash(suppress_callback_exceptions=True)
     @app.callback(
         dash.dependencies.Output('content', 'children'),
         [dash.dependencies.Input('url', 'pathname')]
