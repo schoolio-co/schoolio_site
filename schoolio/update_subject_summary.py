@@ -14,7 +14,7 @@ def get_understanding_level(score, assessment_id):
     ss_attrs = (None, 'lu_level', 'mu_level', 'hu_level')
     setattr(assessment_obj, assess_attrs[understanding_level],
          getattr(assessment_obj, assess_attrs[understanding_level])+1)
-    setattr(assessment_obj, ss_attrs[understanding_level],
+    setattr(ss_obj, ss_attrs[understanding_level],
          getattr(ss_obj, ss_attrs[understanding_level])+1)
     return understanding_level
 
