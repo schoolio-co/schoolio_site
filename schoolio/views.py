@@ -24,6 +24,7 @@ from  cal.forms import EventForm
 from .models import school, school_user, Event, student_assessment, TeacherSchedule, User, grade_level, classroom, student_profiles, activities, assessments, lesson_school_info, standards, day_of_the_week, classroom_subject_summary, create_updates
 from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
+from .update_subject_summary import *
 from .import_csv import import_csv 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -530,28 +531,32 @@ def AddStudentAssessment(request, school_url=None, planning_id=None, assessment_
     model = assessments
 
     obj = assessments.objects.get(id=assessment_id)
+    total_score = obj.total_possible
     classroom_name = obj.classroom_id
     obj2 = classroom.objects.get(id=classroom_name)
     students = obj2.student.all()
     StudentAssessmentFormSet = modelformset_factory(student_assessment, StudentAssessmentForm,  extra=students.count())
-    
+    formset = StudentAssessmentFormSet(initial=[{'student': x.id} for x in students])
 
 
     if request.method == "POST":
         filled_form = StudentAssessmentFormSet(request.POST)
         if filled_form.is_valid():
             for form in filled_form:
-                form.save()
+                prev = form.save(commit=False)
+                student_score = prev.assessment_mark
+                prev.assessment_score = get_assessment_score(student_score, total_score)
+                prev.understanding_level = get_understanding_level(prev.assessment_score)
+                prev.save()
             return render(request, 'assessment.html', {'school_url': school_url})
         else:
-            print(form.errors)
+            print(filled_form.errors)
     else:
-        
-        formset = StudentAssessmentFormSet(initial=[{'student': x.id} for x in students])
         for form in formset:
             form.fields['assessment'].initial = obj
             
     return render(request, 'student_assessment.html', {'formset': formset, 'school_url': school_url, 'obj': obj, 'obj2': obj2, 'students': students})
+
 
 
 def TeacherScheduleView(request, school_url=None, username=None):

@@ -254,9 +254,13 @@ class student_assessment(models.Model):
 							on_delete=models.CASCADE,
 							blank=True,
         					null=True)
-	assessment_mark = models.IntegerField()
-	assessment_score = models.IntegerField()
-	understanding_level = models.IntegerField(default = 0)
+	assessment_mark = models.IntegerField(blank=True,
+        					null=True)
+	assessment_score = models.IntegerField(blank=True,
+        					null=True)
+	understanding_level = models.CharField(max_length=150,
+												blank=True,
+        										null=True)
 
 	def __str__(self):
 		return "%s" % (self.student)

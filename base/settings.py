@@ -33,7 +33,7 @@ PAYPAL_TEST = False
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'djcelery',
     'quiz',
     'storages',
-    #'debug_toolbar',
+    'debug_toolbar',
     'schoolio',
     "pinax.messages",
     "cal",

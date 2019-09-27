@@ -256,7 +256,9 @@ class TeacherScheduleForm(forms.ModelForm):
 
 
 class StudentAssessmentForm(forms.ModelForm):
-
+    assessment_score = forms.CharField(required=False, widget=forms.HiddenInput())
+    understanding_level = forms.CharField(required=False, widget=forms.HiddenInput())
+    
     class Meta:
             model = student_assessment
             fields = '__all__'

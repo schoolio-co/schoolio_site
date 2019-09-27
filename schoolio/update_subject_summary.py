@@ -48,3 +48,7 @@ def update_MI(lesson_id):
             attr = mi_to_ss_attr[mi]
             setattr(ss_obj, attr, getattr(ss_obj, attr)+1)
 
+
+def get_assessment_score(student_score, total_score):
+    score = (student_score/total_score) * 100
+    return(score)
