@@ -29,6 +29,20 @@ from .import_csv import import_csv
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
+from .as_dash import dispatcher
+
+def dash(request, **kwargs):
+     ''' '''
+     return HttpResponse(dispatcher(request))
+
+@csrf_exempt
+def dash_ajax(request,**kwargs):
+     ''' '''
+     return HttpResponse(dispatcher(request), content_type='application/json')
+
+
+
 class SchoolRegistration(TemplateView):
     template_name = 'home.html'
 

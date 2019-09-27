@@ -19,6 +19,8 @@ from django.contrib.auth import views as auth_views
 from pinax.messages.views import *
 from cal.views import *
 
+from .views import dash, dash_ajax
+
 urlpatterns = [
 
     url(r"^inbox/$", 
@@ -198,6 +200,9 @@ urlpatterns = [
     url(r'^calendar/$', 
         view=CalendarView.as_view(), 
         name='calendar'),
+    
+    path('dash-', dash),
+    path('_dash-', dash_ajax),
 
     url(r'(?P<school_url>[\w-]+)',
         view=School_Profile.as_view(),
