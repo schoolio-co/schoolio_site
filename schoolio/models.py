@@ -258,9 +258,7 @@ class student_assessment(models.Model):
         					null=True)
 	assessment_score = models.IntegerField(blank=True,
         					null=True)
-	understanding_level = models.CharField(max_length=150,
-												blank=True,
-        										null=True)
+	understanding_level = models.IntegerField(default = 0)
 
 	def __str__(self):
 		return "%s" % (self.student)
