@@ -16,6 +16,8 @@ def get_understanding_level(score, assessment_id):
          getattr(assessment_obj, assess_attrs[understanding_level])+1)
     setattr(ss_obj, ss_attrs[understanding_level],
          getattr(ss_obj, ss_attrs[understanding_level])+1)
+    assessment_obj.save(update_fields = ['lu_low', 'lu_med', 'lu_high'])
+    ss_obj.save(update_fields = ['lu_level', 'mu_level', 'hu_level'])
     return understanding_level
 
 def update_MI(lesson_id):
@@ -36,7 +38,14 @@ def update_MI(lesson_id):
         for mi in activity_obj.mi1, activity_obj.mi2, activity_obj.mi3: 
             attr = mi_to_ss_attr[mi]
             setattr(ss_obj, attr, getattr(ss_obj, attr)+1)
-
+    ss_obj.save(update_fields = ["Logical - Mathematical",
+                                 "Verbal - Linguistic"   ,
+                                 "Bodily Kinesthetic"    ,
+                                 "Musical"               ,
+                                 "Visual Spatial"        ,
+                                 "Naturalist"            ,
+                                 "Interpersonal"         ,
+                                 "Intrapersonal"         ])
 
 def get_assessment_score(student_score, total_score):
     score = (student_score/total_score) * 100
