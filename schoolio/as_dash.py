@@ -4,10 +4,8 @@ import sys
 import dash
 import dash_core_components as dcc
 import dash_html_components as dhc
-<<<<<<< HEAD
-from .visualize import *
-=======
->>>>>>> ea0b13186145a388149fa5521558b7eede848ecf
+
+
 
 
 def dispatcher(request):

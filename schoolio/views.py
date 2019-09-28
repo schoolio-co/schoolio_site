@@ -27,6 +27,7 @@ from .standard_matching import match_standard, match_activity
 from .evaluate import get_MI_BL
 from .update_subject_summary import *
 from .visualize import *
+from .student_stats import *
 from .import_csv import import_csv 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -237,7 +238,8 @@ def Student_Profile(request, school_url=None, student_id=None):
     obj = student_profiles.objects.get(id=student_id)
     student_name = obj.id
     obj2 = student_assessment.objects.filter(student=student_name)
-    return render(request, 'student_profile.html', {'obj': obj, 'obj2': obj2, 'school_url': school_url})
+    obj3 = get_student_stats(student_name)
+    return render(request, 'student_profile.html', {'obj': obj, 'obj2': obj2, 'obj3': obj3, 'school_url': school_url})
 
 def UserList(request,school_url=None):
     obj = school.objects.get(url=school_url)
