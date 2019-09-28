@@ -9,9 +9,32 @@
 
 <h5>Assessments</h5>
 
-{% for grade in obj2 %}
-<li>{{ grade.assessment }} - {{ grade.assessment_mark }} - {{ grade.assessment_score }} - {{ grade.understanding_level }}</li>
-{% endfor %}
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Assessment</th>
+            <th scope="col">Score</th>
+            <th scope="col">Understanding</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for grade in obj2 %}
+          <tr>
+            <th scope="row">{{ grade.id }}</th>
+            <td>{{ grade.assessment }}</td>
+            <td>{{ grade.assessment_score }}</td>
+            {% if grade.understanding_level >= 3  %}
+            <td class="table-info">High</td>
+            {% elif grade.understanding_level >= 2 %}
+            <td class="table-success">Mid</td>
+            {% else %}
+            <td class="table-danger">Low</td>
+            {% endif %}
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
 
 
 {% endblock %}

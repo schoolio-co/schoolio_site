@@ -5,7 +5,7 @@ from random import randint
 import dash
 import dash_core_components as dcc
 import dash_html_components as dhc
-import .visualize
+from .visualize import *
 
 
 def dispatcher(request):

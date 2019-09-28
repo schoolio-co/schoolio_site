@@ -10,6 +10,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import slugify
 from django.template.defaultfilters import stringfilter
 from django.utils.text import normalize_newlines
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, FormView, TemplateView, DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
@@ -469,13 +470,15 @@ def WeeklyActivity(request, school_url=None, week_of=None, username=None):
     teacher_name = teacher.username
     obj2 = school.objects.get(url=school_url)
     school_pk = obj2.id
+    assessment_names = assessments.objects.filter()
     teacher_schedule = TeacherSchedule.objects.filter(teacher=teacher_pk, school=school_pk)
     object2 = activities.objects.select_related().filter(school_lesson_id__planning_teacher=teacher_pk).filter(week_of=week_of).order_by('period')
+    assessment_names = assessments.objects.filter(school_lesson_id__planning_teacher=teacher_pk)
     previous = int(week_of) - 1 
     object1 = activities.objects.select_related().filter(week_of=previous)
     next_week = int(week_of) + 1 
     object3 = activities.objects.select_related().filter(week_of=next_week)
-    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week, 'teacher_schedule': teacher_schedule })
+    return render(request, 'weekly_activity.html', {'object2': object2, 'object1': object1, 'object3': object3, 'teacher_name': teacher_name, 'school_url': school_url, 'previous': previous, 'next_week': next_week, 'teacher_schedule': teacher_schedule, 'assessment_names': assessment_names })
 
 def WeeklyActivityClassroom(request, school_url=None, week_of=None, username=None, classroom_id=None):
     teacher = User.objects.get(username=username)
@@ -525,6 +528,28 @@ def delete_activity(request, school_url, username, activity_id):
     return redirect('profile', school_url=school_url, username=username)
 
 def CreateAssessment(request, school_url=None, planning_id=None, username=None):
+    model = lesson_school_info
+    model = classroom
+
+    obj = lesson_school_info.objects.get(school_lesson_id=planning_id)
+    classroom_name = obj.classroom
+    lesson_id = obj.school_lesson_id
+    obj2 = classroom.objects.get(Classroom=classroom_name)
+    classroom_pk = obj2.id
+    students = obj2.student
+    if request.method == "POST":
+        form = AssessmentForm(request.POST)
+        if form.is_valid():
+            prev = form.save(commit=False)
+            prev.save()
+        return redirect('addstudentassessment', school_url=school_url, planning_id=planning_id, assessment_id=prev.id)
+    else:
+        form = AssessmentForm()
+        form.fields['school_lesson_id'].initial = lesson_id
+        form.fields['classroom'].initial = classroom_pk
+    return render(request, 'assessment.html', {'form': form, 'school_url': school_url, 'classroom': classroom, 'obj2': obj2, 'students': students })
+
+def SingleAssessment(request, school_url=None, planning_id=None, username=None):
     model = lesson_school_info
     model = classroom
 
