@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys
-from random import randint
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as dhc
+<<<<<<< HEAD
 from .visualize import *
+=======
+>>>>>>> ea0b13186145a388149fa5521558b7eede848ecf
 
 
 def dispatcher(request):
@@ -29,21 +31,10 @@ def dispatcher(request):
         return response.get_data()
 
 
-def _create_app():
+def create_app(layout):
     ''' Creates dash application '''
-
-    app = dash.Dash(csrf_protect=False)
-    app.layout = dhc.Div(children=[
-        dcc.Location(id='url', refresh=False),
-        dcc.Link('Index', href='/dash-index'),
-        ', ',
-        dcc.Link('Figure 1', href='/dash-fig1'),
-        ', ',
-        dcc.Link('Figure 2', href='/dash-fig2'),
-        dhc.Br(),
-        dhc.Br(),
-        dhc.Div(id='content')
-    ])
+    app = dash.Dash()
+    app.layout = layout
     @app.callback(
         dash.dependencies.Output('content', 'children'),
         [dash.dependencies.Input('url', 'pathname')]
@@ -60,83 +51,6 @@ def _create_app():
             return func()
         return 'Unknown link'
     return app
-
-
-def dash_index():
-    ''' '''
-    return 'Welcome to index page'
-
-
-def dash_fig1():
-    ''' '''
-    return dcc.Graph(
-        id='main-graph',
-        figure={
-            'data': [{
-                'name': 'Some name',
-                'mode': 'line',
-                'line': {
-                    'color': 'rgb(0, 0, 0)',
-                    'opacity': 1
-                },
-                'type': 'scatter',
-                'x': [randint(1, 100) for x in range(0, 20)],
-                'y': [randint(1, 100) for x in range(0, 20)]
-            }],
-            'layout': {
-                'autosize': True,
-                'scene': {
-                    'bgcolor': 'rgb(255, 255, 255)',
-                    'xaxis': {
-                        'titlefont': {'color': 'rgb(0, 0, 0)'},
-                        'title': 'X-AXIS',
-                        'color': 'rgb(0, 0, 0)'
-                    },
-                    'yaxis': {
-                        'titlefont': {'color': 'rgb(0, 0, 0)'},
-                        'title': 'Y-AXIS',
-                        'color': 'rgb(0, 0, 0)'
-                    }
-                }
-            }
-        }
-    )
-
-
-def dash_fig2():
-    ''' '''
-    return dcc.Graph(
-        id='main-graph',
-        figure={
-            'data': [{
-                'name': 'Some name',
-                'mode': 'line',
-                'line': {
-                    'color': 'rgb(0, 0, 0)',
-                    'opacity': 1
-                },
-                'type': 'scatter',
-                'x': [randint(1, 100) for x in range(0, 20)],
-                'y': [randint(1, 100) for x in range(0, 20)]
-            }],
-            'layout': {
-                'autosize': True,
-                'scene': {
-                    'bgcolor': 'rgb(255, 255, 255)',
-                    'xaxis': {
-                        'titlefont': {'color': 'rgb(0, 0, 0)'},
-                        'title': 'X-AXIS',
-                        'color': 'rgb(0, 0, 0)'
-                    },
-                    'yaxis': {
-                        'titlefont': {'color': 'rgb(0, 0, 0)'},
-                        'title': 'Y-AXIS',
-                        'color': 'rgb(0, 0, 0)'
-                    }
-                }
-            }
-        }
-    )
 
 
 if __name__ == '__main__':
