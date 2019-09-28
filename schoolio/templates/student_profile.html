@@ -36,6 +36,10 @@
         </tbody>
       </table>
 
-      {{ obj3 }}
-
+<br>
+<br>
+<h5>Multiple Intelligence Breakdown</h5>
+{% for key, values in obj3.items %}      
+<li>{{ key }} - {{ values }}</li>      
+{% endfor %}
 {% endblock %}
