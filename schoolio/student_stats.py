@@ -22,7 +22,6 @@ def get_student_stats(student_id):
     for key in MI_to_BL_scores.keys():
         if all(x == 0 for x in MI_to_BL_scores[key]):
             MI_to_BL_scores[key][1] = 1 # default to medium level of understanding. TODO maybe I should return something to signal that no lessons have covered this?
-        else:
-            l, m, h = MI_to_BL_scores[key]
-            MI_to_BL_scores[key] = (.9*h+.1*m)/(l+m+h)
+        l, m, h = MI_to_BL_scores[key]
+        MI_to_BL_scores[key] = int(((h+.1*m)/(l+m+h))*100)
     return MI_to_BL_scores
